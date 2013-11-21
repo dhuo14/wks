@@ -1,0 +1,19 @@
+# -*- encoding : utf-8 -*-
+defaults: &defaults
+  image_types: ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/x-png', 'image/pjpeg']
+  encodes: ["UTF-8", "GBK"]
+  mail_from: "XXXXX网 <fwgs@sg.com.cn>"
+  web_site_name: "XXXXX网"
+  web_site_key_words: "XXXXX网"
+  company_name: "XXXXX公司"
+  company_short_name: "X公司"
+development:
+  <<: *defaults
+  env_tye: '开发模式'
+  
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  env_tye: '生产模式'

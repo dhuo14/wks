@@ -1,0 +1,71 @@
+body {margin:12px; font:16px/1.5 tahoma, arial, \5b8b\4f53, sans-serif; }
+.tbnotice{font-size:20px;color : #115EAF;margin:2px 0px 10px 4px;font-family: "微软雅黑", "楷体_GB2312";font-style: italic;font-weight: 600;}
+.cbox_radio,.drop_option{ border:0px solid #ccc; margin:0px; width:30px;text-align:left;vertical-align:middle;}
+.nowrap{white-space: nowrap;}
+.form_tips{color:red;margin:14px;}
+.float_tips{color:red;}
+.float_content{text-align:left;margin:0;padding-left:10px;} 
+input[type="text"]{ border:1px solid #ccc; margin:4px; width:170px;height:20px;}
+.input_text {
+	margin:4px;
+	min-width:170px;
+	width:auto !important;
+	width:170px;
+	width:expression(document.body.clientWidth <= 170? "170px": "auto" );
+	min-height:20px;
+	height:auto !important;
+	height:20px;
+	height:expression(document.body.clientWidth <= 20? "20px": "auto" );
+}
+textarea{ margin:4px; width:80%;}
+.textarea { 
+	margin:4px;
+	min-width:100%;
+	min-height:20px;
+	height:auto !important;
+	height:20px;
+	height:expression(document.body.clientWidth <= 20? "20px": "auto" );
+}
+input.calendar{background: url("/images/icons/calendar.png") no-repeat scroll right center #FFFFFF;cursor:pointer;padding-right:25px;width:145px;}
+input.datetime{background: url("/images/icons/calendar.png") no-repeat scroll right center #FFFFFF;cursor:pointer;padding-right:25px;width:145px;}
+input.drop_select{background: url("/images/icons/drop_select.png") no-repeat scroll right center #FFFFFF;cursor:pointer;padding-right:25px;width:145px;}
+.drop_ul_overflow{border:#ccc 0px solid;white-space:nowrap;}
+.drop_ul_overflow_y{height:460px;overflow-y:auto;}
+
+.no_border{border:0;padding:0;margin:0;}
+.no_border td,.no_border th{border:0;}
+th{text-align:center;white-space:nowrap;}
+table { border-collapse:collapse; border-spacing:0;width:100%;}
+table td,table th{ margin:0; padding:4px; border:1px solid #ccc; }
+.tip-yellow table td{border:none;padding:0;}
+hr{margin:8px 0px 8px 0px;border:2px groove #E9E7E7;}
+.pagination{
+    height: 30px;
+    margin-top: 15px;
+    padding-top: 5px;
+    text-align:right;
+    padding-right:24px;
+}
+.pagination .current{
+    font-family: arial;
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 2px;
+    overflow: hidden;
+    padding: 3px 10px;
+}
+.pagination a{
+    border: 1px solid #CCCCCC;
+    font-family: arial;
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 2px;
+    overflow: hidden;
+    padding: 3px 10px;
+}
+.thumb_phpto{cursor:pointer;}
+.red{color:#FF0000;}
+.boldred{color:#FF0000;font-weight:bold;}
+.green{color:#009900;}

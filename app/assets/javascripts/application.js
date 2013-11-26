@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
-//= require jquery.artDialog.min
-//= require artDialog.plugins.min
+//= require base
+//= require artDialog
+//= require artDialog.plugins
+//= require jquery.ztree.all-3.5
+//= require form

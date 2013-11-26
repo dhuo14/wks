@@ -6,7 +6,13 @@ Wks::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
    #root 'home#index'
-   root :to => 'home#index'
+  root :to => 'home#index'
+
+  resources :shared do
+    collection do
+      delete :department, :area
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

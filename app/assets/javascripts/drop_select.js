@@ -1,7 +1,3 @@
-//将字符串转换成对象，避免使用eval
-function parseObj(strData) {
-   return (new Function("return " + strData))();
-}
 // 超高时出现滚动条
 function overflow_y(tree_div) {
   if ($('#' + tree_div).height() > 460) {
@@ -57,7 +53,7 @@ function drop_select(this_input, this_dom, query) {
         if (dialog == undefined) {
             var btn = [
                 {
-                    name: '确定',
+                    value: '确定',
                     focus: true,
                     callback: function() {
                         this.hide();
@@ -67,10 +63,10 @@ function drop_select(this_input, this_dom, query) {
                 }
             ];
             if (droplimit != 1) {
-                btn = btn.concat({name: '全部选中',callback: function() {
+                btn = btn.concat({value: '全部选中',callback: function() {
                     drop_checkall(this_dom, true);
                     return false;
-                }}, {name: '清除已选',callback: function() {
+                }}, {value: '清除已选',callback: function() {
                     drop_checkall(this_dom, false);
                     return false;
                 }});
@@ -228,7 +224,7 @@ function drop_select(this_input, this_dom, query) {
                 }
             },
             async: {
-                type:'get',
+                type:'delete',
                 async:false,
                 enable: true,
                 url:dropdata,

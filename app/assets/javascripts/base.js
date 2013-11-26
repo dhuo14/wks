@@ -1,6 +1,3 @@
-//= require jquery
-//= require jquery_ujs
-
 /*替换全部字符*/
 String.prototype.replaceAll = function(reallyDo, replaceWith, ignoreCase) {
   if (!RegExp.prototype.isPrototypeOf(reallyDo)) {
@@ -10,26 +7,10 @@ String.prototype.replaceAll = function(reallyDo, replaceWith, ignoreCase) {
   }
 };
 
-$(function() {
-  // 判断空 $.isBlank($(this).val())
-  $.isBlank = function(obj) {
-    return(!obj || $.trim(obj) === "");
-  };
-
-  // 日期时间控件
-  $('.my97_time').click(function() {
-    WdatePicker({dateFmt:'yyyyMMdd'});
-  });
-
-  $('.my97_full_time').click(function() {
-    WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});
-  });
-
-  // 下拉选择框
-  $(".drop_select").live("click", function() {
-    drop_select(this, $(this));
-  });
-})
+//将字符串转换成对象，避免使用eval
+function parseObj(strData) {
+   return (new Function("return " + strData))();
+}
 
 // 自动适应高度textarea
 function textarea_auto_height(textarea){

@@ -10,4 +10,8 @@
  *
  *= require_self
  *= require_tree .
+ = require base
+ = require artDialog
+ = require zTreeStyle
+ = require validationEngine.jquery
  */

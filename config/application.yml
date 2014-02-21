@@ -2,11 +2,12 @@
 defaults: &defaults
   image_types: ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/x-png', 'image/pjpeg']
   encodes: ["UTF-8", "GBK"]
-  mail_from: "XXXXX网 <fwgs@sg.com.cn>"
-  web_site_name: "XXXXX网"
-  web_site_key_words: "XXXXX网"
-  company_name: "XXXXX公司"
-  company_short_name: "X公司"
+  web_site_name: "中国共产党党员信息网"
+  web_site_domain: "http://www.cpc.gov.cn"
+  web_site_founded_year: 2014 
+  web_site_key_words: "党员信息 共产党 当组织 入党申请"
+  company_name: "中国共产党中央委员会"
+  company_short_name: "中共党委"
 development:
   <<: *defaults
   env_tye: '开发模式'

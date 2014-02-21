@@ -6,6 +6,13 @@
 <h2>HTML输出</h2>
 <p><%=raw @tmp %></p>
 
+<h2>图片输出</h2>
+<p><%=image_path("icons/warning.png") %></p>
+<p>
+<%=image_tag(asset_path "icons/warning.png") %>
+
+</p>
+
 <h2>artDialog测试</h2>
 
 <div id="artDialog">点我试试</div>
@@ -38,6 +45,20 @@ drop_select:
 
 <div id="drop_select_tree" style="display:none;"></div>
 
+<h2>Bootstrap测试</h2>
+
+   
+
+<span class="label label-default">Default</span>
+<span class="label label-primary">Primary</span>
+<span class="label label-success">Success</span>
+<span class="label label-info">Info</span>
+<span class="label label-warning">Warning</span>
+<span class="label label-danger">Danger</span>
+
+
+
+
 
 <script type="text/javascript">
 	// 对话框
@@ -49,7 +70,7 @@ drop_select:
 		});
 	}
 	$(function(){
-		art.dialog({content:'我是普通弹框!'});
+		// art.dialog({content:'我是普通弹框!'});
 		$("#artDialog").on("click",art_confirm);
 
 		$.fn.zTree.init($("#treeDemo"), setting, zNodes);

@@ -12,4 +12,9 @@ class HomeController < JamesController
 		<br/>
 		中文时间格式：#{Time.new.to_s(:cn_time)}"
 	end
+
+	def flatty
+		
+	end
+
 end

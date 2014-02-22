@@ -23,3 +23,5 @@
 //= require plugins/common/bootstrap-wysihtml5
 //= require plugins/fullcalendar/fullcalendar.min
 //= require plugins/bootbox/bootbox.min
+//= require jquery.ztree.all-3.5
+//= require form

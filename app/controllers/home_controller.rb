@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class HomeController < JamesController
+class HomeController < KobeController
 
 	def index
 		Setting.audit_money = {"汽车采购" => 180000, "办公小额" => 3000}
@@ -11,6 +11,8 @@ class HomeController < JamesController
 		默认时间格式：#{Time.new.to_s}
 		<br/>
 		中文时间格式：#{Time.new.to_s(:cn_time)}"
+		@city = Area.find(1)
+
 	end
 
 	def flatty

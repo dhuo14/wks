@@ -11,6 +11,7 @@ Wks::Application.routes.draw do
   resources :shared do
     collection do
       delete :department, :area
+      get :department, :area
     end
   end
 

@@ -6,4 +6,5 @@
  *= require plugins/bootstrap_daterangepicker/bootstrap-daterangepicker
  *= require plugins/fullcalendar/fullcalendar
  *= require plugins/common/bootstrap-wysihtml5
+ *= require zTreeStyle
 */

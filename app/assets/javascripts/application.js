@@ -4,3 +4,4 @@
 //= require jquery/jquery.mobile.custom.min
 //= require bootstrap/bootstrap
 //= require turbolinks
+//= require base

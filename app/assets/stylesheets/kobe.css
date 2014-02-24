@@ -6,5 +6,8 @@
  *= require plugins/bootstrap_daterangepicker/bootstrap-daterangepicker
  *= require plugins/fullcalendar/fullcalendar
  *= require plugins/common/bootstrap-wysihtml5
+ *= require plugins/tabdrop/tabdrop
+ *= require plugins/jgrowl/jquery.jgrowl.min
+
  *= require zTreeStyle
 */

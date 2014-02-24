@@ -1,16 +1,9 @@
 //= require application
 //= require demo
 //= require theme
-//= require jquery/jquery.min
-//= require jquery/jquery.mobile.custom.min
-//= require jquery/jquery-migrate.min
-//= require jquery/jquery-ui.min
-//= require plugins/jquery_ui_touch_punch/jquery.ui.touch-punch.min
-//= require bootstrap/bootstrap
+
 //= require plugins/modernizr/modernizr.min
 //= require plugins/retina/retina
-//= require theme
-//= require demo
 //= require plugins/flot/excanvas
 //= require plugins/flot/flot.min
 //= require plugins/flot/flot.resize
@@ -22,6 +15,12 @@
 //= require plugins/common/wysihtml5.min
 //= require plugins/common/bootstrap-wysihtml5
 //= require plugins/fullcalendar/fullcalendar.min
+//= require plugins/tabdrop/bootstrap-tabdrop
 //= require plugins/bootbox/bootbox.min
+//= require plugins/typeahead/typeahead
+//= require plugins/jgrowl/jquery.jgrowl.min
+//= require plugins/nestable/jquery.nestable
+
+
 //= require jquery.ztree.all-3.5
 //= require form

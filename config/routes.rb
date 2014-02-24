@@ -15,9 +15,11 @@ Wks::Application.routes.draw do
     end
   end
 
-  get 'test' =>"kobe#test"
-
-  get 'main' => "kobe#index"
+  resources :kobe do
+    collection do
+      get :ui, :test
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

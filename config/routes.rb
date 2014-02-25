@@ -1,12 +1,29 @@
 Wks::Application.routes.draw do
-  get "user/logout"
-  get "user/login"
+  # get "departments/index"
+  # get "departments/new"
+  # get "departments/create"
+  # get "departments/update"
+  # get "departments/edit"
+   #get "article_catalogs/new"
+  # get "article_catalog/create"
+  # get "article_catalog/edit"
+  # get "article_catalog/delete"
+  # get "article_catalog/update"
+  # get "user/logout"
+  # get "user/login"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
    #root 'home#index'
   root :to => 'home#index'
+
+  captcha_route
+
+# 后台
+  namespace :kobe do
+    resources :departments
+  end
 
   resources :shared do
     collection do

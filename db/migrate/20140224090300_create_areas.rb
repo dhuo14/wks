@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
-class CreateArea < ActiveRecord::Migration
+class CreateAreas < ActiveRecord::Migration
   def change
-    create_table :area do |t|
+    create_table :areas do |t|
 		t.string :name                   , :comment => "单位名称"
 		t.string :ancestry               , :comment => "祖先节点"
 		t.integer :ancestry_depth        , :comment => "层级"

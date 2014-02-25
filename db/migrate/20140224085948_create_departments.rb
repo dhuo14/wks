@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
-class CreateDepartment < ActiveRecord::Migration
+class CreateDepartments < ActiveRecord::Migration
   def change
-    create_table :department do |t|
+    create_table :departments do |t|
 		t.string :name                   , :comment => "单位名称"
 		t.string :ancestry               , :comment => "祖先节点"
 		t.integer :ancestry_depth        , :comment => "层级"
@@ -39,8 +39,8 @@ class CreateDepartment < ActiveRecord::Migration
 		t.timestamps
     end
     
-    add_index :department, :name,                :unique => true
-    add_index :department, :org_code,            :unique => true
-    add_index :department, :ancestry
+    add_index :departments, :name,                :unique => true
+    add_index :departments, :org_code,            :unique => true
+    add_index :departments, :ancestry
   end
 end

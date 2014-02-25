@@ -20,6 +20,8 @@
 //= require plugins/typeahead/typeahead
 //= require plugins/jgrowl/jquery.jgrowl.min
 //= require plugins/nestable/jquery.nestable
+//= require plugins/validate/jquery.validate.min
+//= require plugins/validate/additional-methods
 
 
 //= require jquery.ztree.all-3.5

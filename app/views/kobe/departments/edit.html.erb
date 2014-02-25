@@ -1,0 +1,12 @@
+<h1>Kobe::Departments#edit</h1>
+<%= simple_form_for [:kobe, @dep], :html => {:multipart => true}  do |f| %>
+  <%= f.input :name, label: '单位名称', hint: '单位名称不能为空', input_html: { class: 'special' } %>
+  <%= f.input :short_name %>
+    <%= f.input :short_name %>
+	<%= f.input :status %>
+	<%= f.input :ancestry %>
+	<%= f.input :summary %>
+	<%= f.input :is_secret %>
+	<%= f.input :status %>
+  <%= f.button :submit %>
+<% end %>

@@ -30,7 +30,7 @@ module Wks
     # config.i18n.default_locale = :de
 
     # 取消数据表复数形式
-    config.active_record.pluralize_table_names = false
+    #config.active_record.pluralize_table_names = false
 
     # Enable the asset pipeline
     config.assets.enabled = true

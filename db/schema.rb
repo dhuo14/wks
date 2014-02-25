@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131121070718) do
+ActiveRecord::Schema.define(version: 20140224090300) do
 
-  create_table "area", force: true do |t|
+  create_table "areas", force: true do |t|
     t.string   "name",           comment: "单位名称"
     t.string   "ancestry",       comment: "祖先节点"
     t.integer  "ancestry_depth", comment: "层级"
@@ -23,14 +23,7 @@ ActiveRecord::Schema.define(version: 20131121070718) do
     t.datetime "updated_at"
   end
 
-  create_table "category", force: true do |t|
-    t.string  "name",                                              comment: "单位名称"
-    t.string  "ancestry",                                          comment: "祖先节点"
-    t.integer "ancestry_depth",                                    comment: "层级"
-    t.integer "status",         limit: 2, default: 0, null: false, comment: "状态"
-  end
-
-  create_table "department", force: true do |t|
+  create_table "departments", force: true do |t|
     t.string   "name",                                                  comment: "单位名称"
     t.string   "ancestry",                                              comment: "祖先节点"
     t.integer  "ancestry_depth",                                        comment: "层级"
@@ -68,24 +61,8 @@ ActiveRecord::Schema.define(version: 20131121070718) do
     t.datetime "updated_at"
   end
 
-  add_index "department", ["ancestry"], name: "index_department_on_ancestry", using: :btree
-  add_index "department", ["name"], name: "index_department_on_name", unique: true, using: :btree
-  add_index "department", ["org_code"], name: "index_department_on_org_code", unique: true, using: :btree
-
-  create_table "settings", force: true do |t|
-    t.string   "var",                   null: false
-    t.text     "value"
-    t.integer  "thing_id"
-    t.string   "thing_type", limit: 30
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
-
-  create_table "user", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "departments", ["ancestry"], name: "index_departments_on_ancestry", using: :btree
+  add_index "departments", ["name"], name: "index_departments_on_name", unique: true, using: :btree
+  add_index "departments", ["org_code"], name: "index_departments_on_org_code", unique: true, using: :btree
 
 end

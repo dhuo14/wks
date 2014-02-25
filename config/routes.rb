@@ -22,7 +22,7 @@ Wks::Application.routes.draw do
 
 # 后台
   namespace :kobe do
-    resources :departments
+    resources :departments, :except => ["show"]
   end
 
   resources :shared do
@@ -32,7 +32,7 @@ Wks::Application.routes.draw do
     end
   end
 
-  resources :kobe do
+  resources :kobe, :only => ["index"] do
     collection do
       get :ui, :test
     end

@@ -4,7 +4,7 @@ class Kobe::DepartmentsController < KobeController
   end
 
   def new
-    @dep = Department.new
+    
   end
 
   def create
@@ -14,5 +14,6 @@ class Kobe::DepartmentsController < KobeController
   end
 
   def edit
+    @dep = Department.new
   end
 end

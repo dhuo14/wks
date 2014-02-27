@@ -1,1 +1,14 @@
-<h1>Hello World</h1>
+
+<%
+js = %Q|
+    <script type="text/javascript">
+
+      $(function(){
+        $("#ok").on("click",function(){ 
+          alert("#############");
+        });
+      });
+
+    </script>|
+%>
+<%= _create_xml_form(@xml,@area,{"title"=>"创建新单位","button_id"=>"ok","validate_js"=>js}) %>

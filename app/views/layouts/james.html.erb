@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= Dictionary.web_site_name %></title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta content='text/html;charset=utf-8' http-equiv='content-type'>
+    <meta content='<%= Dictionary.web_site_key_words %>' name='description'>
+    <link href='<%= image_path('meta_icons/favicon.ico') %>' rel='shortcut icon' type='image/x-icon'>
+    <link href='<%= image_path('meta_icons/apple-touch-icon.png') %>' rel='apple-touch-icon-precomposed'>
+    <link href='<%= image_path('meta_icons/apple-touch-icon-57x57.png') %>' rel='apple-touch-icon-precomposed' sizes='57x57'>
+    <link href='<%= image_path('meta_icons/apple-touch-icon-72x72.png') %>' rel='apple-touch-icon-precomposed' sizes='72x72'>
+    <link href='<%= image_path('meta_icons/apple-touch-icon-114x114.png') %>' rel='apple-touch-icon-precomposed' sizes='114x114'>
+    <link href='<%= image_path('meta_icons/apple-touch-icon-144x144.png') %>' rel='apple-touch-icon-precomposed' sizes='144x144'>
+    <!-- / START - page related stylesheets [optional] -->
+    <%= stylesheet_link_tag "james" %>
+    <%= javascript_include_tag "james" %>
+    <!--[if lt IE 9]>
+      <%= javascript_include_tag "ie" %>
+    <![endif]-->
+  </head>
+  <body class='contrast-red '>
+    <%= yield %>
+  </body>
+</html>

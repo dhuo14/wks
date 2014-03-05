@@ -69,6 +69,8 @@ end
 
 gem "simple_form", "~> 3.0.1"
 
+gem "ipparse", "~> 0.2.0"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

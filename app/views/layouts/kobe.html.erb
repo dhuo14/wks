@@ -18,12 +18,12 @@
       <%= javascript_include_tag "ie" %>
     <![endif]-->
   </head>
-  <body class='contrast-red '>
+  <body class='contrast-red fixed-header fixed-navigation'>
     <header>
       <nav class='navbar navbar-default'>
         <a class='navbar-brand' href='index.html'>
-          <img width="81" height="21" class="logo" alt="Flatty" src="<%= image_path('logo.svg') %>" />
-          <img width="21" height="21" class="logo-xs" alt="Flatty" src="<%= image_path('logo_xs.svg') %>" />
+          <%= image_tag("logo.svg", size: "81x21", class: "logo",alt: "#{Dictionary.web_site_name}") %>
+          <%= image_tag("logo_xs.svg", size: "21x21", class: "logo-xs",alt: "#{Dictionary.web_site_name}") %>
         </a>
         <a class='toggle-nav btn pull-left' href='#'>
           <i class='icon-reorder'></i>

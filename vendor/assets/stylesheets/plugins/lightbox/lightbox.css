@@ -1,5 +1,5 @@
 body:after {
-  content: url("../../../images/plugins/lightbox/close.png") url("../../../images/plugins/lightbox/loading.gif") url("../../../images/plugins/lightbox/prev.png") url("../../../images/plugins/lightbox/next.png");
+  content: url("/fonts/plugins/lightbox/close.png") url("/fonts/plugins/lightbox/loading.gif") url("/fonts/plugins/lightbox/prev.png") url("/fonts/plugins/lightbox/next.png");
   display: none; }
 
 .lightboxOverlay {
@@ -68,7 +68,7 @@ body:after {
   width: 32px;
   height: 32px;
   margin: 0 auto;
-  background: url("../../../images/plugins/lightbox/loading.gif") no-repeat; }
+  background: url("/fonts/plugins/lightbox/loading.gif") no-repeat; }
 
 .lb-nav {
   position: absolute;
@@ -96,14 +96,14 @@ body:after {
   float: left; }
 
 .lb-prev:hover {
-  background: url("../../../images/plugins/lightbox/prev.png") left 48% no-repeat; }
+  background: url("/fonts/plugins/lightbox/prev.png") left 48% no-repeat; }
 
 .lb-next {
   right: 0;
   float: right; }
 
 .lb-next:hover {
-  background: url("../../../images/plugins/lightbox/next.png") right 48% no-repeat; }
+  background: url("/fonts/plugins/lightbox/next.png") right 48% no-repeat; }
 
 .lb-dataContainer {
   margin: 0 auto;
@@ -149,7 +149,7 @@ body:after {
   float: right;
   width: 30px;
   height: 30px;
-  background: url("../../../images/plugins/lightbox/close.png") top right no-repeat;
+  background: url("/fonts/plugins/lightbox/close.png") top right no-repeat;
   text-align: right;
   outline: none;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);

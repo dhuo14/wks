@@ -7,7 +7,7 @@
 .colorpicker-saturation {
   width: 100px;
   height: 100px;
-  background-image: url("../../../images/plugins/bootstrap_colorpicker/saturation.png");
+  background-image: url("/fonts/plugins/bootstrap_colorpicker/saturation.png");
   cursor: crosshair;
   float: left; }
 
@@ -53,10 +53,10 @@
   margin-top: -1px; }
 
 .colorpicker-hue {
-  background-image: url("../../../images/plugins/bootstrap_colorpicker/hue.png"); }
+  background-image: url("/fonts/plugins/bootstrap_colorpicker/hue.png"); }
 
 .colorpicker-alpha {
-  background-image: url("../../../images/plugins/bootstrap_colorpicker/alpha.png");
+  background-image: url("/fonts/plugins/bootstrap_colorpicker/alpha.png");
   display: none; }
 
 .colorpicker {
@@ -111,7 +111,7 @@
   height: 10px;
   margin-top: 5px;
   clear: both;
-  background-image: url("../../../images/plugins/bootstrap_colorpicker/alpha.png");
+  background-image: url("/fonts/plugins/bootstrap_colorpicker/alpha.png");
   background-position: 0 100%; }
 
 .colorpicker-color div {

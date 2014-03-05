@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= Dictionary.web_site_name %></title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta content='text/html;charset=utf-8' http-equiv='content-type'>
+    <meta content='<%= Dictionary.web_site_key_words %>' name='description'>
+    <link href='<%= image_path('meta_icons/favicon.ico') %>' rel='shortcut icon' type='image/x-icon'>
+    <link href='<%= image_path('meta_icons/apple-touch-icon.png') %>' rel='apple-touch-icon-precomposed'>
+    <link href='<%= image_path('meta_icons/apple-touch-icon-57x57.png') %>' rel='apple-touch-icon-precomposed' sizes='57x57'>
+    <link href='<%= image_path('meta_icons/apple-touch-icon-72x72.png') %>' rel='apple-touch-icon-precomposed' sizes='72x72'>
+    <link href='<%= image_path('meta_icons/apple-touch-icon-114x114.png') %>' rel='apple-touch-icon-precomposed' sizes='114x114'>
+    <link href='<%= image_path('meta_icons/apple-touch-icon-144x144.png') %>' rel='apple-touch-icon-precomposed' sizes='144x144'>
+    <%= stylesheet_link_tag "james" %>
+    <%= javascript_include_tag "james" %>
+    <!--[if lt IE 9]>
+      <%= javascript_include_tag "ie" %>
+    <![endif]-->
+  </head>
+  <body class='contrast-red login contrast-background'>
+    <div class='middle-container'>
+      <div class='middle-row'>
+        <div class='middle-wrapper'>
+          <div class='login-container-header'>
+            <div class='container'>
+              <div class='row'>
+                <div class='col-sm-12'>
+                  <div class='text-center'>
+                    <%= image_tag("logo_lg.svg", size: "121x31", alt: "#{Dictionary.web_site_name}") %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class='login-container'>
+          	<div class='container'>
+			  <%= yield %>
+			</div>
+          </div>
+          <div class='login-container-footer'>
+            <div class='container'>
+              <div class='row'>
+                <div class='col-sm-12'>
+                  <div class='text-center'>
+                    <a href='sign_up.html'>
+                      <i class='icon-user'></i>
+                      New to Flatty?
+                      <strong>Sign up</strong>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

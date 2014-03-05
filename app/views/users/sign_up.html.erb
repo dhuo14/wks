@@ -1,0 +1,77 @@
+
+              <div class='row'>
+                <div class='col-sm-4 col-sm-offset-4'>
+                  <h1 class='text-center title'> 新用户注册 </h1>
+                  <form action='/users' class='form-horizontal validate-form' method='post'>
+                    <div class='form-group'>
+                      <div class='controls with-icon-over-input'>
+                        <input value="" placeholder="E-mail地址" class="form-control" name="users[email]"  data-rule-email='true' data-rule-required='true' id='email' type="text" />
+                        <i class='icon-user text-muted'></i>
+                      </div>
+                    </div>
+                    <div class='form-group'>
+                      <div class='controls with-icon-over-input'>
+                        <input value="" placeholder="密码" class="form-control" name="users[password]" data-rule-minlength='6' data-rule-password='true' data-rule-required='true' id='password' type="password" />
+                        <i class='icon-lock text-muted'></i>
+                      </div>
+                    </div>
+                    <div class='form-group'>
+                      <div class='controls with-icon-over-input'>
+                        <input class='form-control' data-rule-equalto='#password' data-rule-required='true' id='password_confirmation' name='password_confirmation' placeholder='请再次输入密码' type='password' />
+                        <i class='icon-lock text-muted'></i>
+                      </div>
+                    </div>
+                    <div class='form-group'>
+                      <label for='agreement'>
+                        <input id='agreement' name='agreement' data-rule-required="true" type='checkbox' value='' />
+                        我同意
+                        <a class='text-contrast'  href="#user_agreements" data-toggle="modal">用户注册条款</a>
+                      </label>
+                    </div>
+                    <div class='form-group'>
+                      <button class='btn btn-block'> 注 册 </button>
+                    </div>
+                  </form>
+                  <div class='text-center'>
+                    <hr class='hr-normal'>
+                    <a href='sign_in.html'>
+                      <i class='icon-chevron-left'></i>
+                      返回登录页面
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class='modal fade' id='user_agreements' tabindex='-1'>
+                <div class='modal-dialog'>
+                  <div class='modal-content'>
+                    <div class='modal-header'>
+                      <button aria-hidden='true' class='close' data-dismiss='modal' type='button'>×</button>
+                      <h3 class='modal-title' id='myModalLabel'>注册用户须知</h3>
+                    </div>
+                    <div class='modal-body'>
+                      <p>用户注册或游客发言前，请认真阅读本条例。一经注册或发言，即视为同意接受本条例；如不同意，请勿注册或发言。</p>
+                      <hr>
+                      <h4>一、总则</h4>
+                      <ol>
+                        <li>制定本条例的目的在于维护强国社区（下简称"社区"）秩序，保障社区用户的合法权益。</li>
+                        <li>制定本条例的依据是国家有关法律、法规，当本条例与国家法律、法规冲突时，以国家法律、法规为准。</li>
+                        <li>用户愿意接受本条例，方可注册，成为本社区正式用户。</li>
+                      </ol>
+                      <hr>
+                      <h4>二、用户的权利与责任</h4>
+                      <ol>
+                        <li>用户享有社区用户的各种权利，可享受社区提供的各项服务。</li>
+                        <li>用户在社区所进行的所有活动应遵守本社区及相关论坛的管理条例，遵守中华人民共和国法律、法规，并自行承担因从事论坛活动直接或间接引起的一切法律责任。</li>
+                        <li>用户要注意保管好用户名及密码，用户如发现帐号遭他人非法使用，应立即通知社区管理者。因黑客行为或用户保管疏忽导致帐号、密码遭他人非法使用，社区不承担任何责任。</li>
+                        <li>用户认为自己在社区的权益受到侵害，有权根据社区相关规定进行投诉申诉。</li>
+                        <li>用户有权对社区管理提出批评、意见、建议，有权就论坛管理相关工作向论坛提出咨询。</li>
+                        <li>用户需遵守网络道德，注意网络礼仪，做到文明上网。</li>
+                      </ol>
+                    </div>
+                    <div class='modal-footer'>
+                      <button class='btn btn-primary' data-dismiss='modal' type='button'>同意</button>
+                      <a class='btn btn-default' type='button' href="/" target="_self">不同意</a>
+                    </div>
+                  </div>
+                </div>
+              </div>

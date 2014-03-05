@@ -1,14 +1,2 @@
-
-<%
-js = %Q|
-    <script type="text/javascript">
-
-      $(function(){
-        $("#ok").on("click",function(){ 
-          alert("#############");
-        });
-      });
-
-    </script>|
-%>
-<%= _create_xml_form(@xml,@area,{"title"=>"创建新单位","button_id"=>"ok","validate_js"=>js}) %>
+<p><%= Dictionary.company_name %>欢迎您！</p>
+<p></p>

@@ -16,6 +16,6 @@ class Kobe::DepartmentsController < KobeController
   end
 
   def edit
-    @obj = Department.find(1)
+    @dep = Department.find(1)
   end
 end

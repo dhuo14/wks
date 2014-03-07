@@ -1,6 +1,13 @@
 # -*- encoding : utf-8 -*-
 class KobeController < ApplicationController
 
+	# before_filter :authenticate
+
+	# 身份验证
+	def authenticate 
+	  redirect_to sign_in_users_path, :notice => "请您先登录！" unless signed_in? 
+	end
+
 	def index
 	end
 

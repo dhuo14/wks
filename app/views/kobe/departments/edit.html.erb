@@ -1,13 +1,37 @@
-<h1>Kobe::Departments#edit</h1>
+<div class='row'>
+	<div class='col-sm-12'>
+		<div class='box'>
+			<h1>Kobe::Departments#edit</h1>
+			<div class='box-content'>
+				<%= simple_form_for [:kobe, @dep], :html => { :multipart => true } do |f| %>
 
-<%= simple_form_for [:kobe, @dep], :html => {:multipart => true}  do |f| %>
-  <%= f.input :name, label: '单位名称', hint: '单位名称不能为空', input_html: { class: 'special' } %>
-  <%= f.input :short_name %>
-    <%= f.input :short_name %>
-	<%= f.input :status %>
-	<%= f.input :ancestry %>
-	<%= f.input :summary %>
-	<%= f.input :is_secret %>
-	<%= f.input :status %>
-  <%= f.button :submit %>
-<% end %>
+				<%= f.input :name, label: '单位名称', placeholder: 'Numbers!!', input_html: { 'data-rule-number' => 'true', 'data-rule-required' => 'true' } %>
+
+				<%= f.input :is_secret, label: ' 是否保密', as: :my_radio_buttons, collection: [['是','yes'],['否','no']] %>
+
+				<%= f.input :short_name, label: '简称', placeholder: 'Short_name !', hint: 'You cannot change your short_name!!' %>
+
+				<%= f.input :is_secret, label: ' 是否保密', as: :my_check_boxes, collection: ['是','否'] %>
+
+				<%= f.input :summary, label: '多选', collection: [['Alaskan/Hawaiian Time Zone',['Alaska','Hawaii']],['Pacific Time Zone',['California','Nevada','Oregon','Washington']],['Mountain Time Zone',['Arizona','Colorado','Idaho']]], 
+				as: :multiple_select, group_method: :last %>
+
+				<%= f.input :summary, label: '单选', collection: [['Alaskan/Hawaiian Time Zone',['Alaska','Hawaii']],['Pacific Time Zone',['California','Nevada','Oregon','Washington']],['Mountain Time Zone',['Arizona','Colorado','Idaho']]], 
+				as: :single_select, group_method: :last %>
+
+				<%= f.input :created_at, label: 'date_range_picker', as: :date_range_picker %>
+				<%= f.input :created_at, label: 'date_picker', as: :date_picker %>
+				<%= f.input :created_at, label: 'time_picker', as: :time_picker %>
+				<%= f.input :created_at, label: 'date_time_picker', as: :date_time_picker %>
+
+				<%= f.input :short_name, as: :autosize_text, label: 'Autosize textarea' %>
+				<%= f.input :summary, as: :counter_text, label: 'Char counter', allow_length: 20, warning_length: 10 %>
+				<%= f.input :short_name, as: :maxlength_text, label: 'Max length', maxlength: 10 %>
+				<%= f.input :short_name, as: :autosize_counter_text, label: 'Char counter', allow_length: 30, warning_length: 10 %>
+
+				<%= f.button :submit %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

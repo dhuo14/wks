@@ -11,6 +11,7 @@ Wks::Application.routes.draw do
   resources :users  do
     collection do
       get :sign_in, :sign_up, :forgot_password
+      post :login
     end
   end
 

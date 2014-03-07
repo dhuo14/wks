@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   end
 
   # 密码解密
-  def decode_password(black)
+  def decode_password
     return self.password.gsub("_我是加密的","")
   end
 

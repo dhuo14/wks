@@ -5,8 +5,8 @@ SimpleForm.setup do |config|
   # wrapper, change the order or even add your own to the
   # stack. The options given below are used to wrap the
   # whole input.
-  config.wrappers :default, class: :input,
-    hint_class: :field_with_hint, error_class: :field_with_errors do |b|
+  config.wrappers :default, class: 'form-group', 
+  hint_class: :field_with_hint, error_class: :field_with_errors do |b|
     ## Extensions enabled by default
     # Any of these extensions can be disabled for a
     # given input by passing: `f.input EXTENSION_NAME => false`.
@@ -40,8 +40,12 @@ SimpleForm.setup do |config|
     b.optional :readonly
 
     ## Inputs
-    b.use :label_input
-    b.use :hint,  wrap_with: { tag: :span, class: :hint }
+    # b.use :label_input
+    b.wrapper tag: :div, class: 'control-label col-sm-3' do |ba|
+      ba.use :label
+      ba.use :hint,  wrap_with: { tag: :small, class: 'help-block' }
+    end
+    b.use :input, wrap_with: { tag: :div, class: 'col-sm-5 controls' }
     b.use :error, wrap_with: { tag: :span, class: :error }
   end
 
@@ -86,7 +90,7 @@ SimpleForm.setup do |config|
   # You can wrap each item in a collection of radio/check boxes with a tag,
   # defaulting to :span. Please note that when using :boolean_style = :nested,
   # SimpleForm will force this option to be a label.
-  # config.item_wrapper_tag = :span
+  # config.item_wrapper_tag = nil
 
   # You can define a class to use in all item wrappers. Defaulting to none.
   # config.item_wrapper_class = nil
@@ -95,10 +99,10 @@ SimpleForm.setup do |config|
   # config.label_text = lambda { |label, required| "#{required} #{label}" }
 
   # You can define the class to use on all labels. Default is nil.
-  config.label_class = 'control-label'
+  # config.label_class = 'control-label'
 
   # You can define the class to use on all forms. Default is simple_form.
-  # config.form_class = :simple_form
+  config.form_class = 'form form-horizontal validate-form'
 
   # You can define which elements should obtain additional classes
   # config.generate_additional_classes_for = [:wrapper, :label, :input]
@@ -141,5 +145,5 @@ SimpleForm.setup do |config|
   # config.cache_discovery = !Rails.env.development?
 
   # Default class for inputs
-  # config.input_class = nil
+  config.input_class = 'form-control'
 end

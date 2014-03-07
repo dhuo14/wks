@@ -2,16 +2,16 @@
               <div class='row'>
                 <div class='col-sm-4 col-sm-offset-4'>
                   <h1 class='text-center title'> 新用户注册 </h1>
-                  <form action='/users' class='form-horizontal validate-form' method='post'>
+                  <%= form_for(User.new, url: users_path, method: :post, html: { class: "form-horizontal validate-form"}) do |u| %>
                     <div class='form-group'>
                       <div class='controls with-icon-over-input'>
-                        <input value="" placeholder="E-mail地址" class="form-control" name="users[email]"  data-rule-email='true' data-rule-required='true' id='email' type="text" />
+                        <input value="" placeholder="E-mail地址" class="form-control" name="user[email]"  data-rule-email='true' data-rule-required='true' id='email' type="text" />
                         <i class='icon-user text-muted'></i>
                       </div>
                     </div>
                     <div class='form-group'>
                       <div class='controls with-icon-over-input'>
-                        <input value="" placeholder="密码" class="form-control" name="users[password]" data-rule-minlength='6' data-rule-password='true' data-rule-required='true' id='password' type="password" />
+                        <input value="" placeholder="密码" class="form-control" name="user[password]" data-rule-minlength='6' data-rule-password='true' data-rule-required='true' id='password' type="密码" />
                         <i class='icon-lock text-muted'></i>
                       </div>
                     </div>
@@ -22,8 +22,8 @@
                       </div>
                     </div>
                     <div class='form-group'>
-                      <label for='agreement'>
-                        <input id='agreement' name='agreement' data-rule-required="true" type='checkbox' value='' />
+                      <label for='agree' class='controls' style="font-weight:normal">
+                        <input data-rule-required='true' id='agree' name='agree' type='checkbox' value='' />
                         我同意
                         <a class='text-contrast'  href="#user_agreements" data-toggle="modal">用户注册条款</a>
                       </label>
@@ -31,7 +31,7 @@
                     <div class='form-group'>
                       <button class='btn btn-block'> 注 册 </button>
                     </div>
-                  </form>
+                  <% end %>
                   <div class='text-center'>
                     <hr class='hr-normal'>
                     <a href='sign_in.html'>

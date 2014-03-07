@@ -10,14 +10,21 @@ Wks::Application.routes.draw do
 
   resources :users  do
     collection do
-      get :sign_in, :sign_up, :forgot_password, :user_agreements
+      get :sign_in, :sign_up, :forgot_password
     end
   end
 
-# 后台
+# 后台begin
   namespace :kobe do
-    resources :departments, :except => ["show"]
+    resources :departments, :except => ["index"]
+
+    resources :users, :except => ["index"] do 
+      collection do
+        get :profile
+      end
+    end
   end
+# 后台end
 
   resources :shared do
     collection do

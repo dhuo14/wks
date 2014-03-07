@@ -54,6 +54,7 @@ GEM
     execjs (2.0.2)
     hike (1.2.3)
     i18n (0.6.5)
+    ipparse (0.2.0)
     jQuery-Validation-Engine-rails (0.0.2)
     jbuilder (1.5.2)
       activesupport (>= 3.0.0)
@@ -167,6 +168,7 @@ DEPENDENCIES
   ancestry (= 2.0.0)
   coffee-rails (~> 4.0.0)
   easy_captcha
+  ipparse (~> 0.2.0)
   jQuery-Validation-Engine-rails (~> 0.0.2)
   jbuilder (~> 1.2)
   jquery-rails (= 3.0.4)

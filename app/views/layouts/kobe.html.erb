@@ -20,7 +20,7 @@
   </head>
   <body class='contrast-red fixed-header fixed-navigation'>
     <header>
-      <nav class='navbar navbar-default'>
+      <nav class='navbar navbar-default navbar-fixed-top'>
         <a class='navbar-brand' href='index.html'>
           <%= image_tag("logo.svg", size: "81x21", class: "logo",alt: "#{Dictionary.web_site_name}") %>
           <%= image_tag("logo_xs.svg", size: "21x21", class: "logo-xs",alt: "#{Dictionary.web_site_name}") %>
@@ -229,7 +229,7 @@
     </header>
     <div id='wrapper'>
       <div id='main-nav-bg'></div>
-      <nav id='main-nav'>
+      <nav id='main-nav' class='main-nav-fixed'>
         <div class='navigation'>
           <div class='search'>
             <form action='http://www.bublinastudio.com/flattybs3/search_results.html' method='get'>
@@ -945,5 +945,6 @@
       });
     </script>
     <!-- / END - page related files and scripts [optional] -->
+    <%= raw "<script>$(function(){$.jGrowl('#{flash["notice"]}');}</script>" if flash["notice"] %>
   </body>
 </html>

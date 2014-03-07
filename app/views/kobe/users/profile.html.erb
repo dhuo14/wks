@@ -1,0 +1,119 @@
+
+              <div class='row'>
+                <div class='col-sm-12'>
+                  <div class='page-header'>
+                    <h1 class='pull-left'>
+                      <i class='icon-user'></i>
+                      <span>用户个人信息</span>
+                    </h1>
+                    <div class='pull-right'>
+                      <ul class='breadcrumb'>
+                        <li>
+                          <a href='index.html'>
+                            <i class='icon-bar-chart'></i>
+                          </a>
+                        </li>
+                        <li class='separator'>
+                          <i class='icon-angle-right'></i>
+                        </li>
+                        <li>Example pages</li>
+                        <li class='separator'>
+                          <i class='icon-angle-right'></i>
+                        </li>
+                        <li class='active'>User profile</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class='row'>
+                <div class='col-sm-3 col-lg-2'>
+                  <div class='box'>
+                    <div class='box-content'>
+                      <img class="img-responsive" src="http://placehold.it/230x230&amp;text=Photo" />
+                    </div>
+                  </div>
+                </div>
+                <div class='col-sm-9 col-lg-10'>
+                  <div class='box'>
+                    <div class='box-content box-double-padding'>
+                      <form class='form' style='margin-bottom: 0;'>
+                      <%= form_for(@user, url: kobe_users_path, method: :patch, html: {class: "form form-horizontal validate-form", style: "margin-bottom: 0;"}) do |u| %>
+                        <fieldset>
+                          <div class='col-sm-4'>
+                            <div class='lead'>
+                              <i class='icon-github text-contrast'></i>
+                              账户信息
+                            </div>
+                            <small class='text-muted'><p>为了方便接受本站的推送信息，请使用常用的邮箱地址。当您忘记了登录密码时可以通过该邮箱重置。如果您变更了邮箱地址，系统会给您发送一份激活邮件，请到邮箱激活即可。</p></small>
+                          </div>
+                          <div class='col-sm-7 col-sm-offset-1'>
+                            <div class='form-group'>
+                              <label>E-mail地址</label>
+                              <input class='form-control' id='email' name="user[email]" data-rule-email='true' data-rule-required='true' placeholder='E-mail地址' type='text' />
+                            </div>
+                            <hr class='hr-normal'>
+                            <div class='form-group'>
+                              <div class='controls'>
+                                <div class='checkbox'>
+                                  <label>
+                                    <input data-target='#change-password' data-toggle='collapse' id='changepasswordcheck' type='checkbox' value='option1' />
+                                    修改密码?
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class='collapse' id='change-password'>
+                              <div class='form-group'>
+                                <label>密码</label>
+                                <input class='form-control' id='password' name="user[password]" data-rule-minlength='6' data-rule-password='true' placeholder='密码' type='password' />
+                              </div>
+                              <div class='form-group'>
+                                <label>请再次输入密码</label>
+                                <input class='form-control' id='password-confirmation' name='password_confirmation' data-rule-equalto='#password' placeholder='请再次输入密码' type='password' />
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                        <hr class='hr-normal'>
+                        <fieldset>
+                          <div class='col-sm-4'>
+                            <div class='lead'>
+                              <i class='icon-user text-contrast'></i>
+                              个人资料
+                            </div>
+                            <small class='text-muted'><p>默认情况下，您的个人信息仅对系统内的其他成员可见，如果您不希望别人看到您的个人信息，您可以选择“信息保密”，目前保密的内容仅限于“身份证号码”和“手机号码”。</p></small>
+                          </div>
+                          <div class='col-sm-7 col-sm-offset-1'>
+                            <div class='form-group'>
+                              <label class='controls'>姓名</label>
+                              <input class='form-control' id='name' name="user[name]" data-rule-required='true' placeholder='姓名' type='text' />
+                            </div>
+                            <div class='form-group'>
+                              <label class='controls'>性别</label>
+                              <input class='form-control' id='gender' name="user[name]" data-rule-maxlength='1' data-rule-required='true' placeholder='性别' type='text' />
+                            </div>
+                            <div class='form-group'>
+                              <label>出生日期</label>
+                              <input class='form-control' id='lastname' placeholder='Last name' type='text'>
+                            </div>
+                            <hr class='hr-normal'>
+                            <div class='form-group'>
+                              <label>个人简历</label>
+                              <textarea class='autosize form-control' id='bio' placeholder='Bio'></textarea>
+                            </div>
+                          </div>
+                        </fieldset>
+                        <div class='form-actions form-actions-padding' style='margin-bottom: 0;'>
+                          <div class='text-right'>
+                            <div class='btn btn-primary btn-lg'>
+                              <i class='icon-save'></i>
+                              Save
+                            </div>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>

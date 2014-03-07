@@ -7,14 +7,9 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  # 密码加密
-  def encode_password(white_password='')
-  	return white_password
-  end
-
-  # 密码解密
-  def decode_password(black_password="")
-  	return black_password
+  #弹框提示
+  def flash_notice(notice=nil)
+    flash["notice"] = notice
   end
 
   # 当前用户

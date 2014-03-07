@@ -46,7 +46,7 @@ module ApplicationHelper
   #   only_show 在shouw/audit等只需要显示内容的页面设为true，则自动去除form,input,button等标签 
   # */
   def _create_xml_form(xml,obj,options={})
-    table_name = obj.class.table_name
+    table_name = obj.class.to_s.tableize
     form_id = options.has_key?("form_id") ? options["form_id"] : "myform" 
     button_id = options.has_key?("button_id") ? options["button_id"] : "mybutton"
     action = options.has_key?("action") ? options["action"] : "" 

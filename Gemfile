@@ -21,7 +21,7 @@ group :assets do
 end
 
 # 树形结构,ruby处理数据库tree结构
-gem 'ancestry', '2.0.0'
+gem 'ancestry', '2.0.0', :git => "git://github.com/stefankroes/ancestry.git"
 
 # 数据库字段备注
 gem 'migration_comments', '0.3.1'

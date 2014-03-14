@@ -8,7 +8,7 @@ class CreateAreas < ActiveRecord::Migration
 		t.string :code                   , :comment => "编号"
 		t.integer :sort                  , :comment => "排序"
 
-      	t.timestamps
+    t.timestamps
     end
   end
 end

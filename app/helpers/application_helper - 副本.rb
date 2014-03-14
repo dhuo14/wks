@@ -1,13 +1,6 @@
 # -*- encoding : utf-8 -*-
 module ApplicationHelper
 
-  # 红色标记的文本，例如必填项*
-  def _red_text(txt)
-    return raw "<span class='text-red'>#{txt}</span>".html_safe
-  end
-
-
-
   # 下拉选择框
   def drop_select(to_id, rs,  url, options = {})
     options.merge!({:class => 'drop_select', :readonly => "readonly", :dropdata => url})
@@ -122,7 +115,7 @@ module ApplicationHelper
       opt << "data-rule-maxlength='#{options["maxlength"]}'" if options.has_key?("maxlength")
       if options.has_key?("required") && options["required"].to_s == 'true'
         opt << "data-rule-required='true'"
-        red_start = _red_text("*") 
+        red_start = "<span class='text-red'>*</span>" 
       else
         red_start = ""
       end

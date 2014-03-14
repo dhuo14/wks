@@ -1,31 +1,3 @@
-
-              <div class='row'>
-                <div class='col-sm-12'>
-                  <div class='page-header'>
-                    <h1 class='pull-left'>
-                      <i class='icon-user'></i>
-                      <span>用户个人信息</span>
-                    </h1>
-                    <div class='pull-right'>
-                      <ul class='breadcrumb'>
-                        <li>
-                          <a href='index.html'>
-                            <i class='icon-bar-chart'></i>
-                          </a>
-                        </li>
-                        <li class='separator'>
-                          <i class='icon-angle-right'></i>
-                        </li>
-                        <li>Example pages</li>
-                        <li class='separator'>
-                          <i class='icon-angle-right'></i>
-                        </li>
-                        <li class='active'>User profile</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div class='row'>
                 <div class='col-sm-3 col-lg-2'>
                   <div class='box'>
@@ -38,15 +10,16 @@
                   <div class='box'>
                     <div class='box-content box-double-padding'>
                       <form class='form' style='margin-bottom: 0;'>
-                      <%= form_for(@user, url: kobe_users_path, method: :patch, html: {class: "form form-horizontal validate-form", style: "margin-bottom: 0;"}) do |u| %>
+                      <%= simple_form_for [:kobe, @user], :html => { :multipart => true } do |f| %>
                         <fieldset>
                           <div class='col-sm-4'>
                             <div class='lead'>
                               <i class='icon-github text-contrast'></i>
                               账户信息
                             </div>
-                            <small class='text-muted'><p>为了方便接受本站的推送信息，请使用常用的邮箱地址。当您忘记了登录密码时可以通过该邮箱重置。如果您变更了邮箱地址，系统会给您发送一份激活邮件，请到邮箱激活即可。</p></small>
+                            <small class='text-muted'><p>邮箱既是登录账号又是密保工具，当您忘记密码时可以通过邮箱重置。如果您变更了邮箱地址，需要重新激活。为了方便接受本站的推送信息，请使用常用的邮箱地址。</p></small>
                           </div>
+                          <%= f.input :email, label: 'E-mail地址', placeholder: 'E-mail地址', input_html: { 'data-rule-email' => 'true' , 'data-rule-required' => 'true' } %>
                           <div class='col-sm-7 col-sm-offset-1'>
                             <div class='form-group'>
                               <label>E-mail地址</label>
@@ -82,8 +55,9 @@
                               <i class='icon-user text-contrast'></i>
                               个人资料
                             </div>
-                            <small class='text-muted'><p>默认情况下，您的个人信息仅对系统内的其他成员可见，如果您不希望别人看到您的个人信息，您可以选择“信息保密”，目前保密的内容仅限于“身份证号码”和“手机号码”。</p></small>
+                            <small class='text-muted'><p>默认情况下，个人信息仅对系统内的其他成员可见，如果您不希望别人看到您的信息，您可以选择“信息保密”（姓名和性别不在保密范围内）。</p></small>
                           </div>
+                          <%= f.input :name, label: '姓名', placeholder: '姓名', input_html: {'data-rule-maxlength' => '20', 'data-rule-required' => 'true' } %>
                           <div class='col-sm-7 col-sm-offset-1'>
                             <div class='form-group'>
                               <label class='controls'>姓名</label>
@@ -108,14 +82,7 @@
                             </div>
                           </div>
                         </fieldset>
-                        <div class='form-actions form-actions-padding' style='margin-bottom: 0;'>
-                          <div class='text-right'>
-                            <button class='btn btn-primary btn-lg'>
-                              <i class='icon-save'></i>
-                              Save
-                            </button>
-                          </div>
-                        </div>
+                        <%= f.button :submit %>
                       <% end %>
                     </div>
                   </div>

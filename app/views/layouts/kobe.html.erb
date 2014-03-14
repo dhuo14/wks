@@ -547,7 +547,34 @@
         <div class='container'>
           <div class='row' id='content-wrapper'>
             <div class='col-xs-12'>
-            <%= yield %>
+              <div class='row'>
+                <div class='col-sm-12'>
+                  <div class='page-header'>
+                    <h1 class='pull-left'>
+                      <i class='icon-user'></i>
+                      <span>这里是MENU标题（图标）</span>
+                    </h1>
+                    <div class='pull-right'>
+                      <ul class='breadcrumb'>
+                        <li>
+                          <a href='index.html'>
+                            <i class='icon-home'></i>
+                          </a>
+                        </li>
+                        <li class='separator'>
+                          <i class='icon-angle-right'></i>
+                        </li>
+                        <li>父菜单链接</li>
+                        <li class='separator'>
+                          <i class='icon-angle-right'></i>
+                        </li>
+                        <li class='active'>当前菜单</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <%= yield %>
             </div>
           </div>
           <footer id='footer'>

@@ -1,0 +1,14 @@
+<div class='box-content'>
+	<%= simple_form_for [:kobe, Menu.new], :html => { :multipart => true } do |f| %>
+
+		<%= f.input :name, label: '名称', placeholder: '名称', input_html: { 'data-rule-required' => 'true' } %>
+
+		<%= f.input :url, label: 'URL', placeholder: 'URL', hint: 'routes_path或者传统URL' %>
+
+		<%= f.input :icon, label: '图标', collection: [['Font Awesome',['icon-file','icon-archive']],['Web application icons',['icon-camera','icon-phone','icon-shopping-cart','icon-question-sign']]], as: :single_select, group_method: :last %>
+
+		<%= f.input :status, label: '状态', as: :my_radio_buttons, collection: [['有效','1'],['无效','0']] %>
+
+		<%= f.button :submit %>
+	<% end %>
+</div>

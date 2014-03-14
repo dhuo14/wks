@@ -18,6 +18,12 @@ Wks::Application.routes.draw do
 # 后台begin
   namespace :kobe do
     resources :departments, :except => ["index"]
+    resources :menus, :except => ["show"] do
+      collection do
+        get :ztree
+        post :move
+      end
+    end
 
     resources :users, :except => ["index"] do 
       collection do

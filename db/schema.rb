@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303075938) do
+ActiveRecord::Schema.define(version: 20140311015039) do
 
   create_table "areas", force: true do |t|
     t.string   "name",           comment: "单位名称"
@@ -65,16 +65,38 @@ ActiveRecord::Schema.define(version: 20140303075938) do
   add_index "departments", ["name"], name: "index_departments_on_name", unique: true, using: :btree
   add_index "departments", ["org_code"], name: "index_departments_on_org_code", unique: true, using: :btree
 
+  create_table "menus", force: true do |t|
+    t.string   "name",                                 null: false, comment: "名称"
+    t.string   "ancestry",                                          comment: "祖先节点"
+    t.integer  "ancestry_depth",                                    comment: "层级"
+    t.string   "url",                                               comment: "url"
+    t.integer  "status",         limit: 2, default: 0, null: false, comment: "状态"
+    t.integer  "sort",                                              comment: "排序"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "settings", force: true do |t|
+    t.string   "var",                   null: false
+    t.text     "value"
+    t.integer  "thing_id"
+    t.string   "thing_type", limit: 30
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
+
   create_table "users", force: true do |t|
     t.integer  "department_id",                default: 0,                  comment: "单位id"
-    t.string   "login",                                        null: false, comment: "登录名"
+    t.string   "login",                                                     comment: "登录名"
     t.string   "password",                                     null: false, comment: "登录名"
-    t.string   "name",                                         null: false, comment: "姓名"
+    t.string   "name",                                                      comment: "姓名"
     t.string   "portrait",                                                  comment: "头像"
     t.string   "gender",             limit: 2,                              comment: "性别"
     t.string   "identity_num",                                              comment: "身份证"
     t.string   "identity_pic",                                              comment: "身份证图片"
-    t.string   "email",                                                     comment: "电子邮箱"
+    t.string   "email",                                        null: false, comment: "电子邮箱"
     t.string   "mobile",                                                    comment: "手机"
     t.boolean  "is_visible",                   default: true,  null: false, comment: "是否公开,目前仅指身份证和手机号"
     t.string   "tel",                                                       comment: "电话"

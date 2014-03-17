@@ -41,12 +41,32 @@ SimpleForm.setup do |config|
 
     ## Inputs
     # b.use :label_input
+    b.use :required_type
     b.wrapper tag: :div, class: 'control-label col-sm-3' do |ba|
       ba.use :label
+      ba.use :tip
       ba.use :hint,  wrap_with: { tag: :small, class: 'help-block' }
     end
     b.use :input, wrap_with: { tag: :div, class: 'col-sm-5 controls' }
     b.use :error, wrap_with: { tag: :span, class: :error }
+  end
+
+  config.wrappers :up_down, class: 'form-group', 
+  hint_class: :field_with_hint, error_class: :field_with_errors do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.use :required_type
+    b.use :label
+    b.use :tip
+    b.use :hint,  wrap_with: { tag: :small, class: 'help-block' }
+    b.wrapper tag: :div, class: 'controls' do |ba|
+      ba.use :input
+      ba.use :error, wrap_with: { tag: :span, class: :error }
+    end
   end
 
   # The default wrapper to be used by the FormBuilder.
@@ -96,7 +116,7 @@ SimpleForm.setup do |config|
   # config.item_wrapper_class = nil
 
   # How the label text should be generated altogether with the required text.
-  # config.label_text = lambda { |label, required| "#{required} #{label}" }
+  config.label_text = lambda { |label, required| required.present? ? "<span class='text-red'>*</span> #{label}" : "#{label}" }
 
   # You can define the class to use on all labels. Default is nil.
   # config.label_class = 'control-label'
@@ -108,7 +128,7 @@ SimpleForm.setup do |config|
   # config.generate_additional_classes_for = [:wrapper, :label, :input]
 
   # Whether attributes are required by default (or not). Default is true.
-  # config.required_by_default = true
+  config.required_by_default = false
 
   # Tell browsers whether to use the native HTML5 validations (novalidate form option).
   # These validations are enabled in SimpleForm's internal config but disabled by default

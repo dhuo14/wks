@@ -70,9 +70,9 @@ $(function() {
   });
   
   $("#daterange2").daterangepicker({
-    format: "MM/DD/YYYY"
+    format: "YYYY-MM-DD"
   }, function(start, end) {
-    return $("#daterange2").parent().find("input").first().val(start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY"));
+    return $("#daterange2").parent().find("input").first().val(start.format("YYYY-MM-DD") + " 至 " + end.format("YYYY-MM-DD"));
   });
   
   $(".mention").mention({

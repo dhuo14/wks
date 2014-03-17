@@ -5,33 +5,80 @@
 			<div class='box-content'>
 				<%= simple_form_for [:kobe, @dep], :html => { :multipart => true } do |f| %>
 
-				<%= f.input :name, label: '单位名称', placeholder: 'Numbers!!', input_html: { 'data-rule-number' => 'true', 'data-rule-required' => 'true' } %>
+				<%= f.input :name, label: '单位名称', hint: 'Numbers!!', required: true, required_type: { number: true, maxlength: 10, minlength: 6 } %>
 
-				<%= f.input :is_secret, label: ' 是否保密', as: :my_radio_buttons, collection: [['是','yes'],['否','no']] %>
+				<%= f.input :is_secret, label: ' 是否保密', as: :my_radio_buttons, collection: [['是','true'],['否','false']], required: true %>
 
-				<%= f.input :short_name, label: '简称', placeholder: 'Short_name !', hint: 'You cannot change your short_name!!' %>
+				<%= f.input :short_name, label: '简称', placeholder: 'Short_name !', tip: 'You cannot change your short_name!!', required: true %>
 
-				<%= f.input :is_secret, label: ' 是否保密', as: :my_check_boxes, collection: ['是','否'] %>
+				<%= f.input :industry, label: ' 行业类别', as: :my_check_boxes, collection: ['Alaska','Hawaii','Washington','California'], required: true %>
 
-				<%= f.input :summary, label: '多选', collection: [['Alaskan/Hawaiian Time Zone',['Alaska','Hawaii']],['Pacific Time Zone',['California','Nevada','Oregon','Washington']],['Mountain Time Zone',['Arizona','Colorado','Idaho']]], 
-				as: :multiple_select, group_method: :last %>
+				<%= f.input :legal_number, label: '多选', collection: [['Alaskan/Hawaiian Time Zone',['Alaska','Hawaii']],['Pacific Time Zone',['California','Nevada','Oregon','Washington']],['Mountain Time Zone',['Arizona','Colorado','Idaho']]], as: :multiple_select, group_method: :last, required: true, tip: 'legal_number!!'  %>
 
-				<%= f.input :summary, label: '单选', collection: [['Alaskan/Hawaiian Time Zone',['Alaska','Hawaii']],['Pacific Time Zone',['California','Nevada','Oregon','Washington']],['Mountain Time Zone',['Arizona','Colorado','Idaho']]], 
-				as: :single_select, group_method: :last %>
+				<%= f.input :org_code, label: '单选', collection: [['Alaskan/Hawaiian Time Zone',['Alaska','Hawaii']],['Pacific Time Zone',['California','Nevada','Oregon','Washington']],['Mountain Time Zone',['Arizona','Colorado','Idaho']]], as: :single_select, group_method: :last, required: true %>
 
-				<%= f.input :created_at, label: 'date_range_picker', as: :date_range_picker %>
-				<%= f.input :created_at, label: 'date_picker', as: :date_picker %>
-				<%= f.input :created_at, label: 'time_picker', as: :time_picker %>
-				<%= f.input :created_at, label: 'date_time_picker', as: :date_time_picker %>
+				<%= f.input :tel, label: 'date_range_picker', as: :date_range_picker, required: true %>
+				<%= f.input :turnover, label: 'date_picker', as: :date_picker, required: true %>
+				<%= f.input :details, label: 'time_picker', as: :time_picker, required: true %>
+				<%= f.input :created_at, label: 'date_time_picker', as: :date_time_picker, required: true %>
 
-				<%= f.input :short_name, as: :autosize_text, label: 'Autosize textarea' %>
-				<%= f.input :summary, as: :counter_text, label: 'Char counter', allow_length: 20, warning_length: 10 %>
-				<%= f.input :short_name, as: :maxlength_text, label: 'Max length', maxlength: 10 %>
-				<%= f.input :short_name, as: :autosize_counter_text, label: 'Char counter', allow_length: 30, warning_length: 10 %>
+				<%= f.input :legal_name, as: :autosize_counter_text, label: 'Autosize Char counter', allow_length: 30, warning_length: 10, required_type: { number: true } %>
+				<%= f.input :address, as: :autosize_text, label: 'Autosize textarea', required: true %>
+				<%= f.input :post_code, as: :counter_text, label: 'Char counter', allow_length: 40, warning_length: 10, required: true %>
+				<%= f.input :website, as: :maxlength_text, label: 'Max length', maxlength: 10, required: true %>
+				
+				<div class="form-group">
+					<div class="control-label col-sm-3">
+						<label class="maxlength_text required" for="department_website">
+							<span class="text-red">*</span>
+							Max length
+						</label>
+					</div>
+					<div class="col-sm-5 controls">
+						<div class="input-group">
+							<input id="menu_icon" class="form-control" type="text">
+							<span class="input-group-btn">
+								<button class="btn" type="button" data-toggle='modal' href='#modal-menu_icon'>
+									<i class="icon-building"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+				<%= f.input :bank, as: :box_select %>
+
+				<%= f.button :submit %>
+				<% end %>
+			</div>
+
+
+			<div class='col-sm-10 col-sm-offset-1'>
+				<%= simple_form_for [:kobe, @dep], :html => { :multipart => true }, wrapper: :up_down do |f| %>
+
+				<%= f.input :name, label: '单位名称', hint: 'Numbers!!', required: true %>
+
+				<%= f.input :is_secret, label: ' 是否保密', as: :my_radio_buttons, collection: [['是','true'],['否','false']], required: true %>
+
+				<%= f.input :short_name, label: '简称', placeholder: 'Short_name !', tip: 'You cannot change your short_name!!', required: true %>
+
+				<%= f.input :industry, label: ' 行业类别', as: :my_check_boxes, collection: ['Alaska','Hawaii','Washington','California'], required: true %>
+
+				<%= f.input :legal_number, label: '多选', collection: [['Alaskan/Hawaiian Time Zone',['Alaska','Hawaii']],['Pacific Time Zone',['California','Nevada','Oregon','Washington']],['Mountain Time Zone',['Arizona','Colorado','Idaho']]], as: :multiple_select, group_method: :last, required: true  %>
+
+				<%= f.input :org_code, label: '单选', collection: [['Alaskan/Hawaiian Time Zone',['Alaska','Hawaii']],['Pacific Time Zone',['California','Nevada','Oregon','Washington']],['Mountain Time Zone',['Arizona','Colorado','Idaho']]], as: :single_select, group_method: :last, required: true %>
+
+				<%= f.input :tel, label: 'date_range_picker', as: :date_range_picker, required: true %>
+				<%= f.input :turnover, label: 'date_picker', as: :date_picker, required: true %>
+				<%= f.input :details, label: 'time_picker', as: :time_picker, required: true %>
+				<%= f.input :fax, label: 'date_time_picker', as: :date_time_picker, required: true %>
+
+				<%= f.input :legal_name, as: :autosize_counter_text, label: 'Autosize Char counter', allow_length: 30, warning_length: 10, required: true, required_type: { number: true } %>
+				<%= f.input :address, as: :autosize_text, label: 'Autosize textarea', required: true %>
+				<%= f.input :post_code, as: :counter_text, label: 'Char counter', allow_length: 40, warning_length: 10, required: true %>
+				<%= f.input :website, as: :maxlength_text, label: 'Max length', maxlength: 10, required: true %>
 
 				<%= f.button :submit %>
 				<% end %>
 			</div>
 		</div>
 	</div>
-</div>

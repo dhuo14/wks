@@ -7,8 +7,7 @@ class MyRadioButtonsInput < SimpleForm::Inputs::CollectionRadioButtonsInput
       :item_wrapper_tag => 'label',
       :item_wrapper_class => 'radio radio-inline'
      }
-     my_input_html_options = { class: nil }
-
+     my_input_html_options = { class: nil, 'data-rule-required' => options[:required] }
     return @builder.send(
       "collection_radio_buttons",
       attribute_name,

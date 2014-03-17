@@ -5,8 +5,7 @@ class MyCheckBoxesInput < SimpleForm::Inputs::CollectionCheckBoxesInput
       :item_wrapper_tag => 'label',
       :item_wrapper_class => 'checkbox-inline'
      }
-     my_input_html_options = { class: nil }
-
+    my_input_html_options = { class: nil, 'data-rule-required' => options[:required] }
     return @builder.send(
       "collection_check_boxes",
       attribute_name,

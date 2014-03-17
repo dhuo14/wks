@@ -26,6 +26,32 @@ module ApplicationHelper
     (text_field_tag("art_#{to_id}", name_value, options.merge({:id => "art_#{input_id}"})) + hidden_field_tag(to_id, id_value, :droptree_id => "art_#{input_id}" )).html_safe
   end
 
+  # bootbox选择框
+  def box_select(id,arr=[],type='radio',grid=4)
+    str = "<div class='modal fade' id='modal-#{id}' tabindex='-1'><div class='modal-dialog' style='width:780px;'><div class='modal-content'><div class='modal-header'><button aria-hidden='true' class='close' data-dismiss='modal' type='button'>×</button><h4 class='modal-title' id='myModalLabel'>请选择：</h4></div><div class='modal-body'><div class='box-content box-padding'><div class='row'>"
+    grid.times do |i|
+      tmp = arr.length / (grid - i)
+      pl = arr.length % (grid - i) == 0 ? tmp : tmp + 1
+      str << "<div class='col-sm-3'><ul class='list-unstyled box-select' style='margin-bottom:0;'>"
+      arr.slice!(0...pl).each do |ar|
+        str << "<li>"
+        case type
+        when "icon"
+          str << "#{hidden_field_tag("box_hidden_#{id}", ar)}&nbsp; <i class='#{ar}'></i>#{ar}"
+        when "radio"
+          str << "#{radio_button_tag("box_radio_#{id}", ar)}&nbsp; #{ar}"
+        when "checkbox"
+          str << "#{check_box_tag("box_checkbox_#{id}", ar)}&nbsp; #{ar}"
+        end
+        str << "</li>"
+      end
+      str << "</ul></div>"
+    end
+    str << "</div></div></div><div class='modal-footer'><button class='btn btn-default' data-dismiss='modal' type='button'>Close</button><button class='btn btn-primary' type='button'>Save changes</button></div></div></div></div>"
+    return raw str.html_safe
+  end
+
+
   # 获取某实例的字段值
   def _get_column_value(obj,node,details_column='details')
     if node.attributes.has_key?("column") && obj.class.attribute_method?(node["column"])
@@ -40,7 +66,6 @@ module ApplicationHelper
       end
     end
   end
-
 
   # 生成XML表单函数
   # /*options参数说明

@@ -4,3 +4,4 @@
  *= require jquery/jquery_ui
 */
 p{text-indent:2em;}
+ul.box-select > li{cursor:pointer;}

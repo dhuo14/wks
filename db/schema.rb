@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140311015039) do
+ActiveRecord::Schema.define(version: 20140314072733) do
 
   create_table "areas", force: true do |t|
     t.string   "name",           comment: "单位名称"
@@ -65,11 +65,23 @@ ActiveRecord::Schema.define(version: 20140311015039) do
   add_index "departments", ["name"], name: "index_departments_on_name", unique: true, using: :btree
   add_index "departments", ["org_code"], name: "index_departments_on_org_code", unique: true, using: :btree
 
+  create_table "icons", force: true do |t|
+    t.string  "name",                                 null: false, comment: "名称"
+    t.string  "ancestry",                                          comment: "祖先节点"
+    t.integer "ancestry_depth",                                    comment: "层级"
+    t.string  "transfer",                                          comment: "实际图标，父级节点的name不是真正的图标"
+    t.integer "status",         limit: 2, default: 0, null: false, comment: "状态"
+    t.integer "sort",                                              comment: "排序"
+  end
+
+  add_index "icons", ["name"], name: "index_icons_on_name", unique: true, using: :btree
+
   create_table "menus", force: true do |t|
     t.string   "name",                                 null: false, comment: "名称"
     t.string   "ancestry",                                          comment: "祖先节点"
     t.integer  "ancestry_depth",                                    comment: "层级"
     t.string   "url",                                               comment: "url"
+    t.string   "icon",                                              comment: "图标"
     t.integer  "status",         limit: 2, default: 0, null: false, comment: "状态"
     t.integer  "sort",                                              comment: "排序"
     t.datetime "created_at"

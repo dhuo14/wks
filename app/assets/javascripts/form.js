@@ -21,19 +21,22 @@
 
 $(function() {
 
-// $("#get_value").on("click",function(){
-//       var a1 = $("#get_01").val();
-//       var a2 = $("#get_02").val();
-//       var a3 = $("#get_02").attr("checked") == true ? "1" : "0";
-//       var a4="";  
-//       $("[name='get_031']:checked").each(function(){  
-//         a4+=$(this).val()+",";   
-//       })  
-
-
-//       alert(a1+ "__________"+a2+ "#############"+a4);
-//     });
-//   });
+  // bootbox选择器--点击后的选择事件
+  $("ul.box-select li").on("click",function(){
+    var ipt = $(this).children("input");
+    var id = $(this).parents(".modal").first().attr("id").replace("modal-",""); 
+    if(ipt.attr("type") == "radio" || ipt.attr("type") == "hidden"){
+      $("#"+id).val(ipt.val());
+      $(this).parents(".modal").modal('hide');
+    } 
+    else{
+      var arr = new Array();
+      $("input[name='" + ipt.attr("name") + "']:checked").each(function(){
+        arr.push($(this).val());
+      })
+      $("#"+id).val(arr.join(','));
+    }
+  })
 
 
 

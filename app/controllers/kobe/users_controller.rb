@@ -10,7 +10,7 @@ class Kobe::UsersController < KobeController
   end
 
   def update
-  	if @user.update_attributes(update_params)
+  	if @user.update(update_params)
 	    # @user.encode_password unless params[:user][:password].blank?
 	    flash_notice("保存成功") 
 	    redirect_to profile_kobe_users_path(@user)

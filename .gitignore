@@ -17,4 +17,5 @@
 
 /config/database.yml
 /public/assets
+/public/test
 /Gemfile.lock

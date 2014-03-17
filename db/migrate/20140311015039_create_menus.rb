@@ -12,5 +12,6 @@ class CreateMenus < ActiveRecord::Migration
 
     t.timestamps
     end
+    add_index :menus, :name,                :unique => true
   end
 end

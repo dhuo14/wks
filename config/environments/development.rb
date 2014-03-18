@@ -26,4 +26,7 @@ Wks::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  # 虚拟机测试环境在外部访问，友好错误提示
+  BetterErrors::Middleware.allow_ip! "10.0.2.2"
 end

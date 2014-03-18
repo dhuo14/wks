@@ -72,6 +72,7 @@ gem "simple_form", "~> 3.0.1"
 gem "ipparse", "~> 0.2.0"
 
 gem "rails-i18n", "~> 4.0.1"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -83,3 +84,11 @@ gem "rails-i18n", "~> 4.0.1"
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :development, :test do
+	# console print&debug 这个是手动，需要在代码里面写binding.pry
+	gem "pry-rails", "~> 0.3.2"
+	# 这2个加起来是自动，报错的地方会停下来，也能写代码
+  gem "better_errors", "~> 1.1.0"
+  gem "binding_of_caller", "~> 0.7.2"
+end

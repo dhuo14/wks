@@ -11,10 +11,9 @@
 
 		<%= f.input :sort, label: '排序号', placeholder: '只能填数字', input_html: { 'data-rule-number' => 'true', 'data-rule-required' => 'true' } %>
 
-		<%= f.input :icon, label: '图标', as: :box_select, placeholder: '图标', input_html: { 'data-rule-required' => 'true' } %>
-
+		<%= f.input :icon, label: '图标', as: :box_select, box_param: { 'array' => @icon, 'type' => 'icon', 'grid' => 2 }, placeholder: '图标', required: true %>
+		
 		<%= f.button :submit %>
 	<% end %>
 </div>
 
-<%= box_select('menu_icon',@icon,'radio') %>

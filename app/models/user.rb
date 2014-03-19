@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
   belongs_to :department
+  has_many :user_menus, dependent: :destroy
+  has_many :menus, :through => :user_menus, :source => :menu
 
   # 是否超级管理员,超级管理员不留操作痕迹
   def is_webmaster?

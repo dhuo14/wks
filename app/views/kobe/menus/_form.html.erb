@@ -5,7 +5,7 @@
 
 		<%= f.input :name, label: '名称', placeholder: '名称', input_html: { 'data-rule-required' => 'true' } %>
 
-		<%= f.input :url, label: 'URL', placeholder: 'URL', hint: '相对路径' %>
+		<%= f.input :route_path, label: 'URL', placeholder: 'URL', hint: '相对路径' %>
 
 		<%= f.input :status, label: '状态', as: :my_radio_buttons, collection: [['有效','1'],['无效','0']] %>
 

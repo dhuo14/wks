@@ -8,9 +8,7 @@ class Kobe::MenusController < KobeController
 	def index
 		@menu = Menu.new
     @icon = Icon.leaves.map(&:name)
-    # binding.pry
-    # sadf
-
+    @my_menus = my_menus
 	end
 
   def new

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 
 class Department < ActiveRecord::Base
-
+	has_many :user, dependent: :destroy
   # 树形结构
   has_ancestry :cache_depth => true
   default_scope -> {order(:ancestry, :sort, :id)}

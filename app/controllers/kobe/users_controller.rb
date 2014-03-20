@@ -11,13 +11,12 @@ class Kobe::UsersController < KobeController
 
   def update
   	if @user.update(update_params)
-	    # @user.encode_password unless params[:user][:password].blank?
-	    flash_notice("保存成功") 
+	    tips_get("保存成功") 
 	    redirect_to profile_kobe_users_path(@user)
-	else
-		flash_notice("保存成功")
-		redirect_to kobe_index_path(@user)
-	end
+  	else
+      flash_get(@user.errors.full_messages)
+  		render 'profile'
+  	end
   end
 
   private  
@@ -28,7 +27,8 @@ class Kobe::UsersController < KobeController
   end
 
   def get_user
-  	@user = User.find(params[:format])
+  	# @user = User.find(params[:format])
+    @user = current_user
   end
   
 end

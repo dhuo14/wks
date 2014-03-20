@@ -20,9 +20,14 @@ class Kobe::MenusController < KobeController
   end
 
   def create
-    @menu = Menu.new(menu_params) 
-    flash_notice("操作成功。") if @menu.save
-    redirect_to kobe_menus_path
+    menu = Menu.new(menu_params) 
+    if menu.save
+      tips_get("操作成功。")
+      redirect_to kobe_menus_path
+    else
+      flash_get(menu.errors.full_messages)
+      render 'index'
+    end
   end
 
   def update

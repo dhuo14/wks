@@ -1,4 +1,5 @@
 source 'http://ruby.taobao.org'
+# source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
@@ -30,7 +31,7 @@ gem 'migration_comments', '0.3.1'
 gem 'jquery-rails', '3.0.4'
 
 # 类xml解析
-gem 'nokogiri', '1.6.0'
+gem "nokogiri", "~> 1.6.1"
 
 # 分页
 gem 'kaminari', '0.14.1'
@@ -73,8 +74,10 @@ gem "ipparse", "~> 0.2.0"
 
 gem "rails-i18n", "~> 4.0.1"
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+# Use ActiveModel has_secure_password 密码验证 目前暂时不支持高版本3.1.5
+gem "bcrypt-ruby", "~> 3.0.1" 
+# gem 'bcrypt', '~> 3.1.7'
+# gem "bcrypt-ruby", "~> 3.1.5"
 
 # Use unicorn as the app server
 # gem 'unicorn'

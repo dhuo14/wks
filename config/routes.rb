@@ -10,10 +10,12 @@ Wks::Application.routes.draw do
 
   resources :users  do
     collection do
-      get :sign_in, :sign_up, :forgot_password
+      get :sign_in, :sign_up, :sign_out, :forgot_password
       post :login
     end
   end
+
+  resources :sessions, :only => [:new, :create, :destroy]
 
 # 后台begin
   namespace :kobe do

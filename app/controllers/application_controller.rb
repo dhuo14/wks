@@ -3,22 +3,35 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+
+  # 开发给view层用的方法
+  helper_method :current_user, :signed_in?
+
+  def current_user
+    remember_token = User.encrypt(cookies[:remember_token])
+    @current_user ||= User.find_by(remember_token:remember_token)
+  end
+
+  def signed_in?
+    !current_user.nil?
+  end
+
+
+
   protected
 
-  #弹框提示
-  def flash_notice(notice=nil)
-    flash["notice"] = notice
+  #着重提示，等用户手动关闭
+  def flash_get(message,status="error")
+    unless message.class == Array
+      message = [message]
+    end
+    flash[status] = message
   end
 
-  # 当前用户
-  def current_user
-    @current_user ||= session[:user_id] && User.find(session[:user_id])
+  #普通提示，自动关闭
+  def tips_get(message)
+    flash[:tips] = message
   end
-
-  # 是否登录?
-  def signed_in?
-    !current_user.nil? 
-  end 
 
   # 发送邮件
   def _send_email(email,title,content)

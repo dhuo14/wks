@@ -4,7 +4,8 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.integer :department_id, :default => 0, :comment => "单位id"
       t.string :login, :comment => "登录名"
-      t.string :password, :null => false, :comment => "密码"
+      t.string :password_digest, :null => false, :comment => "密码"
+      t.string :remember_token, :comment => "自动登录"
       t.string :name, :null => false, :comment => "姓名"
       t.string :portrait, :comment => "头像"
       t.string :gender, :limit => 2, :comment => "性别"

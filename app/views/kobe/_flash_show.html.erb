@@ -1,0 +1,22 @@
+<% 
+	ha = {
+	  "success" => ["alert-success","icon-ok-sign", "成功"],
+	  "error" => ["alert-danger", "icon-remove-sign", "错误"],
+	  "warning" => ["alert-warning", "icon-exclamation-sign", "警告"],
+	  "info" => ["alert-info","icon-info-sign", "消息"]
+	}
+
+	flash.each do |key,value| 
+		return unless ha.has_key?(key)
+	  str = "
+	  <div class='alert #{ha[key][0]} alert-dismissable'>
+	  <a class='close' data-dismiss='alert' href='#'>&times;</a>
+	  <h4><i class='#{ha[key][1]}'></i> #{ha[key][2]} </h4>
+	  <ul>
+	  #{value.map{|m|"<li>#{m}</li>"}.join}
+	  </ul>
+	  </div>"
+	%>
+	  <%= raw str.html_safe %>
+
+	<% end %>

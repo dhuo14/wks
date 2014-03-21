@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Kobe::UsersController < KobeController
-  before_filter :get_user ,:only => [:profile,:update]
+  before_filter :get_user, :only => [:profile, :rest_account, :update]
 
   def edit
   end
@@ -9,7 +9,14 @@ class Kobe::UsersController < KobeController
   	
   end
 
-  def update
+  
+  def impower
+  end
+
+  def change_password
+  end
+
+  def update()
   	if @user.update(update_params)
 	    tips_get("保存成功") 
 	    redirect_to profile_kobe_users_path(@user)
@@ -22,8 +29,13 @@ class Kobe::UsersController < KobeController
   private  
 
   # 修改用户时只允许传递过来的参数
-  def update_params  
-    params.require(:user).permit(:email, :password, :name, :gender, :identity_num)  
+  def update_params(act='profile')  
+    ha={
+      "profile" => %w(name gender identity_num email mobile is_visible tel fax duty professional_title bio),
+      "impower" => %w(is_admin status),
+      "change_password" => %w(password password_confirmation)
+    }
+    params.require(:user).permit(ha[act]) 
   end
 
   def get_user

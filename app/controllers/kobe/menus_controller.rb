@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Kobe::MenusController < KobeController
-	# layout "application"
-  layout "test"  
+
   skip_before_filter :verify_authenticity_token, :only => :move 
   # protect_from_forgery :except => :index
 

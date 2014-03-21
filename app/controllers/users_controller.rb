@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   def login
     user = User.find_by(email:params[:user][:email].downcase)
     if user && user.authenticate(params[:user][:password])
-      sign_in_user user
+      sign_in_user(user, params[:user][:remember_me] == '1')
       redirect_to profile_kobe_users_path(user)
     else
       flash_get '用户名或者密码错误!'
@@ -79,11 +79,15 @@ class UsersController < ApplicationController
     @current_user = user
   end
 
-  def sign_in_user(user)
+  def sign_in_user(user,remember_me = false)
     remember_token = User.new_remember_token
-    cookies.permanent[:remember_token] = remember_token
+    if remember_me
+      cookies.permanent[:remember_token] = remember_token # 20年有效期
+    else
+      cookies[:remember_token] = remember_token # 30min 或关闭浏览器消失
+    end
     user.update_attribute(:remember_token, User.encrypt(remember_token))
-    self.current_user = user
+    self.current_user= user
   end
 
 end

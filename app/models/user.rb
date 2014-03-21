@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with:VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, :on => :create
 
   belongs_to :department
   has_many :user_menus, dependent: :destroy
@@ -52,9 +52,9 @@ class User < ActiveRecord::Base
     if menu.icon.blank?
       case menu.depth
       when 0
-        menu.icon = "icon-chevron-right"  
+        menu.icon = "icon-caret-right"  
       when 1
-        menu.icon = "icon-caret-right"
+        menu.icon = "icon-chevron-right"
       else
         menu.icon = "icon-angle-right"
       end

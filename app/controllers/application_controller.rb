@@ -20,6 +20,14 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # 需要登录
+  def request_authenticate!
+    unless signed_in?
+      flash_get '请先登录!'
+      redirect_to sign_in_users_path
+    end
+  end
+
   #着重提示，等用户手动关闭
   def flash_get(message,status="error")
     unless message.class == Array

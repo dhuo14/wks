@@ -6,7 +6,7 @@ class Kobe::UsersController < KobeController
   end
 
   def profile
-  	
+  	tips_get('这个一个测试信息')
   end
 
   

@@ -376,4 +376,19 @@
       });
     </script>
     <!-- / END - page related files and scripts [optional] -->
-    <%= raw "<script>$(function(){$.jGrowl('#{flash["notice"]}');}</script>" if flash["notice"] %>
+
+
+
+
+    <script>
+      $(function() {
+        // 当前菜单样式
+        var current_menu = $(".navigation ul>li>a[href='<%= request.fullpath %>']");
+        if (current_menu != undefined){
+          current_menu.parents("ul").addClass("in");
+          current_menu.parents("li").addClass("active");
+        }
+        // 弹出tips
+        <%= raw "$.jGrowl('#{flash[:tips]}');".html_safe unless flash[:tips].blank? %>
+      });
+    </script>

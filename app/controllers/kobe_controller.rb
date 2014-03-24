@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class KobeController < ApplicationController
 
-	before_filter :request_authenticate!
+	before_filter :store_location, :request_authenticate!, :init_themes
 
 	def index
 	end
@@ -19,8 +19,13 @@ class KobeController < ApplicationController
 		@city = Area.find(1)
 	end
 
-	def ui
-	end
+  # 准备主界面的素材
+	def init_themes
+    # 主题颜色
+    @colors = [["red", "红色"],["blue", "浅蓝"],["orange", "橙色"],["purple", "紫色"],["green", "绿色"],["muted", "灰色"],["fb", "蓝紫"],["dark", "黑色"],["pink", "粉色"],["grass-green", "草绿"],["sea-blue", "海蓝"],["banana", "黄色"],["dark-orange", "深橙"],["brown", "棕色"]]
+
+    @unread_notifications = current_user.unread_notifications
+  end
 
 
 

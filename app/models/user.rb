@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
+
+  attr_readonly :received_count
+
   before_save {self.email = email.downcase}
   before_create :create_remember_token
 
@@ -11,6 +14,8 @@ class User < ActiveRecord::Base
   belongs_to :department
   has_many :user_menus, dependent: :destroy
   has_many :menus, :through => :user_menus, :source => :menu
+  # 收到的消息
+  has_many :unread_notifications, -> { where "status=0" }, class_name: "Notification", foreign_key: "receiver_id"  
 
 
   # 是否超级管理员,超级管理员不留操作痕迹
@@ -60,7 +65,7 @@ class User < ActiveRecord::Base
       end
     end
     unless menu.has_children?
-      str = "<li><a class='dropdown-collapse' href='#{menu.route_path}'><i class='#{menu.icon}'></i><span>#{menu.name}</span></a></li>"
+      str = "<li><a href='#{menu.route_path}'><i class='#{menu.icon}'></i><span>#{menu.name}</span></a></li>"
     else
       str = "<li><a class='dropdown-collapse' href='#{menu.route_path}'><i class='#{menu.icon}'></i><span>#{menu.name}</span><i class='icon-angle-down angle-down'></i></a>"
       str << menus_ul(menu.children)

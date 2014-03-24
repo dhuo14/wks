@@ -1,7 +1,25 @@
 # -*- encoding : utf-8 -*-
 module ApplicationHelper
 
-
+  # 显示未读的系统消息（状态栏消息）
+  def show_notification(obj)
+    str = %Q|
+            <li>
+              <a href='#'>
+                <div class='widget-body'>
+                  <div class='pull-left icon'>
+                    <i class='#{obj.category.icon} #{obj.category.icon_color}'></i>
+                  </div>
+                  <div class='pull-left text'>
+                    #{obj.content}
+                    <small class='text-muted'>#{obj.created_at}</small>
+                  </div>
+                </div>
+              </a>
+            </li>
+    |
+    return str.html_safe
+  end
 
 
   # # 红色标记的文本，例如必填项*

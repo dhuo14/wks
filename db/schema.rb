@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319060458) do
+ActiveRecord::Schema.define(version: 20140324071031) do
 
   create_table "areas", force: true do |t|
     t.string   "name",           comment: "单位名称"
@@ -80,13 +80,41 @@ ActiveRecord::Schema.define(version: 20140319060458) do
     t.string   "name",                                 null: false, comment: "名称"
     t.string   "ancestry",                                          comment: "祖先节点"
     t.integer  "ancestry_depth",                                    comment: "层级"
-    t.string   "url",                                               comment: "url"
+    t.string   "route_path",                                        comment: "url"
     t.string   "icon",                                              comment: "图标"
     t.integer  "status",         limit: 2, default: 0, null: false, comment: "状态"
     t.integer  "sort",                                              comment: "排序"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "notification_categories", force: true do |t|
+    t.string   "name",                                 null: false, comment: "名称"
+    t.string   "ancestry",                                          comment: "祖先节点"
+    t.integer  "ancestry_depth",                                    comment: "层级"
+    t.string   "icon",                                              comment: "图标"
+    t.string   "icon_color",                                        comment: "图标颜色"
+    t.integer  "status",         limit: 2, default: 0, null: false, comment: "状态"
+    t.integer  "sort",                                              comment: "排序"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notification_categories", ["name"], name: "index_notification_categories_on_name", unique: true, using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.integer  "sender_id",                                      null: false, comment: "发送者ID"
+    t.integer  "receiver_id",                                    null: false, comment: "接收者ID"
+    t.integer  "notification_category_id",                       null: false, comment: "类别ID"
+    t.string   "title",                                                       comment: "标题"
+    t.string   "content",                                                     comment: "内容"
+    t.integer  "status",                   limit: 2, default: 0, null: false, comment: "状态"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["receiver_id"], name: "index_notifications_on_receiver_id", using: :btree
+  add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
 
   create_table "settings", force: true do |t|
     t.string   "var",                   null: false
@@ -109,25 +137,29 @@ ActiveRecord::Schema.define(version: 20140319060458) do
   add_index "user_menus", ["user_id", "menu_id"], name: "index_user_menus_on_user_id_and_menu_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.integer  "department_id",                default: 0,                  comment: "单位id"
-    t.string   "login",                                                     comment: "登录名"
-    t.string   "password",                                     null: false, comment: "登录名"
-    t.string   "name",                                                      comment: "姓名"
-    t.string   "portrait",                                                  comment: "头像"
-    t.string   "gender",             limit: 2,                              comment: "性别"
-    t.string   "identity_num",                                              comment: "身份证"
-    t.string   "identity_pic",                                              comment: "身份证图片"
-    t.string   "email",                                        null: false, comment: "电子邮箱"
-    t.string   "mobile",                                                    comment: "手机"
-    t.boolean  "is_visible",                   default: true,  null: false, comment: "是否公开,目前仅指身份证和手机号"
-    t.string   "tel",                                                       comment: "电话"
-    t.string   "fax",                                                       comment: "传真"
-    t.boolean  "is_admin",                     default: false, null: false, comment: "是否管理员"
-    t.integer  "status",                       default: 0,     null: false, comment: "状态"
-    t.string   "duty",                                                      comment: "职务"
-    t.string   "professional_title",                                        comment: "职称"
-    t.text     "details",                                                   comment: "明细"
-    t.text     "logs",                                                      comment: "日志"
+    t.integer  "department_id",                 default: 0,                  comment: "单位id"
+    t.string   "login",                                                      comment: "登录名"
+    t.string   "password_digest",                               null: false, comment: "加密密码"
+    t.string   "remember_token",                                             comment: "加密的cookies"
+    t.boolean  "remember_me",                   default: false,              comment: "自动登录"
+    t.string   "name",                                                       comment: "姓名"
+    t.string   "portrait",                                                   comment: "头像"
+    t.string   "gender",             limit: 2,                               comment: "性别"
+    t.string   "birthday",           limit: 10,                              comment: "出生日期"
+    t.string   "identity_num",                                               comment: "身份证"
+    t.string   "identity_pic",                                               comment: "身份证图片"
+    t.string   "email",                                         null: false, comment: "电子邮箱"
+    t.string   "mobile",                                                     comment: "手机"
+    t.boolean  "is_visible",                    default: true,  null: false, comment: "是否公开,目前仅指身份证和手机号"
+    t.string   "tel",                                                        comment: "电话"
+    t.string   "fax",                                                        comment: "传真"
+    t.boolean  "is_admin",                      default: false, null: false, comment: "是否管理员"
+    t.integer  "status",                        default: 0,     null: false, comment: "状态"
+    t.string   "duty",                                                       comment: "职务"
+    t.string   "professional_title",                                         comment: "职称"
+    t.text     "bio",                                                        comment: "个人简历"
+    t.text     "details",                                                    comment: "明细"
+    t.text     "logs",                                                       comment: "日志"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

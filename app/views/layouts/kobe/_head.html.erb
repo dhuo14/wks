@@ -15,7 +15,7 @@
             <ul class='dropdown-menu color-settings' style="width:80px;">
               <li class='color-settings-contrast-color'>
                 <div class='color-title'><i class='icon-magic'></i> &nbsp;变换主题颜色</div>
-                <% @colors.each do |color| %>
+                <% Dictionary.colors.each do |color| %>
                   <%= raw "<a data-change-to='contrast-#{color[0]}' href='#''><i class='icon-cog text-#{color[0]}'></i> #{color[1]}</a>" %>
                 <% end %>
               </li>
@@ -36,33 +36,39 @@
           <li class='dropdown dark user-menu'>
             <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
               <img width="23" height="23" alt="Mila Kunis" src="<%= image_path('avatar.jpg') %>" />
-              <span class='user-name'>Mila Kunis</span>
+              <span class='user-name'><%= "#{current_user.name}(#{status_cn(current_user)})" %></span>
               <b class='caret'></b>
             </a>
             <ul class='dropdown-menu'>
               <li>
-                <a href='user_profile.html'>
+                <a href='<%= profile_kobe_users_path %>'>
                   <i class='icon-user'></i>
-                  Profile
+                  个人资料
                 </a>
               </li>
               <li>
-                <a href='user_profile.html'>
+                <a href='<%= change_password_kobe_users_path %>'>
+                  <i class='icon-lock'></i>
+                  重置密码
+                </a>
+              </li>
+              <li>
+                <a href='<%= setting_kobe_users_path %>'>
                   <i class='icon-cog'></i>
-                  Settings
+                  系统设置
                 </a>
               </li>
               <li class='divider'></li>
               <li>
                 <a href='/users/sign_out'>
                   <i class='icon-signout'></i>
-                  注销
+                  安全退出
                 </a>
               </li>
             </ul>
           </li>
         </ul>
-        <form action='/kobe/search' class='navbar-form navbar-right hidden-xs' method='get'>
+        <form action='<%= search_kobe_index_path %>' class='navbar-form navbar-right hidden-xs' method='get'>
           <button class='btn btn-link icon-search' name='button' type='submit'></button>
           <div class='form-group'>
             <input value="" class="form-control" placeholder="搜索..." autocomplete="off" id="q_header" name="q" type="text" />

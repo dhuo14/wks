@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
 
   # 开发给view层用的方法
-  helper_method :current_user, :signed_in?, :redirect_back_or
+  helper_method :current_user, :signed_in?, :redirect_back_or, :status_cn
 
   # 当前用户
   def current_user
@@ -23,6 +23,15 @@ class ApplicationController < ActionController::Base
     redirect_to(session[:return_to] || default)
     session.delete(:return_to)
   end
+
+  # 状态汉化
+  def status_cn(obj)
+    table_name = obj.class.to_s.tableize
+    arr = Dictionary.status[table_name]
+    return arr.nil? ? "" : arr.find{|n|n[1] == obj.status}[0]
+    # return arr.nil? ? "" : Hash[*arr.flatten][obj.status]
+  end
+
 
   protected
 
@@ -53,12 +62,12 @@ class ApplicationController < ActionController::Base
     end
 
     # 发送邮件
-    def _send_email(email,title,content)
+    def send_email(email,title,content)
       # 这里是发送邮件的代码，暂缺
     end
 
     #  写入日志 确保表里面有logs和status字段才能用这个函数
-    def _write_logs(record,content,remark='',user=current_user)
+    def write_logs(record,content,remark='',user=current_user)
       unless user.is_webmaster?  # 特殊情况下超级管理员后台修改不记录
         unless record.logs.nil?
           new_doc = Nokogiri::XML(record.logs)

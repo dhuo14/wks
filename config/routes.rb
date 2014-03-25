@@ -1,4 +1,5 @@
 Wks::Application.routes.draw do
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -19,7 +20,8 @@ Wks::Application.routes.draw do
 
 # 后台begin
   namespace :kobe do
-    resources :departments, :except => ["index"]
+    resources :departments
+    resources :articles
     resources :menus, :except => ["show"] do
       collection do
         get :ztree
@@ -29,7 +31,7 @@ Wks::Application.routes.draw do
 
     resources :users, :except => ["index"] do 
       collection do
-        get :profile
+        get :profile, :change_password, :setting
       end
     end
   end
@@ -44,7 +46,7 @@ Wks::Application.routes.draw do
 
   resources :kobe, :only => ["index"] do
     collection do
-      get :ui, :test
+      get :search
     end
   end
 

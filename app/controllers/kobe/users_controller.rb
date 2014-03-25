@@ -6,7 +6,6 @@ class Kobe::UsersController < KobeController
   end
 
   def profile
-  	tips_get('这个一个测试信息')
   end
 
   
@@ -31,7 +30,7 @@ class Kobe::UsersController < KobeController
   # 修改用户时只允许传递过来的参数
   def update_params(act='profile')  
     ha={
-      "profile" => %w(name gender identity_num email mobile is_visible tel fax duty professional_title bio),
+      "profile" => %w(name gender birthday identity_num email mobile is_visible tel fax duty professional_title bio),
       "impower" => %w(is_admin status),
       "change_password" => %w(password password_confirmation)
     }

@@ -1,0 +1,23 @@
+<div class='row'>
+	<div class='col-sm-10 col-sm-offset-1'>
+		<div class='box'>
+
+				<%= simple_form_for [:kobe, Article.new], :html => { :multipart => true } do |f| %>
+
+				<%= f.input :title, label: '标题', required: true %>
+
+				<%= f.input :new_days, label: '新标记天数', tip: '从发布日期起多少天内显示"new"标记', as: :my_radio_buttons, collection: (1..10).to_a, required: true %>
+
+				<%= f.input :top_type, label: '置顶类别', collection: Dictionary.top_type, as: :my_radio_buttons, required: true %>
+
+				<%#= f.input :tags, label: '标签', collection: Dictionary.tags.articles, as: :multiple_select, group_method: :last, required: true  %>
+
+				<%= f.input :access_permission, label: '开放级别', as: :my_check_boxes, collection: Dictionary.access_permission, required: true %>
+
+				<%= f.input :content, label: '内容', as: :autosize_counter_text, allow_length: 3000, warning_length: 2900, required: true %>
+
+				<%= f.button :submit %>
+				<% end %>
+			</div>
+		</div>
+	</div>

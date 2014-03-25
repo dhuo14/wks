@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324071031) do
+ActiveRecord::Schema.define(version: 20140325015341) do
 
   create_table "areas", force: true do |t|
     t.string   "name",           comment: "单位名称"
@@ -22,6 +22,39 @@ ActiveRecord::Schema.define(version: 20140324071031) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "article_categories", force: true do |t|
+    t.string   "name",                                 null: false, comment: "名称"
+    t.string   "ancestry",                                          comment: "祖先节点"
+    t.integer  "ancestry_depth",                                    comment: "层级"
+    t.string   "icon",                                              comment: "图标"
+    t.integer  "status",         limit: 2, default: 0, null: false, comment: "状态"
+    t.integer  "sort",                                              comment: "排序"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "article_categories", ["name"], name: "index_article_categories_on_name", unique: true, using: :btree
+
+  create_table "articles", force: true do |t|
+    t.string   "title",                                        comment: "标题"
+    t.integer  "user_id",                         null: false, comment: "发布者ID"
+    t.integer  "article_category_id",             null: false, comment: "类别ID"
+    t.datetime "publish_time",                                 comment: "发布时间"
+    t.string   "tags",                                         comment: "标签"
+    t.integer  "new_days",            default: 3, null: false, comment: "几天内显示new标签"
+    t.integer  "top_type",            default: 0, null: false, comment: "置顶类别"
+    t.integer  "access_permission",   default: 0, null: false, comment: "访问权限"
+    t.integer  "status",              default: 0, null: false, comment: "状态"
+    t.text     "content",                                      comment: "内容"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "articles", ["publish_time"], name: "index_articles_on_publish_time", using: :btree
+  add_index "articles", ["tags"], name: "index_articles_on_tags", using: :btree
+  add_index "articles", ["title"], name: "index_articles_on_title", using: :btree
+  add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
   create_table "departments", force: true do |t|
     t.string   "name",                                                  comment: "单位名称"
@@ -141,7 +174,6 @@ ActiveRecord::Schema.define(version: 20140324071031) do
     t.string   "login",                                                      comment: "登录名"
     t.string   "password_digest",                               null: false, comment: "加密密码"
     t.string   "remember_token",                                             comment: "加密的cookies"
-    t.boolean  "remember_me",                   default: false,              comment: "自动登录"
     t.string   "name",                                                       comment: "姓名"
     t.string   "portrait",                                                   comment: "头像"
     t.string   "gender",             limit: 2,                               comment: "性别"

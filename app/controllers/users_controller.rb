@@ -54,8 +54,8 @@ class UsersController < ApplicationController
   	user = User.new(user_params)
     if user.save
       flash_get("注册成功，请登录。","success")
-      # _write_logs(user,'注册',remark='账号创建成功',user)
-      # _send_email(user.email,"#{Dictionary.web_site_name}激活邮件",'恭喜您注册成，请点击下列链接激活账号。XXXXXXXXXXX')
+      # write_logs(user,'注册',remark='账号创建成功',user)
+      # send_email(user.email,"#{Dictionary.web_site_name}激活邮件",'恭喜您注册成，请点击下列链接激活账号。XXXXXXXXXXX')
       redirect_to sign_in_users_path(user)
     else
       flash_get(user.errors.full_messages)

@@ -8,6 +8,22 @@ defaults: &defaults
   web_site_key_words: "党员信息 共产党 当组织 入党申请"
   company_name: "中国共产党中央委员会"
   company_short_name: "中共党委"
+
+  # 颜色样式
+  colors: [["red", "红色"],["blue", "浅蓝"],["orange", "橙色"],["purple", "紫色"],["green", "绿色"],["muted", "灰色"],["fb", "蓝紫"],["dark", "黑色"],["pink", "粉色"],["grass-green", "草绿"],["sea-blue", "海蓝"],["banana", "黄色"],["dark-orange", "深橙"],["brown", "棕色"]]
+  # 文章置顶类型
+  top_type: [["不置顶",0], ["普通置顶",1], ["红字置顶",2]]
+  # 信息公开类别
+  access_permission: [["完全公开",0], ["登录用户",1], ["单位管理员",2]]
+  # 状态约定，对3求模，0待定，1有效，2无效
+  status: 
+    users: [["资料未填写",0], ["正常",1], ["冻结",2], ["未审核",3],["已删除",5]]
+    articles: [["未发布",0], ["已发布",1], ["审核不通过",2], ["已删除",5]]
+  # 标签
+  tags:
+    articles: ['党建','人才','档案','办公']
+
+
 development:
   <<: *defaults
   env_tye: '开发模式'

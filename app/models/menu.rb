@@ -5,10 +5,10 @@ class Menu < ActiveRecord::Base
   has_ancestry :cache_depth => true
   default_scope -> {order(:ancestry, :sort, :id)}
 
-
+  def parent_name
+  	self.parent.name
+  end
 
   private
-
-  
 
 end

@@ -3,7 +3,6 @@ class MyRadioButtonsInput < SimpleForm::Inputs::CollectionRadioButtonsInput
   def input
     label_method, value_method = detect_collection_methods
     my_input_options = { 
-      :checked => 1,
       :item_wrapper_tag => 'label',
       :item_wrapper_class => 'radio radio-inline'
      }

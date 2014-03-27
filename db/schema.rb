@@ -126,6 +126,23 @@ ActiveRecord::Schema.define(version: 20140327033502) do
     t.string   "name",                                 null: false, comment: "名称"
     t.string   "ancestry",                                          comment: "祖先节点"
     t.integer  "ancestry_depth",                                    comment: "层级"
+<<<<<<< HEAD
+=======
+    t.string   "icon",                                              comment: "图标"
+    t.string   "route_path",                                        comment: "url"
+    t.integer  "status",         limit: 2, default: 0, null: false, comment: "状态"
+    t.integer  "sort",                                              comment: "排序"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "menus", ["name"], name: "index_menus_on_name", unique: true, using: :btree
+
+  create_table "notification_categories", force: true do |t|
+    t.string   "name",                                 null: false, comment: "名称"
+    t.string   "ancestry",                                          comment: "祖先节点"
+    t.integer  "ancestry_depth",                                    comment: "层级"
+>>>>>>> b5311f26316c8611856513e53e24537b79fac5ae
     t.string   "icon",                                              comment: "图标"
     t.string   "route_path",                                        comment: "url"
     t.integer  "status",         limit: 2, default: 0, null: false, comment: "状态"
@@ -150,12 +167,18 @@ ActiveRecord::Schema.define(version: 20140327033502) do
   add_index "notifications", ["receiver_id"], name: "index_notifications_on_receiver_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
 
+<<<<<<< HEAD
   create_table "uploads", force: true do |t|
     t.integer  "article_id",        comment: "文章ID"
     t.string   "data_file_name",    comment: "文件名"
     t.string   "data_content_type", comment: "文件类型"
     t.string   "data_file_size",    comment: "文件大小"
     t.datetime "data_updated_at"
+=======
+  create_table "user_menus", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "menu_id",    null: false
+>>>>>>> b5311f26316c8611856513e53e24537b79fac5ae
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -163,6 +186,7 @@ ActiveRecord::Schema.define(version: 20140327033502) do
   add_index "uploads", ["article_id"], name: "index_uploads_on_article_id", using: :btree
 
   create_table "users", force: true do |t|
+<<<<<<< HEAD
     t.integer  "department_id",                default: 0,                  comment: "单位id"
     t.string   "login",                                                     comment: "登录名"
     t.string   "password_digest",                              null: false, comment: "密码"
@@ -185,6 +209,30 @@ ActiveRecord::Schema.define(version: 20140327033502) do
     t.text     "bio",                                                       comment: "个人简历"
     t.text     "details",                                                   comment: "明细"
     t.text     "logs",                                                      comment: "日志"
+=======
+    t.integer  "department_id",                 default: 0,                  comment: "单位id"
+    t.string   "login",                                                      comment: "登录名"
+    t.string   "password_digest",                               null: false, comment: "密码"
+    t.string   "remember_token",                                             comment: "自动登录"
+    t.string   "name",                                                       comment: "姓名"
+    t.string   "portrait",                                                   comment: "头像"
+    t.string   "gender",             limit: 2,                               comment: "性别"
+    t.string   "birthday",           limit: 10,                              comment: "出生日期"
+    t.string   "identity_num",                                               comment: "身份证"
+    t.string   "identity_pic",                                               comment: "身份证图片"
+    t.string   "email",                                         null: false, comment: "电子邮箱"
+    t.string   "mobile",                                                     comment: "手机"
+    t.boolean  "is_visible",                    default: true,  null: false, comment: "是否公开,目前仅指身份证和手机号"
+    t.string   "tel",                                                        comment: "电话"
+    t.string   "fax",                                                        comment: "传真"
+    t.boolean  "is_admin",                      default: false, null: false, comment: "是否管理员"
+    t.integer  "status",                        default: 0,     null: false, comment: "状态"
+    t.string   "duty",                                                       comment: "职务"
+    t.string   "professional_title",                                         comment: "职称"
+    t.text     "bio",                                                        comment: "个人简历"
+    t.text     "details",                                                    comment: "明细"
+    t.text     "logs",                                                       comment: "日志"
+>>>>>>> b5311f26316c8611856513e53e24537b79fac5ae
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -10,7 +10,7 @@ class BoxSelectInput < SimpleForm::Inputs::Base
 
 		# bootbox选择框
 		box_param = options[:box_param]
-		if box_param
+		if box_param && !box_param["array"].nil?
 			box_param["type"] ||= 'radio'
 			box_param["grid"] ||= 4
 			arr = box_param["array"]

@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20140325015341) do
   add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
   create_table "departments", force: true do |t|
-    t.string   "name",                                                  comment: "单位名称"
+    t.string   "name",                                     null: false, comment: "单位名称"
     t.string   "ancestry",                                              comment: "祖先节点"
     t.integer  "ancestry_depth",                                        comment: "层级"
     t.integer  "status",         limit: 2, default: 0,     null: false, comment: "状态"
@@ -113,13 +113,15 @@ ActiveRecord::Schema.define(version: 20140325015341) do
     t.string   "name",                                 null: false, comment: "名称"
     t.string   "ancestry",                                          comment: "祖先节点"
     t.integer  "ancestry_depth",                                    comment: "层级"
-    t.string   "route_path",                                        comment: "url"
     t.string   "icon",                                              comment: "图标"
+    t.string   "route_path",                                        comment: "url"
     t.integer  "status",         limit: 2, default: 0, null: false, comment: "状态"
     t.integer  "sort",                                              comment: "排序"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "menus", ["name"], name: "index_menus_on_name", unique: true, using: :btree
 
   create_table "notification_categories", force: true do |t|
     t.string   "name",                                 null: false, comment: "名称"
@@ -149,20 +151,9 @@ ActiveRecord::Schema.define(version: 20140325015341) do
   add_index "notifications", ["receiver_id"], name: "index_notifications_on_receiver_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
 
-  create_table "settings", force: true do |t|
-    t.string   "var",                   null: false
-    t.text     "value"
-    t.integer  "thing_id"
-    t.string   "thing_type", limit: 30
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
-
   create_table "user_menus", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "menu_id"
+    t.integer  "user_id",    null: false
+    t.integer  "menu_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -172,8 +163,8 @@ ActiveRecord::Schema.define(version: 20140325015341) do
   create_table "users", force: true do |t|
     t.integer  "department_id",                 default: 0,                  comment: "单位id"
     t.string   "login",                                                      comment: "登录名"
-    t.string   "password_digest",                               null: false, comment: "加密密码"
-    t.string   "remember_token",                                             comment: "加密的cookies"
+    t.string   "password_digest",                               null: false, comment: "密码"
+    t.string   "remember_token",                                             comment: "自动登录"
     t.string   "name",                                                       comment: "姓名"
     t.string   "portrait",                                                   comment: "头像"
     t.string   "gender",             limit: 2,                               comment: "性别"

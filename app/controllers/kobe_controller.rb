@@ -51,7 +51,7 @@ class KobeController < ApplicationController
     if node.blank?
       return render :json => "[]" 
     end
-    json = node.map{|m|"{id:#{m.id}, pId:#{_get_pid(m)}, name:'#{m.id}_#{m.name}'}"}
+    json = node.map{|m|"{id:#{m.id}, pId:#{_get_pid(m)}, name:'#{m.name}'}"}
     return render :json => "[#{json.join(", ")}]" 
   end
 

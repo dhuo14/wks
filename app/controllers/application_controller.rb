@@ -53,12 +53,12 @@ class ApplicationController < ActionController::Base
       unless message.class == Array
         message = [message]
       end
-      flash.now[status] = message
+      flash[status] = message
     end
 
     #普通提示，自动关闭
     def tips_get(message)
-      flash.now[:tips] = message
+      flash[:tips] = message
     end
 
     # 发送邮件

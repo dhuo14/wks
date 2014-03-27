@@ -7,7 +7,7 @@
 	}
 
 	flash.each do |key,value| 
-		return unless ha.has_key?(key)
+		next unless ha.has_key?(key)
 	  str = "
 	  <div class='alert #{ha[key][0]} alert-dismissable'>
 	  <a class='close' data-dismiss='alert' href='#'>&times;</a>

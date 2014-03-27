@@ -1,10 +1,10 @@
 # -*- encoding : utf-8 -*-
-class CreateArticleCategories < ActiveRecord::Migration
+class CreateArticlesCategories < ActiveRecord::Migration
   def change
-    create_table :article_categories do |t|
-    	t.integer :article_id 
-    	t.integer :category_id 
+    create_table :articles_categories do |t|
+    	t.belongs_to :article, :null => false
+    	t.belongs_to :category, :null => false
     end
-    add_index :article_categories, [:article_id, :category_id]
+    add_index :articles_categories, [:article_id, :category_id]
   end
 end

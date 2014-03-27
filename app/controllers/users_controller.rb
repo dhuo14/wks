@@ -53,10 +53,11 @@ class UsersController < ApplicationController
     # params.permit!
   	user = User.new(user_params)
     if user.save
-      flash_get("注册成功，请登录。","success")
+      flash_get('抱歉，您的资料还未填写，请先维护您的个人信息。',"info")
+      sign_in_user user
       # write_logs(user,'注册',remark='账号创建成功',user)
       # send_email(user.email,"#{Dictionary.web_site_name}激活邮件",'恭喜您注册成，请点击下列链接激活账号。XXXXXXXXXXX')
-      redirect_to sign_in_users_path(user)
+      redirect_to profile_kobe_users_path(user)
     else
       flash_get(user.errors.full_messages)
       render 'sign_up'

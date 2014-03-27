@@ -12,4 +12,8 @@ class Kobe::ArticlesController < KobeController
 
   def edit
   end
+
+  def create
+  	ddd
+  end 
 end

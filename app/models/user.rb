@@ -1,8 +1,5 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
-
-  attr_readonly :received_count
-
   before_save {self.email = email.downcase}
   before_create :create_remember_token
 
@@ -12,8 +9,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 6 }, :on => :create
 
   belongs_to :department
-  has_many :user_menus, dependent: :destroy
-  has_many :menus, :through => :user_menus, :source => :menu
+  has_and_belongs_to_many :menus
   # 收到的消息
   has_many :unread_notifications, -> { where "status=0" }, class_name: "Notification", foreign_key: "receiver_id"  
 
@@ -35,7 +31,7 @@ class User < ActiveRecord::Base
 
 
   # 获取当前人的菜单
-  def menus
+  def show_menus
     return menus_ul(Menu.to_depth(0))
   end
 

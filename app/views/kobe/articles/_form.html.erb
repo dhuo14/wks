@@ -1,12 +1,18 @@
 <div class='row'>
-	<div class='col-sm-10 col-sm-offset-1'>
+	<div class='col-sm-8 col-sm-offset-1'>
 		<div class='box'>
-
+			<div class='box-content'>
 				<%= simple_form_for [:kobe, Article.new], :html => { :multipart => true } do |f| %>
 
-				<%= f.input :title, label: '标题', required: true %>
+				<%= f.association :article_category %>
 
-				<%= f.input :new_days, label: '新标记天数', tip: '从发布日期起多少天内显示"new"标记', as: :my_radio_buttons, collection: (1..10).to_a, required: true %>
+				<%#= f.input :title, label: '标题', required: true %>
+
+
+						<%= f.input :title, label: '多选', placeholder: 'legal_number !', collection: [["门户公告管理", [1]],["系统设置", [7]],["紧急通知", [17]],["我不告诉你", [["网上竞价", [["走进组织部", 10], ["互动交流平台", [["人才工作", 12]]]]]]],["重要通知", [["党员信息管理", [["协同办公系统", 4]]]]],["远程教育平台",[["工作动态", [["移动办公平台", [["干部之家", 11]]]]], ["公告管理", 8], ["机关党建", 13]]]], as: :multiple_select, group_method: :last, required: true, tip: 'legal_number!!'  %>
+
+
+				<%= f.input :new_days, label: '标新天数', tip: '显示"new"标记的有效期', required: true, collection: 1..30 %>
 
 				<%= f.input :top_type, label: '置顶类别', collection: Dictionary.top_type, as: :my_radio_buttons, required: true %>
 
@@ -21,3 +27,4 @@
 			</div>
 		</div>
 	</div>
+</div>

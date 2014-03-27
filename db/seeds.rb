@@ -23,8 +23,8 @@ if Department.first.blank?
 end
 
 if Menu.first.blank?
-  [["门户公告管理","1", "icon-home"],["党员信息管理", "1", "icon-sitemap"], ["互动交流平台", "1", "icon-comments"], ["协同办公系统", "1" ,"icon-group"], ["远程教育平台", "1", "icon-globe"], ["移动办公平台", "1", "icon-mobile-phone"], ["系统设置", "1", "icon-cogs"]].each do |option|
-    Menu.create(:name => option[0], :status => option[1] , :url => option[2])
+  [["门户公告管理", "icon-home"],["党员信息管理",  "icon-sitemap"], ["互动交流平台",  "icon-comments"], ["协同办公系统", "icon-group"], ["远程教育平台",  "icon-globe"], ["移动办公平台",  "icon-mobile-phone"], ["系统设置",  "icon-cogs"]].each do |option|
+    Menu.create(:name => option[0], :status => 1, :route_path => option[2])
   end
 end
 

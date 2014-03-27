@@ -6,7 +6,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :login, :comment => "登录名"
       t.string :password_digest, :null => false, :comment => "密码"
       t.string :remember_token, :comment => "自动登录"
-      t.string :name, :null => false, :comment => "姓名"
+      t.string :name, :comment => "姓名"
+      t.date :birthday, :comment => "出生日期"
       t.string :portrait, :comment => "头像"
       t.string :gender, :limit => 2, :comment => "性别"
       t.string :identity_num, :comment => "身份证"
@@ -25,8 +26,8 @@ class CreateUsers < ActiveRecord::Migration
       t.text :logs , :comment => "日志"
       t.timestamps
     end
-      add_index :users, :email,                :unique => true
-      add_index :users, :mobile,               :unique => true
-      add_index :users, :login,                :unique => true
+    add_index :users, :email,                :unique => true
+    add_index :users, :mobile,               :unique => true
+    add_index :users, :login,                :unique => true
   end
 end

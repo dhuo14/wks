@@ -14,7 +14,7 @@ class Kobe::MenusController < KobeController
   end
 
   def edit
-  	@menu = Menu.find(params[:format]) unless params[:format].blank?
+  	@menu = Menu.find(params[:id]) unless params[:id].blank?
   end
 
   def create

@@ -1,10 +1,10 @@
 <div class='row'>
-	<div class='col-sm-8 col-sm-offset-1'>
+	<div class='col-sm-10 col-sm-offset-1'>
 		<div class='box'>
 			<div class='box-content'>
-				<%= simple_form_for [:kobe, Article.new], :html => { :multipart => true } do |f| %>
+				<%= simple_form_for [:kobe, @article], :html => { :multipart => true } do |f| %>
 
-				<%= f.association :categories, label: '所属栏目', hint: '可以多选', required: true %>
+				<%= f.association :categories, label: '所属栏目', hint: '按住"shift键"可以多选', required: true %>
 
 				
 
@@ -17,9 +17,13 @@
 
 				<%#= f.input :tags, label: '标签', collection: Dictionary.tags.articles, as: :multiple_select, group_method: :last, required: true  %>
 
-				<%= f.input :access_permission, label: '开放级别', as: :my_check_boxes, collection: Dictionary.access_permission, required: true %>
+				<%= f.input :access_permission, label: '访问权限', as: :my_check_boxes, collection: Dictionary.access_permission, required: true %>
 
-				<%= f.input :content, label: '内容', as: :autosize_counter_text, allow_length: 3000, warning_length: 2900, required: true %>
+
+				<%= f.simple_fields_for :content do |c| %>
+					<%= c.input :content, label: '内容', as: :autosize_counter_text, allow_length: 3000, warning_length: 2900, required: true %>
+				<%	end %>
+
 
 				<%= f.button :submit %>
 				<% end %>

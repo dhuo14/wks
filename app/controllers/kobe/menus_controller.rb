@@ -7,14 +7,6 @@ class Kobe::MenusController < KobeController
   before_filter :get_icon, :only => [ :new, :index, :edit ]
   layout false, :only => [ :edit, :new ]
 
-  def get_menu
-    @menu = Menu.find(params[:id]) unless params[:id].blank?
-  end
-
-  def get_icon
-    @icon = Icon.leaves.map(&:name)
-  end
-
 	def index
 		@menu = Menu.new
 	end
@@ -69,6 +61,14 @@ class Kobe::MenusController < KobeController
     # 只允许传递过来的参数
     def menu_params  
       params.require(:menu).permit(:name, :url, :icon, :sort, :status, :parent_id)  
+    end
+
+    def get_menu
+      @menu = Menu.find(params[:id]) unless params[:id].blank?
+    end
+
+    def get_icon
+      @icon = Icon.leaves.map(&:name)
     end
 
 end

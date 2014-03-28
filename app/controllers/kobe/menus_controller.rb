@@ -5,6 +5,7 @@ class Kobe::MenusController < KobeController
   # protect_from_forgery :except => :index
   before_filter :get_menu, :only => [ :edit, :update, :destroy ]
   before_filter :get_icon, :only => [ :new, :index, :edit ]
+  layout false, :only => [ :edit, :new ]
 
   def get_menu
     @menu = Menu.find(params[:id]) unless params[:id].blank?
@@ -23,12 +24,7 @@ class Kobe::MenusController < KobeController
   end
 
   def edit
-  	if @menu
-      json = { name: @menu.name, parent_id: @menu.parent_id, parent_name: ( @menu.parent.nil? ? '' : @menu.parent.name ), icon: @menu.icon, route_path: @menu.route_path, status: @menu.status, sort: @menu.sort}
-      render :json => json
-    else
-      render :text => "操作失败！"
-    end
+
   end
 
   def create

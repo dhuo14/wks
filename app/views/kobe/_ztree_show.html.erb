@@ -52,7 +52,8 @@
 			onDrag: onDrag,
 			onDrop: onDrop,
 			onExpand: onExpand,
-			onRightClick: OnRightClick
+			onRightClick: OnRightClick,
+			onClick: editTreeNode
 		}
 	};
 
@@ -186,10 +187,11 @@
 function OnRightClick(event, treeId, treeNode) {
 	if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
 		zTree.cancelSelectedNode();
-		showRMenu("root", event.clientX, event.target.offsetTop);
+		showRMenu("root", event.clientX - $("#main-nav").width() - event.target.offsetLeft, event.target.offsetTop);
 	} else if (treeNode && !treeNode.noR) {
 		zTree.selectNode(treeNode);
-		showRMenu("node", event.clientX, event.target.offsetTop);
+		var target_a = $(event.target).parents("a")[0];
+		showRMenu("node", target_a.offsetLeft + target_a.offsetWidth, target_a.offsetTop);
 	}
 }
 
@@ -217,8 +219,9 @@ function onBodyMouseDown(event){
 
 function addTreeNode() {
 	hideRMenu();
-	cleanField();
 	var node = zTree.getSelectedNodes()[0];
+	var url = "/kobe/menus/new"
+	getForm(url);
 	if (node) {
 		$("input#menu_parent_id").val(node.id);
 		$("input#menu_parent_name").val(node.name);
@@ -226,15 +229,21 @@ function addTreeNode() {
 		$("input#menu_parent_id").val('');
 		$("input#menu_parent_name").val('');
 	}
-	$("form#new_menu").attr("action", "/kobe/menus");
-	$("form#new_menu").attr("method", "post");
 }
-function cleanField() {
-	$("form#new_menu input[name^='menu']").each(function() {
-		if($(this).attr("type") == "radio") {
-			$(this).removeAttr("checked");
-		}else {
-			$(this).val('');
+function getForm(url) {
+	$.ajax({
+		type: "get",
+		url: url,
+		async: false,
+		cache: false,
+		dataType: "html",
+		success: function(data) {
+			$("#menu_form").html(data);
+			$.getScript("<%= asset_path 'theme.js' %>");
+			$.getScript("<%= asset_path 'form.js' %>");
+		},
+		error: function (data, textStatus){
+			bootbox.alert("操作失败，请重试！错误代码：" + textStatus + "\n" + data, init_ztree());
 		}
 	});
 }
@@ -242,35 +251,13 @@ function editTreeNode() {
 	hideRMenu();
 	var node = zTree.getSelectedNodes()[0];
 	if (node) {
-		$.ajax({
-			type: "get",
-			url: "/kobe/menus/" + node.id + "/edit",
-			async: false,
-			cache: false,
-			dataType: "json",
-			success: function(data) {
-				var act = $("form#new_menu").attr("action");
-				$("form#new_menu").attr("action", act + "/" + node.id);
-				$("form#new_menu").attr("method", "post");
-				$.each(data,function(k,v) {
-					var ipt = $("input[name='menu[" + k + "]']")
-					if(ipt.attr("type") == "radio") {
-						$("input[name='menu[" + k + "]'][value='" + v + "']").attr("checked", "checked");
-					}else {
-						ipt.val(v);
-					}
-				});
-			},
-			error: function (data, textStatus){
-				bootbox.alert("操作失败，请重试！错误代码：" + textStatus + "\n" + data, init_ztree());
-			}
-		})
+		var url = "/kobe/menus/" + node.id + "/edit"
+		getForm(url);
 	}
 }
 function removeTreeNode() {
 	hideRMenu();
 	var nodes = zTree.getSelectedNodes();
-	cleanField();
 	if (nodes && nodes.length>0) {
 		if (nodes[0].children && nodes[0].children.length > 0) {
 			var msg = "下级子节点也会一并删除并且不可恢复，您确认要删除么？";

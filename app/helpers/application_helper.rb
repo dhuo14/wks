@@ -21,6 +21,20 @@ module ApplicationHelper
     return str.html_safe
   end
 
+  def form_btn(f)
+    str = %Q|
+    <div class="form-actions form-actions-padding-sm" style="background-color: #FFFFFF;">
+      <div class="row">
+        <div class="col-sm-9 col-sm-offset-3">
+          #{ f.button :submit, ' 保 存 ', :class => 'btn-primary btn-lg' } &nbsp;&nbsp; 
+          #{ f.button :button, ' 重 置 ', :type => 'reset', :class => 'btn-lg' }
+        </div>
+      </div>
+     </div>
+    |
+    return str.html_safe
+  end
+
 
   # # 红色标记的文本，例如必填项*
   # def _red_text(txt)

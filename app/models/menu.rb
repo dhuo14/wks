@@ -6,7 +6,7 @@ class Menu < ActiveRecord::Base
   default_scope -> {order(:ancestry, :sort, :id)}
 
   def parent_name
-  	self.parent.name
+  	self.parent.nil? ? '' : self.parent.name
   end
 
   private

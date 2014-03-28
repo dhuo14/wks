@@ -43,8 +43,7 @@
               <%= f.input :professional_title, label: '职称' %>
               <%= f.input :is_visible, label: '信息保密', as: :my_radio_buttons, collection: [['保密',true],['公开',false]], required: true %>
               <%= f.input :bio, label: '个人简历', as: :counter_text, allow_length: 800, warning_length: 780 %>
-              <hr class='hr-normal'>
-              <%= f.button :submit, ' 保 存 ', :class => 'btn-primary btn-lg' %> &nbsp;&nbsp; <%= f.button :button, ' 重 置 ', :type => 'reset', :class => 'btn-lg' %>
+              <%= form_btn(f) %> 
             </div>
           </fieldset>
         <% end %>

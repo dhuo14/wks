@@ -24,7 +24,7 @@ end
 
 if Menu.first.blank?
   [["门户公告管理", "icon-home"],["党员信息管理",  "icon-sitemap"], ["互动交流平台",  "icon-comments"], ["协同办公系统", "icon-group"], ["远程教育平台",  "icon-globe"], ["移动办公平台",  "icon-mobile-phone"], ["系统设置",  "icon-cogs"]].each do |option|
-    Menu.create(:name => option[0], :status => 1, :route_path => option[2])
+    Menu.create(:name => option[0], :status => 1, :route_path => option[1])
   end
 end
 

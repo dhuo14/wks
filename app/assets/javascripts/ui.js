@@ -14,6 +14,4 @@
 //= require plugins/typeahead/typeahead
 //= require plugins/jgrowl/jquery.jgrowl.min
 //= require plugins/nestable/jquery.nestable
-//= require plugins/datatables/jquery.dataTables.min
-//= require plugins/datatables/jquery.dataTables.columnFilter
-//= require plugins/datatables/dataTables.overrides
+//= require wice_grid

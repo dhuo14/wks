@@ -3,8 +3,11 @@ class Kobe::ArticlesController < KobeController
   before_filter :get_article, :only => [ :edit, :update, :destroy ]
 
   def index
-  	# @article = Article.where(:author => current_user)
-    @article = Icon.all
+    unless current_user.boss?
+      @article = initialize_grid(Article.includes(:author).where(:author => current_user).references(:author))
+    else
+      @article = initialize_grid(Article.includes(:author).references(:author))
+    end
   end
 
   def show

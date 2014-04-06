@@ -15,8 +15,9 @@ class User < ActiveRecord::Base
 
 
   # 是否超级管理员,超级管理员不留操作痕迹
-  def is_webmaster?
-  	self.login == "admin"
+  def boss?
+  	# self.login == "admin"
+    true
   end
 
 

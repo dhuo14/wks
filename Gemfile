@@ -34,7 +34,7 @@ gem 'jquery-rails', '3.0.4'
 gem "nokogiri", "~> 1.6.1"
 
 # 分页
-gem 'kaminari', '0.14.1'
+gem 'kaminari', '~> 0.15.1'
 
 # 静态配置信息
 gem "settingslogic", "~> 2.0.9"
@@ -78,6 +78,9 @@ gem "rails-i18n", "~> 4.0.1"
 gem "bcrypt-ruby", "~> 3.0.1" 
 # gem 'bcrypt', '~> 3.1.7'
 # gem "bcrypt-ruby", "~> 3.1.5"
+
+# 后台表格包含分页
+gem 'wice_grid', '~> 3.4.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'

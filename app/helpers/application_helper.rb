@@ -21,6 +21,7 @@ module ApplicationHelper
     return str.html_safe
   end
 
+  # 表单提交按钮
   def form_btn(f)
     str = %Q|
     <div class="form-actions form-actions-padding-sm" style="background-color: #FFFFFF;">
@@ -33,6 +34,18 @@ module ApplicationHelper
      </div>
     |
     return str.html_safe
+  end
+
+  # 操作列表
+  def oprate_btn(obj)
+    arr = cando_list(obj)
+    if arr.length < 5
+      return arr.map{|a|link_to(a[1], a[2], class: a[0])}.join("&nbsp;").html_safe
+    else 
+      tmp = arr.map{|a|"<li>#{link_to(a[1], a[2], class: a[0])}</li>"}.join
+      return "<div class='btn-group dropdown' style='margin-bottom:5px'><button class='btn'> 操作 </button><button class='btn dropdown-toggle' data-toggle='dropdown'><span class='caret'></span></button><ul class='dropdown-menu'>#{tmp}</ul></div>".html_safe
+    end
+
   end
 
 

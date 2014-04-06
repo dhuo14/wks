@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
 
   # 开发给view层用的方法
-  helper_method :current_user, :signed_in?, :redirect_back_or, :status_cn
+  helper_method :current_user, :signed_in?, :redirect_back_or, :status_cn, :cando_list
 
   # 当前用户
   def current_user
@@ -24,14 +24,14 @@ class ApplicationController < ActionController::Base
     session.delete(:return_to)
   end
 
-  # 状态汉化
-  def status_cn(obj)
+  # 状态汉化 ,badge 是否带颜色标签
+  def status_cn(obj,badge=true)
     table_name = obj.class.to_s.tableize
     arr = Dictionary.status[table_name]
-    return arr.nil? ? "" : arr.find{|n|n[1] == obj.status}[0]
+    str = arr.nil? ? "" : arr.find{|n|n[1] == obj.status}[0]
+    return badge ? "<span class='label label-#{status_color(obj.status % 6)}'>#{str}</span>".html_safe : str.html_safe
     # return arr.nil? ? "" : Hash[*arr.flatten][obj.status]
   end
-
 
   protected
 
@@ -87,6 +87,28 @@ class ApplicationController < ActionController::Base
         node["IP地址"] = "#{request.remote_ip}|#{IPParse.parse(request.remote_ip).gsub("Unknown", "未知")}"
         record.update_columns("logs" => new_doc.to_s)
       end
+    end
+
+    # 可以操作列表
+    def cando_list(obj)
+      arr = [] 
+      arr << ['icon-zoom-in','详细', edit_kobe_article_path(obj)] 
+      arr << ['icon-wrench','修改', edit_kobe_article_path(obj)]
+      arr << ['icon-edit','补录', edit_kobe_article_path(obj)]
+      arr << ['icon-trash','删除', edit_kobe_article_path(obj)]
+      arr << ['icon-print','打印', edit_kobe_article_path(obj)] 
+      arr << ['icon-check','确认', edit_kobe_article_path(obj)]
+      arr << ['icon-key','权限', edit_kobe_article_path(obj)] 
+      arr << ['icon-star-empty','评论', edit_kobe_article_path(obj)] 
+      arr << ['icon-share','转发', edit_kobe_article_path(obj)] 
+      arr << ['icon-legal','审核', edit_kobe_article_path(obj)] 
+    end
+
+  private
+
+    # 状态对应的标签颜色
+    def status_color(n)
+      Dictionary.status_color[n]
     end
 
 

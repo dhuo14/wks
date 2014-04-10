@@ -4,9 +4,9 @@ class Kobe::ArticlesController < KobeController
 
   def index
     unless current_user.boss?
-      @article = initialize_grid(Article.includes(:author).where(:author => current_user).references(:author))
+      @articles = Article.includes(:author).where(:author => current_user).references(:author).page params[:page]
     else
-      @article = initialize_grid(Article.includes(:author).references(:author))
+      @articles = Article.includes(:author).references(:author).page params[:page]
     end
   end
 
@@ -41,6 +41,11 @@ class Kobe::ArticlesController < KobeController
       flash_get(@article.errors.full_messages)
       render 'edit'
     end
+  end
+
+  # 批处理
+  def batch_task
+    render :text => params[:grid].to_s
   end
 
   private  

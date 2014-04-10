@@ -1,7 +1,30 @@
+// 删除确认框
+function doDelete(formId='batchFrom'){
+  if($("input[type='checkbox'][name='grid[]']:checked").length == 0){
+    bootbox.alert("请至少选择一条记录！");
+  }else{
+    bootbox.confirm("删除后不可恢复，您确定要删除吗？", function(result){
+      if (result)
+        $("#"+formId).submit();
+    }); 
+  }
+}
 
-
+// 搜索表单提交
+function searchFormDone(){
+  $("#keywords").val($("#keys").val());
+  $("#searchForm").submit();
+}
 
 $(function() {
+	// 全选
+	$("#selectAll").click(function(){
+    if(this.checked){
+        $("input[type='checkbox'][name='grid[]']").each(function(){this.checked=true;});
+    }else{
+        $("input[type='checkbox'][name='grid[]']").each(function(){this.checked=false;});
+    }
+	});
 
   // bootbox选择器--点击后的选择事件
   $("ul.box-select li").on("click",function(){
@@ -18,7 +41,7 @@ $(function() {
       })
       $("#"+id).val(arr.join(','));
     }
-  })
+  });
 
 
 

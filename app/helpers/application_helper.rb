@@ -45,9 +45,12 @@ module ApplicationHelper
       tmp = arr.map{|a|"<li>#{link_to(a[1], a[2], class: a[0])}</li>"}.join
       return "<div class='btn-group dropdown' style='margin-bottom:5px'><button class='btn'> 操作 </button><button class='btn dropdown-toggle' data-toggle='dropdown'><span class='caret'></span></button><ul class='dropdown-menu'>#{tmp}</ul></div>".html_safe
     end
-
   end
 
+  def show_index(index, per = 20)
+    params[:page] ||= 1
+    (params[:page].to_i - 1) * per + index + 1
+  end
 
   # # 红色标记的文本，例如必填项*
   # def _red_text(txt)

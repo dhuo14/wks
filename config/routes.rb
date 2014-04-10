@@ -21,7 +21,11 @@ Wks::Application.routes.draw do
 # 后台begin
   namespace :kobe do
     resources :departments
-    resources :articles
+    resources :articles do 
+      collection do
+        post :batch_task
+      end
+    end
     resources :menus, :except => ["show"] do
       collection do
         get :ztree

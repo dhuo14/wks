@@ -5,3 +5,5 @@
 */
 p{text-indent:2em;}
 ul.box-select > li{cursor:pointer;}
+.vbottom{vertical-align:text-top;}
+.vmiddle{vertical-align:middle;}

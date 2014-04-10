@@ -79,9 +79,6 @@ gem "bcrypt-ruby", "~> 3.0.1"
 # gem 'bcrypt', '~> 3.1.7'
 # gem "bcrypt-ruby", "~> 3.1.5"
 
-# 后台表格包含分页
-gem 'wice_grid', '~> 3.4.2'
-
 # Use unicorn as the app server
 # gem 'unicorn'
 

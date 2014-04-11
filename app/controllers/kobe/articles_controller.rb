@@ -3,7 +3,7 @@ class Kobe::ArticlesController < KobeController
   before_filter :get_article, :only => [ :edit, :update, :destroy ]
 
   def index
-    unless current_user.boss?
+    unless current_user.admin?
       @articles = Article.includes(:author).where(:author => current_user).references(:author).page params[:page]
     else
       @articles = Article.includes(:author).references(:author).page params[:page]

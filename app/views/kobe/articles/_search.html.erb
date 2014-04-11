@@ -1,35 +1,29 @@
 <nav class="navbar  navbar-right">
   <div class="input-group">
-  <input type="text" id="keys" class="form-control">
+  <input type="text" id="keys" class="form-control" placeholder="请输入关键字...">
   <span class="input-group-btn">
   <button type="button" class="btn" onclick="searchFormDone();">
     <i class="icon-search"></i> 搜索
   </button>
-  <span class='vbottom'>
-   <a data-toggle="modal" href="#accurate-search" role="button"> 高级搜索</a> <i class="icon-magic"></i>
+  <span class="vbottom box box-collapsed" id="accurate-search">
+    高级搜索<i class="icon-caret-down"></i>
   </span>
   </span>
   </div>
 </nav>
 
 
-<div class='modal fade' id='accurate-search' tabindex='-1'>
-  <div class='modal-dialog'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button aria-hidden='true' class='close' data-dismiss='modal' type='button'>×</button>
-        <h4 class='modal-title' id='myModalLabel'>高级搜索</h4>
-      </div>
+<div class="row" id="search_panel">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="box-content">
       <%= simple_form_for [:kobe, Article.new], :html => { :id => "searchForm" }, wrapper: :up_down do |f| %>
         <div class='modal-body' style="padding:34px;">
           <%= f.association :categories, label: '所属栏目', hint: '按住"shift键"可以多选' %>
           <%= f.input :title, label: '标题', placeholder: '标题' %>
-          <%= f.input :created_at, label: '时间', as: :date_range_picker, required: true %>
+          <%= f.input :created_at, label: '时间', as: :date_range_picker%>
         </div>
-        <div class='modal-footer'>
-          <button class='btn btn-default' data-dismiss='modal' type='button'>取消</button>
-          <button class='btn btn-primary' type='submit'>搜索</button>
-        </div>
+        <button class='btn btn-default' data-dismiss='modal' type='button'>取消</button>
+        <button class='btn btn-primary' type='submit'>搜索</button>
       <% end %>
     </div>
   </div>

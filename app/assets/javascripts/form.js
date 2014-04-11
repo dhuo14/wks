@@ -17,6 +17,8 @@ function searchFormDone(){
 }
 
 $(function() {
+
+  
 	// 全选
 	$("#selectAll").click(function(){
     if(this.checked){
@@ -25,6 +27,13 @@ $(function() {
         $("input[type='checkbox'][name='grid[]']").each(function(){this.checked=false;});
     }
 	});
+
+  // 高级搜索  
+   $("#accurate-search").click(function(){
+      $("#search_panel").slideToggle("fast");
+      $(this).children("i").toggleClass("icon-caret-down"); 
+      $(this).children("i").toggleClass("icon-caret-up"); 
+    });
 
   // bootbox选择器--点击后的选择事件
   $("ul.box-select li").on("click",function(){

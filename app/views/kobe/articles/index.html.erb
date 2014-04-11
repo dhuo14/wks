@@ -13,7 +13,7 @@
         </div>
       	<%= form_tag(batch_task_kobe_articles_path, method: "post", id: "batchFrom") do %>
       		<%= hidden_field_tag 'batch_task' %>
-					<table style="margin-bottom:0;" class="table table-bordered table-hover table-striped">
+					<table style="margin-bottom:0;" class="table fixedheader table-bordered table-hover table-striped">
 					  <thead>
 					    <tr>
 					    <th><%= check_box_tag 'selectAll' %></th>

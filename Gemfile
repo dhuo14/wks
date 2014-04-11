@@ -79,6 +79,9 @@ gem "bcrypt-ruby", "~> 3.0.1"
 # gem 'bcrypt', '~> 3.1.7'
 # gem "bcrypt-ruby", "~> 3.1.5"
 
+# 权限校验
+gem 'cancancan', '~> 1.7'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

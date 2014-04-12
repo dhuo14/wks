@@ -14,6 +14,3 @@
 //= require plugins/typeahead/typeahead
 //= require plugins/jgrowl/jquery.jgrowl.min
 //= require plugins/nestable/jquery.nestable
-//= require jquery.fixedtableheader.min
-
-

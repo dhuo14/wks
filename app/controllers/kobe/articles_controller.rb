@@ -1,8 +1,11 @@
 # -*- encoding : utf-8 -*-
 class Kobe::ArticlesController < KobeController
+  authorize_resource
+  # skip_authorize_resource :only => :new
   before_filter :get_article, :only => [ :edit, :update, :destroy ]
 
   def index
+    # authorize! :index, Article, :message => "您没有相关权限！"
     unless current_user.admin?
       @articles = Article.includes(:author).where(:author => current_user).references(:author).page params[:page]
     else

@@ -3,13 +3,28 @@ class Ability
 
   def initialize(user)
     # Define abilities for the passed in user here. For example:
-    #
-    #   user ||= User.new # guest user (not logged in)
-    #   if user.admin?
-    #     can :manage, :all
-    #   else
-    #     can :read, :all
-    #   end
+      alias_action :create, :read, :update, :destroy, :to => :crud
+      user ||= User.new # guest user (not logged in)
+      if user.admin?
+        can :manage, :all
+      else
+        user.permissions.each do |p|
+        begin
+          action = p.action.to_sym
+          subject = begin
+                      # RESTful Controllers
+                      p.subject.camelize.constantize
+                    rescue
+                      # Non RESTful Controllers
+                      p.subject.underscore.to_sym
+                    end
+          can action, subject
+        rescue => e
+          Rails.logger.info "#{e}"
+          Rails.logger.info "#{subject}"
+        end
+      end
+      end
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.

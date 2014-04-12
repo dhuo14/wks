@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140327033502) do
+ActiveRecord::Schema.define(version: 20140412115903) do
 
   create_table "areas", force: true do |t|
     t.string   "name",           comment: "单位名称"
@@ -23,31 +23,22 @@ ActiveRecord::Schema.define(version: 20140327033502) do
     t.datetime "updated_at"
   end
 
-  create_table "article_categories", force: true do |t|
-    t.integer "article_id"
-    t.integer "category_id"
-  end
-
-  add_index "article_categories", ["article_id", "category_id"], name: "index_article_categories_on_article_id_and_category_id", using: :btree
-
   create_table "article_contents", force: true do |t|
+    t.integer  "article_id", null: false
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "articles", force: true do |t|
-    t.integer  "article_content_id"
-    t.string   "title",                                        comment: "标题"
-    t.integer  "user_id",                         null: false, comment: "发布者ID"
-    t.integer  "article_category_id",             null: false, comment: "类别ID"
-    t.datetime "publish_time",                                 comment: "发布时间"
-    t.string   "tags",                                         comment: "标签"
-    t.integer  "new_days",            default: 3, null: false, comment: "几天内显示new标签"
-    t.integer  "top_type",            default: 0, null: false, comment: "置顶类别"
-    t.integer  "access_permission",   default: 0, null: false, comment: "访问权限"
-    t.integer  "status",              default: 0, null: false, comment: "状态"
-    t.text     "content",                                      comment: "内容"
+    t.string   "title",                                      comment: "标题"
+    t.integer  "user_id",                       null: false, comment: "发布者ID"
+    t.datetime "publish_time",                               comment: "发布时间"
+    t.string   "tags",                                       comment: "标签"
+    t.integer  "new_days",          default: 3, null: false, comment: "几天内显示new标签"
+    t.integer  "top_type",          default: 0, null: false, comment: "置顶类别"
+    t.integer  "access_permission", default: 0, null: false, comment: "访问权限"
+    t.integer  "status",            default: 0, null: false, comment: "状态"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -55,6 +46,13 @@ ActiveRecord::Schema.define(version: 20140327033502) do
   add_index "articles", ["tags"], name: "index_articles_on_tags", using: :btree
   add_index "articles", ["title"], name: "index_articles_on_title", using: :btree
   add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
+
+  create_table "articles_categories", force: true do |t|
+    t.integer "article_id",  null: false
+    t.integer "category_id", null: false
+  end
+
+  add_index "articles_categories", ["article_id", "category_id"], name: "index_articles_categories_on_article_id_and_category_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name",                                 null: false, comment: "名称"
@@ -144,18 +142,54 @@ ActiveRecord::Schema.define(version: 20140327033502) do
   add_index "menus_users", ["user_id", "menu_id"], name: "index_menus_users_on_user_id_and_menu_id", using: :btree
 
   create_table "notifications", force: true do |t|
-    t.integer  "sender_id",                                      null: false, comment: "发送者ID"
-    t.integer  "receiver_id",                                    null: false, comment: "接收者ID"
-    t.integer  "notification_category_id",                       null: false, comment: "类别ID"
-    t.string   "title",                                                       comment: "标题"
-    t.string   "content",                                                     comment: "内容"
-    t.integer  "status",                   limit: 2, default: 0, null: false, comment: "状态"
+    t.integer  "sender_id",                         null: false, comment: "发送者ID"
+    t.integer  "receiver_id",                       null: false, comment: "接收者ID"
+    t.integer  "category",                          null: false, comment: "类别ID"
+    t.string   "title",                                          comment: "标题"
+    t.string   "content",                                        comment: "内容"
+    t.integer  "status",      limit: 2, default: 0, null: false, comment: "状态"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "notifications", ["receiver_id"], name: "index_notifications_on_receiver_id", using: :btree
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
+
+  create_table "permissions", force: true do |t|
+    t.string   "action",      null: false, comment: "权限"
+    t.string   "subject",     null: false, comment: "对象"
+    t.string   "description", null: false, comment: "描述"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "permissions", ["action", "subject"], name: "index_permissions_on_action_and_subject", using: :btree
+
+  create_table "permissions_roles", force: true do |t|
+    t.integer "role_id",       null: false
+    t.integer "permission_id", null: false
+  end
+
+  add_index "permissions_roles", ["role_id", "permission_id"], name: "index_permissions_roles_on_role_id_and_permission_id", using: :btree
+
+  create_table "roles", force: true do |t|
+    t.string   "name",                                 null: false, comment: "名称"
+    t.string   "ancestry",                                          comment: "祖先节点"
+    t.integer  "ancestry_depth",                                    comment: "层级"
+    t.integer  "status",         limit: 2, default: 0, null: false, comment: "状态"
+    t.integer  "sort",                                              comment: "排序"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "roles_users", force: true do |t|
+    t.integer "user_id", null: false
+    t.integer "role_id", null: false
+  end
+
+  add_index "roles_users", ["user_id", "role_id"], name: "index_roles_users_on_user_id_and_role_id", using: :btree
 
   create_table "uploads", force: true do |t|
     t.integer  "article_id",        comment: "文章ID"

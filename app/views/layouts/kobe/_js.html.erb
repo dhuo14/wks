@@ -391,7 +391,5 @@
         }
         // 弹出tips
         <%= raw "$.jGrowl('#{flash[:tips]}');".html_safe unless flash[:tips].blank? %>
-        // 固定表头
-        $("table.fixedheader").fixedtableheader(); 
       });
     </script>

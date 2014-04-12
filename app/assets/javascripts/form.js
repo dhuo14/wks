@@ -1,5 +1,7 @@
 // 删除确认框
-function doDelete(formId='batchFrom'){
+function doDelete(){
+  // 默认参数写法
+  var formId = arguments[0] ? arguments[0] : "batchFrom";
   if($("input[type='checkbox'][name='grid[]']:checked").length == 0){
     bootbox.alert("请至少选择一条记录！");
   }else{
@@ -9,7 +11,6 @@ function doDelete(formId='batchFrom'){
     }); 
   }
 }
-
 // 搜索表单提交
 function searchFormDone(){
   $("#keywords").val($("#keys").val());

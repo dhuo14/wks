@@ -10,14 +10,15 @@ class User < ActiveRecord::Base
 
   belongs_to :department
   has_and_belongs_to_many :menus
+  has_and_belongs_to_many :roles
+  has_many :permissions, through: :roles
   # 收到的消息
   has_many :unread_notifications, -> { where "status=0" }, class_name: "Notification", foreign_key: "receiver_id"  
 
 
   # 是否超级管理员,超级管理员不留操作痕迹
   def admin?
-  	# self.login == "admin"
-    true
+    self.roles.map(&:name).include?("系统管理员")
   end
 
 

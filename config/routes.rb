@@ -9,6 +9,8 @@ Wks::Application.routes.draw do
 
   captcha_route
 
+  get 'errors' => 'errors#index'
+
   resources :users  do
     collection do
       get :sign_in, :sign_up, :sign_out, :forgot_password
@@ -20,20 +22,25 @@ Wks::Application.routes.draw do
 
 # 后台begin
   namespace :kobe do
+    resources :main, :only => :index do
+      collection do
+        get :to_do
+      end
+    end
     resources :departments
     resources :articles do 
       collection do
         post :batch_task
       end
     end
-    resources :menus, :except => ["show"] do
+    resources :menus, :except => :show do
       collection do
         get :ztree
         post :move
       end
     end
 
-    resources :users, :except => ["index"] do 
+    resources :users, :except => :index do 
       collection do
         get :profile, :change_password, :setting
       end
@@ -48,7 +55,7 @@ Wks::Application.routes.draw do
     end
   end
 
-  resources :kobe, :only => ["index"] do
+  resources :kobe, :only => :index do
     collection do
       get :search
     end

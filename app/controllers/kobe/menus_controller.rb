@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Kobe::MenusController < KobeController
-
+  # load_and_authorize_resource
+  
   skip_before_filter :verify_authenticity_token, :only => [ :move,:destroy ]
   # protect_from_forgery :except => :index
   before_filter :get_menu, :only => [ :edit, :update, :destroy ]

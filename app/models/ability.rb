@@ -10,7 +10,6 @@ class Ability
       else
         user.permissions.each do |p|
         begin
-          action = p.action.to_sym
           subject = begin
                       # RESTful Controllers
                       p.subject.camelize.constantize
@@ -18,10 +17,10 @@ class Ability
                       # Non RESTful Controllers
                       p.subject.underscore.to_sym
                     end
-          can action, subject
+          can p.action.to_sym, subject
         rescue => e
-          Rails.logger.info "#{e}"
-          Rails.logger.info "#{subject}"
+          Rails.logger.info "cancancan异常---------#{e}"
+          Rails.logger.info "cancancan对象#{subject}"
         end
       end
       end

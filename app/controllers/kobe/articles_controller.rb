@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Kobe::ArticlesController < KobeController
-  authorize_resource
-  # skip_authorize_resource :only => :new
+  load_and_authorize_resource
+  
   before_filter :get_article, :only => [ :edit, :update, :destroy ]
 
   def index

@@ -59,6 +59,6 @@ end
 
 if Permission.first.blank?
   [["manage", "department","单位管理"],["manage", "user","用户管理"],["manage",  "menu","菜单管理"],["manage","article","文章管理"], ["index","article","文章列表查看"]].each do |option|
-    Permission.create(:action => option[0], :subject => option[1], :description => option[2])
+    Permission.create(:action => option[0], :subject => option[1], :name => option[2])
   end
 end

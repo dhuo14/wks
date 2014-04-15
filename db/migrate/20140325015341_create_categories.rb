@@ -8,7 +8,7 @@ class CreateCategories < ActiveRecord::Migration
     t.string :icon                   , :comment => "图标"
     t.integer :status                , :comment => "状态", :limit => 2, :default => 0 ,:null => false
 	  t.integer :sort                  , :comment => "排序"
-
+    t.text :params                   , :comment => "参数"
     t.timestamps
     end
     add_index :categories, :name,                :unique => true

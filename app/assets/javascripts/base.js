@@ -18,6 +18,6 @@ function textarea_auto_height(textarea){
   textarea.style.height = (25+textarea.scrollHeight)+"px";
 };
 
-$.validator.methods.equal = function(value, element, param) {
-	return value === param;
-};
+// $.validator.methods.equal = function(value, element, param) {
+// 	return value === param;
+// };

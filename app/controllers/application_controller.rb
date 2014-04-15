@@ -3,9 +3,14 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-
   # 开发给view层用的方法
   helper_method :current_user, :signed_in?, :redirect_back_or, :status_cn, :cando_list
+
+  # cancan 权限校验
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to errors_path, :alert => exception.message
+    # render :file => "#{Rails.root}/public/403.html", :status => 403, :layout => false
+  end
 
   # 当前用户
   def current_user
@@ -41,7 +46,7 @@ class ApplicationController < ActionController::Base
     end
 
     # 需要登录
-    def request_authenticate!
+    def request_signed_in!
       unless signed_in?
         flash_get '请先登录!'
         redirect_to sign_in_users_path

@@ -1,9 +1,10 @@
 # -*- encoding : utf-8 -*-
 class KobeController < ApplicationController
-
-	before_filter :store_location, :request_authenticate!, :init_themes
+  before_filter :request_signed_in!
+	before_filter :store_location, :init_themes
 
 	def index
+    render :text => "sdfsdfsdf"
 	end
 
 	def test
@@ -18,17 +19,6 @@ class KobeController < ApplicationController
 		<p>中文时间格式：#{Time.new.to_s(:cn_time)}</p>"
 		@city = Area.find(1)
 	end
-
-  # 准备主界面的素材
-	def init_themes
-    # 主题颜色
-    @colors = [["red", "红色"],["blue", "浅蓝"],["orange", "橙色"],["purple", "紫色"],["green", "绿色"],["muted", "灰色"],["fb", "蓝紫"],["dark", "黑色"],["pink", "粉色"],["grass-green", "草绿"],["sea-blue", "海蓝"],["banana", "黄色"],["dark-orange", "深橙"],["brown", "棕色"]]
-
-    @unread_notifications = current_user.unread_notifications
-  end
-
-
-
   
   # 以下是公用方法
   protected
@@ -84,6 +74,11 @@ class KobeController < ApplicationController
 
   # 以下是私有方法
   private 
+  
+  # 准备主界面的素材 ---- #未读短信息
+  def init_themes
+    @unread_notifications = current_user.unread_notifications
+  end
 
   # 同级目录内移动
   def siblings_move(source_node,target_node,move_type)

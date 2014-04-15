@@ -8,6 +8,8 @@ defaults: &defaults
   web_site_key_words: "党员信息 共产党 当组织 入党申请"
   company_name: "中国共产党中央委员会"
   company_short_name: "中共党委"
+  # 客户服务电话
+  cs_tel: "业务咨询:(010)88016801/88016802/88016607，技术支持:88016617/88016623。"
 
   # 颜色样式
   colors: [["red", "红色"],["blue", "浅蓝"],["orange", "橙色"],["purple", "紫色"],["green", "绿色"],["muted", "灰色"],["fb", "蓝紫"],["dark", "黑色"],["pink", "粉色"],["grass-green", "草绿"],["sea-blue", "海蓝"],["banana", "黄色"],["dark-orange", "深橙"],["brown", "棕色"]]

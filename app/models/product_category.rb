@@ -1,4 +1,4 @@
 # -*- encoding : utf-8 -*-
-class ArticleCategory < Category
-  default_scope -> {descendants_of(Category.find(2))}
+class ProductCategory < Category
+  default_scope -> {where(["ancestry LIKE ? OR ancestry = ? ",'2/%',2])}
 end

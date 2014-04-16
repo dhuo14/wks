@@ -4,7 +4,7 @@
 			<div class='box-content'>
 				<%= simple_form_for [:kobe, @article], :html => { :multipart => true } do |f| %>
 
-				<%= f.association :categories, label: '所属栏目', hint: '按住"shift键"可以多选', required: true %>
+				<%= f.association :article_categories, label: '所属栏目', hint: '按住"shift键"可以多选', required: true %>
 
 				
 

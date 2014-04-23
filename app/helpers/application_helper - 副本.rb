@@ -101,7 +101,7 @@ module ApplicationHelper
   #   button_id 按钮ID,与自定义的validate_js配合使用
   #   validate_js 表单自定义验证JS
   #   action 提交的路径
-  #   title  表单标题 可有可无
+  #   title  表单标题
   #   grid 每一行显示几个输入框
   #   only_show 在shouw/audit等只需要显示内容的页面设为true，则自动去除form,input,button等标签 
   # */
@@ -113,42 +113,23 @@ module ApplicationHelper
     title = options.has_key?("title") ? options["title"] : "" 
     grid = options.has_key?("grid") ? options["grid"] : 1 
     only_show = options.has_key?("only_show") ? options["only_show"] : false 
-    str = "<div class='row'><div class='box col-sm-12'>"
-    unless title.blank?
-      str << "<div class='box-header'><div class='title'>#{title}</div><div class='actions'><a href='#'' class='btn box-remove btn-xs btn-link'><i class='icon-remove'></i></a><a href='#'' class='btn box-collapse btn-xs btn-link'><i></i></a></div></div>"
-    end
-    unless only_show
-      str << "<form class='form form-horizontal validate-form' id='#{form_id}' action='#{action}' style='margin-bottom: 0;'>" 
-    end
-    str << "<div class='box-content box-no-padding'>"
-    str << "<table style='margin-bottom:0;' class='table table-bordered'>"
+    str = "<div class='row'><div class='col-sm-12'><div class='box'><div class='box-header'><div class='title'>#{title}</div><div class='actions'><a class='btn box-collapse btn-xs btn-link' href=''><i></i></a></div></div><div class='box-content'>"
+    str << "<form class='form form-horizontal validate-form' id='#{form_id}' action='#{action}' style='margin-bottom: 0;'>" unless only_show
     doc = Nokogiri::XML(xml)
     # 先生成输入框--针对没有data_type属性或者data_type属性不包括'大文本'、'富文本'的
-    tds = doc.xpath("/root/node[not(@data_type)] | /root/node[@data_type!='大文本'][@data_type!='富文本']")
-    tds.each_slice(grid).with_index do |node,i|
-      str << "<tr>"
-      node.each_with_index{|n,ii|
-        if i * grid + ii + 1 == tds.length
-          rest = grid - (ii + 1)
-        else 
-          rest = 0
-        end
-        str << _create_text_field(table_name,_get_column_value(obj,n),n.attributes,only_show,rest)
-      }
-      str << "</tr>"
+    doc.xpath("/root/node[not(@data_type)] | /root/node[@data_type!='大文本'][@data_type!='富文本']").each_slice(grid) do |node|
+      str << "<div class='row'>"
+      node.each{|n|str << _create_text_field(table_name,_get_column_value(obj,n),n.attributes,only_show,grid)}
+      str << "</div>"
     end
-    # 再生成文本框和富文本框--针对大文本或者富文本
+    # 再生产文本框和富文本框--针对大文本或者富文本
     doc.xpath("/root/node[contains(@data_type,'文本')]").each_slice(1) do |node|
-      str << "<tr>"
-      node.each{|n|str << _create_text_field(table_name,_get_column_value(obj,n),n.attributes,only_show,grid-1)}
-      str << "</tr>"
+      str << "<div class='row'>"
+      node.each{|n|str << _create_text_field(table_name,_get_column_value(obj,n),n.attributes,only_show,1,grid)}
+      str << "</div>"
     end
-    str << "</table>"
-    str << "</div>"
-    unless only_show 
-      str << "<div style='padding:15px;'><button id='#{button_id}'class='btn btn-primary' type='submit'><i class='icon-save'></i> 保 存 </button></div></form>"
-    end   
-    str << "</div>"
+    str << "<div class='form-actions' style='margin-bottom:0'><div class='row'><div class='col-sm-9 col-sm-offset-3'><button id='#{button_id}'class='btn btn-primary' type='submit'><i class='icon-save'></i> 保 存 </button></div></div></div></form>" unless only_show     
+    str << "</div></div></div></div>"
     str << options["validate_js"] if options.has_key?("validate_js") 
     return raw str.html_safe
   end
@@ -164,10 +145,10 @@ module ApplicationHelper
   #   placeholder 输入框内提示信息
   #   required 是否必填，为true 会有小红星*
   #   display 显示方式 disabled 不可操作 readonly 是否只读 skip 跳过不出现 hidden 隐藏
-  #   rest 每行剩余的空白单元格
+  #   text_grid 本参数仅仅针对大文本和富文本类型有效，目的是对齐原来字符类型的文本框
   #   
   # # */
-  def _create_text_field(table_name, value, options={}, only_show=false,rest=0)
+  def _create_text_field(table_name, value, options={}, only_show=false,grid=1,text_grid=1)
     # 没有name和display=skip的直接跳过
     return "" unless options.has_key?("name") && !(options.has_key?("display") && options["display"].to_s == "skip")
     name = options["name"]  
@@ -216,15 +197,8 @@ module ApplicationHelper
       end
       input_str = "<input type='text' class='form-control' id='#{table_name}_#{column}' name='#{table_name}[#{column}]' value='#{value}' #{opt.join(" ")}>" if input_str.blank?
     end
-    if ["大文本","富文本"].include?(data_type)
-          str = "<td class='form-group'><div class='control-label'><label for='#{column}'>#{red_start} #{name} #{hint}</label></div></td><td class='controls' colspan='#{rest*2+1}'>#{input_str}</td>"
-    else
-      str = "<td class='form-group'><div class='control-label'><label for='#{column}'>#{red_start} #{name} #{hint}</label></div></td><td class='controls'>#{input_str}</td>"
-      rest.times do |i|
-        str << "<td></td><td></td>"
-      end
-    end
-    return str
+    grid_col = get_grid(3,["大文本","富文本"].include?(data_type))
+    str = "<div class='form-group col-md-#{12/grid}'><div class='control-label col-sm-#{grid_col[0]}'><label for='#{column}'>#{red_start} #{name} #{hint}</label></div><div class='col-sm-#{grid_col[1]} controls'>#{input_str}</div></div>"
   end
 
   def get_grid(column = 1, textarea = false)

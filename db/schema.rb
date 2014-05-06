@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140412115903) do
+ActiveRecord::Schema.define(version: 20140506074929) do
 
   create_table "areas", force: true do |t|
     t.string   "name",           comment: "单位名称"
@@ -53,6 +53,20 @@ ActiveRecord::Schema.define(version: 20140412115903) do
   end
 
   add_index "articles_categories", ["article_id", "category_id"], name: "index_articles_categories_on_article_id_and_category_id", using: :btree
+
+  create_table "catalogs", force: true do |t|
+    t.string   "name",                                 null: false, comment: "名称"
+    t.string   "ancestry",                                          comment: "祖先节点"
+    t.integer  "ancestry_depth",                                    comment: "层级"
+    t.string   "icon",                                              comment: "图标"
+    t.integer  "status",         limit: 2, default: 0, null: false, comment: "状态"
+    t.integer  "sort",                                              comment: "排序"
+    t.text     "params",                                            comment: "参数"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "catalogs", ["name"], name: "index_catalogs_on_name", unique: true, using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name",                                 null: false, comment: "名称"
@@ -156,9 +170,12 @@ ActiveRecord::Schema.define(version: 20140412115903) do
   add_index "notifications", ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
 
   create_table "permissions", force: true do |t|
-    t.string   "action",      null: false, comment: "权限"
-    t.string   "subject",     null: false, comment: "对象"
-    t.string   "description", null: false, comment: "描述"
+    t.string   "name",                       null: false, comment: "名称"
+    t.string   "action",                     null: false, comment: "权限"
+    t.string   "subject",                    null: false, comment: "对象"
+    t.boolean  "is_model",    default: true, null: false
+    t.string   "conditions"
+    t.string   "description",                null: false, comment: "描述"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -35,7 +35,7 @@ Wks::Application.routes.draw do
     end
     resources :categorys, :only => :index do
       collection do
-        get :article_category_json, :product_category_json
+        get :category_json
       end
     end
     resources :menus, :except => :show do

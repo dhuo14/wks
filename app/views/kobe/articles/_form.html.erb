@@ -7,11 +7,11 @@
 				<%#= f.association :categories, label: '所属栏目', hint: '按住"shift键"可以多选', required: true %>
 
 				<%= f.input :category, label: '所属栏目', hint: '树形选择框' do %>
-          <%= tree_select "article[category_ids]", @article.categories, "/kobe/categorys/article_category_json", {:checked_max => 1, "data-rule-required" => "true"} %>
+          <%= tree_select "article[category_ids]", @article.categories, "/kobe/categorys/category_json", {:checked_max => 1, "data-rule-required" => "true"} %>
         <% end %>
 
         <%= f.input :tags, label: '标签', hint: '选择框' do %>
-          <%= tree_select "articlet[tags]", @article.tags, "/kobe/menus/ztree_json", {:checked_max => 1, "data-rule-required" => "true"} %>
+          <%= tree_select "articlet[tags]", @article.tags, "/kobe/menus/ztree", {:checked_max => 1, "data-rule-required" => "true"} %>
         <% end %>
 
 				<%= f.input :title, label: '标题', placeholder: '标题', required: true %>

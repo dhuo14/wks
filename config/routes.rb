@@ -33,13 +33,17 @@ Wks::Application.routes.draw do
         post :batch_task
       end
     end
+    resources :categorys, :only => :index do
+      collection do
+        get :article_category_json, :product_category_json
+      end
+    end
     resources :menus, :except => :show do
       collection do
         get :ztree
         post :move
       end
     end
-
     resources :users, :except => :index do 
       collection do
         get :profile, :change_password, :setting

@@ -23,11 +23,20 @@ class KobeController < ApplicationController
   # 以下是公用方法
   protected
 
- 
 
+  def tree_select_json(obj_class,name)
+    if name.blank?
+      node = obj_class.all
+    else
+      sql = "SELECT DISTINCT a.id,a.name,a.ancestry FROM #{obj_class.to_s.tableize} a INNER JOIN  #{obj_class.to_s.tableize} b ON (FIND_IN_SET(a.id,REPLACE(b.ancestry,'/',',')) > 0 OR a.id=b.id OR (LOCATE(CONCAT(b.ancestry,'/',b.id),a.ancestry)>0)) WHERE b.name LIKE ? ORDER BY a.ancestry"
+      node = obj_class.find_by_sql([sql,"%#{name}%"])
+    end
+    json = node.map{|m|"{id:#{m.id}, pId:#{get_parentid(m)}, name:'#{m.name}'}"}
+    return render :json => "[#{json.join(", ")}]" 
+  end 
 
   # 生成ztree需要的json，obj_calss
-  def _ztree_json(obj_class,id,options={})
+  def ztree_json(obj_class,id,options={})
     unless id.blank?
       node = obj_class.find_by(id: id)
       if node && node.has_children? 
@@ -41,17 +50,18 @@ class KobeController < ApplicationController
     if node.blank?
       return render :json => "[]" 
     end
-    json = node.map{|m|"{id:#{m.id}, pId:#{_get_pid(m)}, name:'#{m.name}'}"}
+    json = node.map{|m|"{id:#{m.id}, pId:#{get_parentid(m)}, name:'#{m.name}'}"}
     return render :json => "[#{json.join(", ")}]" 
   end
 
   # 为zTree获取父节点id，node必须为ancestry
-  def _get_pid(node)
-    return node.parent_id.nil? ? 0 : node.parent_id
+  def get_parentid(node)
+    # return node.parent_id.nil? ? 0 : node.parent_id
+    return node.ancestry.nil? ? 0 : node.ancestry.split('/').last
   end
 
   # zTree移动节点
-  def _ztree_move_node(source_id,target_id,move_type,is_copy=false)
+  def ztree_move_node(source_id,target_id,move_type,is_copy=false)
     return if source_id.blank? || target_id.blank? || move_type.blank?
     source_node = Menu.find_by(id: source_id)
     target_node = Menu.find_by(id: target_id)

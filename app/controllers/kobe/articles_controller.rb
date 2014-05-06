@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Kobe::ArticlesController < KobeController
-  load_and_authorize_resource
+  # load_and_authorize_resource
   
   before_filter :get_article, :only => [ :edit, :update, :destroy ]
 
@@ -60,6 +60,7 @@ class Kobe::ArticlesController < KobeController
 
     # 只允许传递过来的参数
     def my_params  
-      params.require(:article).permit(:title, :new_days, :top_type, :access_permission, :category_ids => [], content_attributes: :content)  
+      params[:article][:category_ids] = params[:article][:category_ids].split(',')
+      params.require(:article).permit(:title, :new_days, :top_type, :access_permission, :category_ids=>[], content_attributes: :content)  
     end
 end

@@ -6,15 +6,14 @@
 
 				<%#= f.association :categories, label: '所属栏目', hint: '按住"shift键"可以多选', required: true %>
 
-				<%= f.input :category, label: '所属栏目', hint: '树形选择框' do %>
-          <%= tree_select "article[category_ids]", @article.categories, "/kobe/categorys/article_category_json", {:checked_max => 1, "data-rule-required" => "true"} %>
-        <% end %>
+				<%#= f.input :category, label: '所属栏目', hint: '树形选择框' do %>
+          <%#= tree_select "article[category_ids][]", @article.categories, "/shared/industry_categories", {:droplimit => 1} %>
+        <%# end %>
 
-        <%= f.input :tags, label: '标签', hint: '选择框' do %>
-          <%= tree_select "articlet[tags]", @article.tags, "/kobe/menus/ztree_json", {:checked_max => 1, "data-rule-required" => "true"} %>
-        <% end %>
+
 
 				<%= f.input :title, label: '标题', placeholder: '标题', required: true %>
+
 
 				<%= f.input :new_days, label: '标新天数', tip: '显示"new"标记的有效期', required: true, collection: (1..30).to_a.map{|x|["#{x}天",x]}, include_blank: '请选择' %>
 
@@ -24,9 +23,11 @@
 
 				<%#= f.input :access_permission, label: '访问权限', as: :my_check_boxes, collection: Dictionary.access_permission, required: true %>
 
+
 				<%= f.simple_fields_for :content do |c| %>
 					<%= c.input :content, label: '内容', as: :autosize_counter_text, allow_length: 3000, warning_length: 2900, required: true %>
 				<%	end %>
+
 
 				<%= f.button :submit %>
 				<% end %>

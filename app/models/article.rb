@@ -5,6 +5,9 @@ class Article < ActiveRecord::Base
 	# has_many :uploads, class_name: "ArcitleUpload"
 	has_and_belongs_to_many :categories, class_name: "Category"
 	accepts_nested_attributes_for :categories, :content
- #  accepts_nested_attributes_for :uploads
+  #  accepts_nested_attributes_for :uploads
+  scope :published, -> { where(status: 1) }
+
+  include AboutStatus
 
 end

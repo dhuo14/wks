@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Kobe::UsersController < KobeController
-  before_filter :get_user, :only => [:profile, :rest_account, :update]
+  before_action :get_user, :only => [:profile, :rest_account, :update]
 
   def edit
   end

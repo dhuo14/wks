@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class KobeController < ApplicationController
-  before_filter :request_signed_in!
-	before_filter :store_location, :init_themes
+  before_action :request_signed_in!
+	before_action :store_location, :init_themes
 
 	def index
     render :text => "sdfsdfsdf"
@@ -31,7 +31,7 @@ class KobeController < ApplicationController
       sql = "SELECT DISTINCT a.id,a.name,a.ancestry FROM #{obj_class.to_s.tableize} a INNER JOIN  #{obj_class.to_s.tableize} b ON (FIND_IN_SET(a.id,REPLACE(b.ancestry,'/',',')) > 0 OR a.id=b.id OR (LOCATE(CONCAT(b.ancestry,'/',b.id),a.ancestry)>0)) WHERE b.name LIKE ? ORDER BY a.ancestry"
       node = obj_class.find_by_sql([sql,"%#{name}%"])
     end
-    json = node.map{|m|"{id:#{m.id}, pId:#{get_parentid(m)}, name:'#{m.name}'}"}
+    json = node.map{|m|"{id:#{m.id}, pId:#{m.parent_id}, name:'#{m.name}'}"}
     return render :json => "[#{json.join(", ")}]" 
   end 
 
@@ -50,14 +50,8 @@ class KobeController < ApplicationController
     if node.blank?
       return render :json => "[]" 
     end
-    json = node.map{|m|"{id:#{m.id}, pId:#{get_parentid(m)}, name:'#{m.name}'}"}
+    json = node.map{|m|"{id:#{m.id}, pId:#{m.parent_id}, name:'#{m.name}'}"}
     return render :json => "[#{json.join(", ")}]" 
-  end
-
-  # 为zTree获取父节点id，node必须为ancestry
-  def get_parentid(node)
-    # return node.parent_id.nil? ? 0 : node.parent_id
-    return node.ancestry.nil? ? 0 : node.ancestry.split('/').last
   end
 
   # zTree移动节点

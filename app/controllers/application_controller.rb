@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # 开发给view层用的方法
-  helper_method :current_user, :signed_in?, :redirect_back_or, :status_cn, :cando_list
+  helper_method :current_user, :signed_in?, :redirect_back_or, :cando_list
 
   # cancan 权限校验
   rescue_from CanCan::AccessDenied do |exception|
@@ -27,15 +27,6 @@ class ApplicationController < ActionController::Base
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
     session.delete(:return_to)
-  end
-
-  # 状态汉化 ,badge 是否带颜色标签
-  def status_cn(obj,badge=true)
-    table_name = obj.class.to_s.tableize
-    arr = Dictionary.status[table_name]
-    str = arr.nil? ? "" : arr.find{|n|n[1] == obj.status}[0]
-    return badge ? "<span class='label label-#{status_color(obj.status % 6)}'>#{str}</span>".html_safe : str.html_safe
-    # return arr.nil? ? "" : Hash[*arr.flatten][obj.status]
   end
 
   protected
@@ -108,13 +99,5 @@ class ApplicationController < ActionController::Base
       arr << ['icon-share','转发', edit_kobe_article_path(obj)] 
       arr << ['icon-legal','审核', edit_kobe_article_path(obj)] 
     end
-
-  private
-
-    # 状态对应的标签颜色
-    def status_color(n)
-      Dictionary.status_color[n]
-    end
-
 
 end

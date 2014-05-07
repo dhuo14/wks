@@ -19,139 +19,132 @@ function searchFormDone(){
 
 // tree_select 相关函数begin
 
-  function tree_select(id,url,checked_max,keyword){
-    $.fn.zTree.init($('#ztree_' + id), ztree_setting(url, checked_max, keyword));
-    $('#ok_' + id).on('click',function(){
-      ztree_ok_click(id,checked_max);
-    });
-  }
+function tree_select(id,url,checked_max,keyword){
+  $.fn.zTree.init($('#ztree_' + id), ztree_setting(url, checked_max, keyword));
+  $('#ok_' + id).on('click',function(){
+    ztree_ok_click(id,checked_max);
+  });
 
-  // 树形选择器点击确定按钮
-  function ztree_ok_click(id,checked_max){
-    var treeObj = $.fn.zTree.getZTreeObj('ztree_' + id);
-    var nodes = treeObj.getCheckedNodes(true);
-    var node_id = [];
-    var node_name = [];
-    var check_count = 0;
-    var too_much = false;
 
-    $.each(nodes, function(n, node) {
-      if (!node.isParent) {
-        check_count += 1;
-        if (check_count > checked_max && checked_max > 0) {
-          too_much = true;
-        }
-        else {
-          node_id.push(node.id);
-          node_name.push(node.name);
-        }
-      }
-      if (too_much == true) {
-        $('#tips_' + id).html("最多只能选" + checked_max + "项");
-        treeObj.checkNode(node, false, false);
-      }
-    });
-    $('#box_' + id).val(node_name.join(","));
-    $('#' + id).val(node_id.join(","));
-    $('#cancel_' + id).click();
-  } 
+    // 树形选择器点击确定按钮
+    function ztree_ok_click(id,checked_max){
+      var treeObj = $.fn.zTree.getZTreeObj('ztree_' + id);
+      var nodes = treeObj.getCheckedNodes(true);
+      var node_id = [];
+      var node_name = [];
+      var check_count = 0;
+      var too_much = false;
 
-  function ztree_setting(url,checked_max,keyword) {
-    var check_type = checked_max == 1 ? "radio" : "checkbox";
-    var otherparam = (keyword == undefined) ? {} : {'name' : keyword};
-    var setting = {
-        check: {
-          enable: true,
-          chkStyle: check_type,
-          autoCheckTrigger: true,
-          chkboxType: { "Y": "ps", "N": "ps" },
-          radioType: "all"
-        },
-        data: {
-          simpleData: {
-              enable: true
+      $.each(nodes, function(n, node) {
+        if (!node.isParent) {
+          check_count += 1;
+          if (check_count > checked_max && checked_max > 0) {
+            too_much = true;
           }
-        },
-        async: {
-          type:'get',
-          async:false,
-          enable: true,
-          url:url,
-          autoParam:["id", "name=n", "level=lv"],
-          otherParam:otherparam,
-          dataFilter: filter
-        },
-        callback: {
-          // onAsyncSuccess: zTreeOnAsyncSuccess,
-          // onCollapse: zTreeOnExpand,
-          // onExpand: zTreeOnExpand,
-          // onCheck: zTreeOnCheck,
-          // onClick: zTreeOnClick
+          else {
+            node_id.push(node.id);
+            node_name.push(node.name);
+          }
         }
-    };
-    return setting;
-  }
-  // 输入关键字后搜索
-  function query_data() {
-    var keyword = $("#drop_query_param").val();
-    var setting = ztree_setting(checked_max, keyword);
-    $.fn.zTree.destroy();
-    $.fn.zTree.init($("#" + tree_div_content), setting);
-  }
-  // 树加载完成绑定函数
-  function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
-    var checked_id = "" ;
-    var treeObj = $.fn.zTree.getZTreeObj(treeId);
-    var nodes = treeObj.transformToArray(treeObj.getNodes());
-    if ($("input[type='hidden'][droptree_id='" + this_dom.attr("id") + "']").length > 0) {
-      checked_id = $("input[type='hidden'][droptree_id='" + this_dom.attr("id") + "']").val();
-    }
-    var array_id = checked_id.split(",");
-    if (query == true) {
-       treeObj.expandAll(true);   // 查询时展开全部节点
-    }
-    for (var i = 0; i < nodes.length; i++) {
-      //            if (nodes[i].level < 1) {        // 展开两层
-      //                treeObj.expandNode(nodes[i], true, false, true);
-      //            }
-      if (nodes[i].isParent && checked_max == 1) {     // 如果是单选不允许选择父节点
-          nodes[i].nocheck = true;
-          treeObj.updateNode(nodes[i]);
-      }
-      if ($.inArray(nodes[i].id, array_id) >= 0) {  // 勾上默认值
-          treeObj.checkNode(nodes[i], true, true);
-      }
-    }
-  }
-  // 原始数据过滤
-  function filter(treeId, parentNode, childNodes) {
-    if (!childNodes) return null;
-    for (var i = 0, l = childNodes.length; i < l; i++) {
-      childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
-    }
-    return childNodes;
-  }
-  // 节点展开绑定函数
-  function zTreeOnExpand(event, treeId, treeNode) {
-    overflow_y(tree_div_content);
-  }
+        if (too_much == true) {
+          $('#tips_' + id).html("最多只能选" + checked_max + "项");
+          treeObj.checkNode(node, false, false);
+        }
+      });
+      $('#box_' + id).val(node_name.join(","));
+      $('#' + id).val(node_id.join(","));
+      $('#cancel_' + id).click();
+    } 
 
-  function zTreeOnCheck(event, treeId, treeNode) {
-    after_check(treeId);
-    if (checked_max == 1 && treeNode.checked) {
-      var dialog = art.dialog.get('float_' + this_dom.attr("id"));
+    function ztree_setting(url,checked_max,keyword) {
+      var check_type = checked_max == 1 ? "radio" : "checkbox";
+      var otherparam = (keyword == undefined) ? {} : {'name' : keyword};
+      var setting = {
+          check: {
+            enable: true,
+            chkStyle: check_type,
+            autoCheckTrigger: true,
+            chkboxType: { "Y": "ps", "N": "ps" },
+            radioType: "all"
+          },
+          data: {
+            simpleData: {
+                enable: true
+            }
+          },
+          async: {
+            type:'get',
+            async:false,
+            enable: true,
+            url:url,
+            autoParam:["id", "name=n", "level=lv"],
+            otherParam:otherparam
+          },
+          callback: {
+            // onAsyncSuccess: zTreeOnAsyncSuccess,
+            // onCollapse: zTreeOnExpand,
+            // onExpand: zTreeOnExpand,
+            // onCheck: zTreeOnCheck,
+            // onClick: zTreeOnClick
+          }
+      };
+      return setting;
+    }
+    // 输入关键字后搜索
+    function query_data() {
+      var keyword = $("#drop_query_param").val();
+      var setting = ztree_setting(checked_max, keyword);
+      $.fn.zTree.destroy();
+      $.fn.zTree.init($("#" + tree_div_content), setting);
+    }
+    // 树加载完成绑定函数
+    function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
+      var checked_id = "" ;
+      var treeObj = $.fn.zTree.getZTreeObj(treeId);
+      var nodes = treeObj.transformToArray(treeObj.getNodes());
+      if ($("input[type='hidden'][droptree_id='" + this_dom.attr("id") + "']").length > 0) {
+        checked_id = $("input[type='hidden'][droptree_id='" + this_dom.attr("id") + "']").val();
+      }
+      var array_id = checked_id.split(",");
+      if (query == true) {
+         treeObj.expandAll(true);   // 查询时展开全部节点
+      }
+      for (var i = 0; i < nodes.length; i++) {
+        //            if (nodes[i].level < 1) {        // 展开两层
+        //                treeObj.expandNode(nodes[i], true, false, true);
+        //            }
+        if (nodes[i].isParent && checked_max == 1) {     // 如果是单选不允许选择父节点
+            nodes[i].nocheck = true;
+            treeObj.updateNode(nodes[i]);
+        }
+        if ($.inArray(nodes[i].id, array_id) >= 0) {  // 勾上默认值
+            treeObj.checkNode(nodes[i], true, true);
+        }
+      }
+    }
+
+    // 节点展开绑定函数
+    function zTreeOnExpand(event, treeId, treeNode) {
+      overflow_y(tree_div_content);
+    }
+
+    function zTreeOnCheck(event, treeId, treeNode) {
+      after_check(treeId);
+      if (checked_max == 1 && treeNode.checked) {
+        var dialog = art.dialog.get('float_' + this_dom.attr("id"));
+        dialog.hide();
+        this_dom.focus();
+      }
+    }
+    // 点击选择框绑定函数
+    function zTreeOnClick(event, treeId, treeNode) {
+      drop_checkall(this_dom, false);
+      this_dom.val(treeNode.name);
+      $("input[type='hidden'][droptree_id='" + this_dom.attr("id") + "']").val(treeNode.id);
       dialog.hide();
       this_dom.focus();
     }
-  }
-  // 点击选择框绑定函数
-  function zTreeOnClick(event, treeId, treeNode) {
-    drop_checkall(this_dom, false);
-    this_dom.val(treeNode.name);
-    $("input[type='hidden'][droptree_id='" + this_dom.attr("id") + "']").val(treeNode.id);
-    dialog.hide();
-    this_dom.focus();
-  }
+}
 // tree_select 相关函数end
 
 

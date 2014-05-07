@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   # 收到的消息
   has_many :unread_notifications, -> { where "status=0" }, class_name: "Notification", foreign_key: "receiver_id"  
 
+  include AboutStatus
 
   # 是否超级管理员,超级管理员不留操作痕迹
   def admin?

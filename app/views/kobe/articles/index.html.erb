@@ -32,7 +32,7 @@
 					      <td><%= show_index(i) %></td>
 					      <td><%= article.title %></td>
 					      <td><%= article.author.name %></td>
-					      <td><%= status_cn(article) %></td>
+					      <td><%= article.status_to_badge %></td>
 					      <td><%= article.created_at %></td>
 					      <td><%= oprate_btn(article) %></td>
 					    </tr>

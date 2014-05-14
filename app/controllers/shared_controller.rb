@@ -2,12 +2,12 @@
 class SharedController < JamesController
   # 下拉框选择时查询行业分类
   def department
-    return render :json => Department.get_json(params[:name])
+    ztree_json(Department)
   end
 
   # 下拉框选择时查询地区
   def area
-    return render :json => Area.get_json(params[:name])
+    ztree_json(Area)
   end
 
   private

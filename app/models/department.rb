@@ -6,6 +6,7 @@ class Department < ActiveRecord::Base
   has_ancestry :cache_depth => true
   default_scope -> {order(:ancestry, :sort, :id)}
 
+  include AboutAncestry
 
 	def self.xml(who='',options={})
 	  %Q{

@@ -38,27 +38,7 @@ class KobeController < ApplicationController
   # 以下是公用方法
   protected
 
-  # zTree移动节点
-  def ztree_move_node(source_id,target_id,move_type,is_copy=false)
-    return if source_id.blank? || target_id.blank? || move_type.blank?
-    source_node = Menu.find_by(id: source_id)
-    target_node = Menu.find_by(id: target_id)
-    return unless source_node && target_node
-    if move_type == "inner" 
-      reset_parent(source_node,target_node)
-    else
-      if source_node.parent != target_node.parent
-        if target_node.root?
-          source_node.parent = nil
-          siblings_move(source_node,target_node,move_type)
-        else
-          reset_parent(source_node,target_node.parent)
-        end
-      end
-      siblings_move(source_node,target_node,move_type)
-    end
-    render :text => "targetId=#{target_id},sourceId=#{source_id},moveType=#{move_type},isCopy=#{is_copy}"
-  end
+  
 
   # 以下是私有方法
   private 
@@ -68,38 +48,6 @@ class KobeController < ApplicationController
     @unread_notifications = current_user.unread_notifications
   end
 
-  # 同级目录内移动
-  def siblings_move(source_node,target_node,move_type)
-      siblings = target_node.siblings
-      tmp = i = 0
-      siblings.each do |s|
-        i = i + 1
-        if s == target_node
-          if move_type == "prev"
-            tmp = i
-            s.sort = i + 1
-          elsif move_type == "next"
-            s.sort = i
-            tmp = i + 1
-          end
-          i = i + 1  
-        elsif s == source_node 
-            i = i - 1  # 跳过源节点
-            next
-        else
-          s.sort = i
-        end
-        s.save
-      end
-      source_node.sort = tmp
-      source_node.save
-  end
   
-  # 重新指定父节点
-  def reset_parent(source_node,target_node)
-    source_node.parent = target_node
-    source_node.sort = target_node.children.count + 1
-    source_node.save
-  end
 
 end

@@ -50,11 +50,11 @@ class Kobe::MenusController < KobeController
   end
 
   def move
-    ztree_move_node(params[:sourceId],params[:targetId],params[:moveType],params[:isCopy])
+    render :text => Menu.ztree_move_node(params[:sourceId],params[:targetId],params[:moveType],params[:isCopy])
   end
 
   def ztree
-    return render :json => Menu.get_json(params[:name])
+    ztree_json(Menu)
   end
 
   private  

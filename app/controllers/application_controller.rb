@@ -31,6 +31,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
+    # 生产ztree的json
+    def ztree_json(obj_class)
+      return render :json => obj_class.get_json(params[:name])
+    end
+
     # 设置后退页面
     def store_location
       session[:return_to] = request.fullpath if request.get?

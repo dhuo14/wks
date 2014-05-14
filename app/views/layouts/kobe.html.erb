@@ -12,7 +12,7 @@
     <link href='<%= image_path('meta_icons/apple-touch-icon-114x114.png') %>' rel='apple-touch-icon-precomposed' sizes='114x114'>
     <link href='<%= image_path('meta_icons/apple-touch-icon-144x144.png') %>' rel='apple-touch-icon-precomposed' sizes='144x144'>
     <!-- / START - page related stylesheets [optional] -->
-    <% assets_name =  Rails.env == "development" ? "/test/kobe" : "kobe" %>
+    <% assets_name =  Rails.env == "development" ? "kobe" : "kobe" %>
     <%= stylesheet_link_tag assets_name %>
     <%= javascript_include_tag assets_name %>
     <!--[if lt IE 9]>

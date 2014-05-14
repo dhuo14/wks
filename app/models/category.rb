@@ -5,4 +5,5 @@ class Category < ActiveRecord::Base
   default_scope -> {order(:ancestry, :sort, :id)}
   
   include AboutAncestry
+
 end

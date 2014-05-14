@@ -61,7 +61,7 @@ Wks::Application.routes.draw do
 
   resources :kobe, :only => :index do
     collection do
-      get :search
+      get :search, :obj_class_json
     end
   end
 

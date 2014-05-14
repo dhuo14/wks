@@ -54,7 +54,7 @@ class Kobe::MenusController < KobeController
   end
 
   def ztree
-    ztree_json(Menu,params[:format])
+    return render :json => Menu.get_json(params[:name])
   end
 
   private  

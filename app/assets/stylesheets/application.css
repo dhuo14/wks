@@ -7,6 +7,6 @@ p{text-indent:2em;}
 ul.box-select > li{cursor:pointer;}
 .vbottom{vertical-align:text-top;}
 .vmiddle{vertical-align:middle;}
-.pointer{cursor:pointer;}
+.tree_select_search,.pointer{cursor:pointer;}
 #accurate-search{cursor:pointer;}
 #search_panel{margin-top:6px;display:none;}

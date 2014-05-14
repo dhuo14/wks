@@ -19,8 +19,8 @@ function searchFormDone(){
 
 // tree_select 相关函数begin
 
-function tree_select(id,url,checked_max,keyword){
-  $.fn.zTree.init($('#ztree_' + id), ztree_setting(url, checked_max, keyword));
+function tree_select(id,obj_class,checked_max,keyword){
+  $.fn.zTree.init($('#ztree_' + id), ztree_setting(obj_class, checked_max, keyword));
   $('#ok_' + id).on('click',function(){
     ztree_ok_click(id,checked_max);
   });
@@ -56,9 +56,8 @@ function tree_select(id,url,checked_max,keyword){
       $('#cancel_' + id).click();
     } 
 
-    function ztree_setting(url,checked_max,keyword) {
+    function ztree_setting(obj_class,checked_max,keyword) {
       var check_type = checked_max == 1 ? "radio" : "checkbox";
-      var otherparam = (keyword == undefined) ? {} : {'name' : keyword};
       var setting = {
           check: {
             enable: true,
@@ -76,9 +75,9 @@ function tree_select(id,url,checked_max,keyword){
             type:'get',
             async:false,
             enable: true,
-            url:url,
+            url:'/kobe/obj_class_json',
             autoParam:["id", "name=n", "level=lv"],
-            otherParam:otherparam
+            otherParam:{'obj_class' : obj_class, 'name' : keyword}
           },
           callback: {
             // onAsyncSuccess: zTreeOnAsyncSuccess,
@@ -92,8 +91,8 @@ function tree_select(id,url,checked_max,keyword){
     }
     // 输入关键字后搜索
     function query_data() {
-      var keyword = $("#drop_query_param").val();
-      var setting = ztree_setting(checked_max, keyword);
+      var keyword = $("#" + id + "keyword").val();
+      var setting = ztree_setting(obj_class, checked_max, keyword);
       $.fn.zTree.destroy();
       $.fn.zTree.init($("#" + tree_div_content), setting);
     }
@@ -171,10 +170,10 @@ $(function() {
   // 树形选择
   $(".tree_select").each(function(){
     var id = $(this).attr("id");
-    var url = $(this).attr("url");
+    var obj_class = $(this).attr("obj_class");
     var checked_max = $(this).attr("checked_max");
     var keyword = $(this).attr("keyword");
-    tree_select(id,url,checked_max,keyword);
+    tree_select(id,obj_class,checked_max,keyword);
   });
 
   // bootbox选择器--点击后的选择事件

@@ -39,7 +39,7 @@ module CategoryHelper
 			str << %Q{
 				>#{n['name']}</div>
 					<span class='actions pull-right li_operate'>
-						<a class='btn btn-link edit has-tooltip' data-placement='top' href='javascript:void(0);' title='修改'>
+						<a class='btn btn-link edit has-tooltip' data-placement='top' title='修改' data-toggle='modal' href='#modal-form'>
 							<i class='icon-pencil'></i>
 						</a>
 						<a class='btn btn-link remove has-tooltip' data-placement='top' href='javascript:void(0);' title='删除'>

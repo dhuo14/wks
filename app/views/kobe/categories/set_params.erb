@@ -2,13 +2,12 @@
 
 <div class="row" id="save_param_btn">
 	<div class="col-sm-9 col-sm-offset-3">
-		<input class="btn btn-primary btn-lg" type="button" value="增加参数" name="add_param" data-toggle='modal' href='#modal-example2'/>&nbsp;&nbsp;
+		<input class="btn btn-primary btn-lg" type="button" value="增加参数" name="add_param" data-toggle='modal' href='#modal-form'/>&nbsp;&nbsp;
 		<input class="btn btn-primary btn-lg" type="submit" value=" 保 存 " name="commit"/>
 	</div>
 </div>
 
-<!-- <div class='box-content' style='display:none;' id='edit_attr'> -->
-<div class='modal fade' id='modal-example2' tabindex='-1'>
+<div class='modal fade' id='modal-form' tabindex='-1'>
 	<div class='modal-dialog'>
 	  <div class='modal-content'>
 	    <div class='modal-header'>
@@ -100,15 +99,9 @@
 					</div>
 				</form>
       </div>
-    <div class='modal-footer'>
-      <button class='btn btn-default' data-dismiss='modal' type='button'>Close</button>
-      <button class='btn btn-primary' type='button'>Save changes</button>
-    </div>
-  </div>
+  	</div>
+	</div>
 </div>
-
-<!-- </div> -->
-
 
 <script type='text/javascript'>
 	$(document).ready(function(){
@@ -133,29 +126,30 @@
 
 		// 修改参数
 		$("span.li_operate a.edit").on("click", function(){
-			bootbox.alert($("#edit_attr").html());
 			var node = $(this).parent().prev("div")[0];
-			$(".bootbox-body input[name='attr[name]']").val(node.textContent);
-			$(".bootbox-body input[name='attr[name]']").attr('readonly','readonly');
+			$("#edit_attr_form input[name='attr[name]']").val(node.textContent);
+			$("#edit_attr_form input[name='attr[name]']").attr('readonly','readonly');
 			var param = node.attributes;
 			for(var i = 0; i<param.length; i++){
 				if(param[i].name != "class" && param[i].name != "required"){
-					$(".bootbox-body input[name='attr["+param[i].name+"]']").val(param[i].value);
+					$("#edit_attr_form input[name='attr["+param[i].name+"]']").val(param[i].value);
 				}
 				if(param[i].name == "data_type"){
-					$(".bootbox-body select[name='attr[data_type]'] option[value='"+param[i].value+"']").attr("selected",true);
+					$("#edit_attr_form select[name='attr[data_type]'] option[value='"+param[i].value+"']").attr("selected",true);
 				}
 				if(param[i].name == "required"){
-					$(".bootbox-body input[name='attr[required]'][value='"+param[i].value+"']").attr("checked",true);
+					$("#edit_attr_form input[name='attr[required]'][value='"+param[i].value+"']").attr("checked",true);
 				}
 			}
 		});
 
 		//增加参数
-		// $("#save_param_btn input[name='add_param'][type='button']").on("click", function(){
-		// 	bootbox.alert($("#edit_attr").html());
-			
-		// });
+		$("#save_param_btn input[name='add_param']").on("click", function(){
+			$("#edit_attr_form input[name='attr[name]']").removeAttr('readonly');
+			$("#edit_attr_form input[type='text']").each(function(){$(this).val("");});
+			$("#edit_attr_form select").each(function(){this.options.selectedIndex = 0;});
+			$("#edit_attr_form input[type='radio']").each(function(){this.checked = false;});
+		});
 
 		//删除参数
 		$("span.li_operate a.remove").on("click", function(){

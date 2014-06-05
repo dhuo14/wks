@@ -49,6 +49,12 @@ Wks::Application.routes.draw do
         get :profile, :change_password, :setting
       end
     end
+    resources :categories, :except => :show do
+      collection do
+        get :ztree, :set_params
+        post :move, :save_params, :save_attr, :remove_params
+      end
+    end
   end
 # 后台end
 

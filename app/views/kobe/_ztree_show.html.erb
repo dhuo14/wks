@@ -220,14 +220,14 @@ function onBodyMouseDown(event){
 function addTreeNode() {
 	hideRMenu();
 	var node = zTree.getSelectedNodes()[0];
-	var url = "/kobe/menus/new"
+	var url = '<%= "/#{params[:controller]}/new" %>'
 	getForm(url);
 	if (node) {
-		$("input#menu_parent_id").val(node.id);
-		$("input#menu_parent_name").val(node.name);
+		$('<%= "input##{controller_name.singularize}_parent_id" %>').val(node.id);
+		$('<%= "input##{controller_name.singularize}_parent_name" %>').val(node.name);
 	}else {
-		$("input#menu_parent_id").val('');
-		$("input#menu_parent_name").val('');
+		$('<%= "input##{controller_name.singularize}_parent_id" %>').val('');
+		$('<%= "input##{controller_name.singularize}_parent_name" %>').val('');
 	}
 }
 function getForm(url) {
@@ -238,7 +238,7 @@ function getForm(url) {
 		cache: false,
 		dataType: "html",
 		success: function(data) {
-			$("#menu_form").html(data);
+			$("#form_div").html(data);
 			$.getScript("<%= asset_path 'theme.js' %>");
 			$.getScript("<%= asset_path 'form.js' %>");
 		},
@@ -251,7 +251,7 @@ function editTreeNode() {
 	hideRMenu();
 	var node = zTree.getSelectedNodes()[0];
 	if (node) {
-		var url = "/kobe/menus/" + node.id + "/edit"
+		var url = '<%= "/#{params[:controller]}/" %>' + node.id + "/edit"
 		getForm(url);
 	}
 }
@@ -274,12 +274,14 @@ function ajaxDestroyNode(node,msg) {
 		if(result){
 			$.ajax({
 				type: "delete",
-				url: "/kobe/menus/" + node.id,
+				url: '<%= "/#{params[:controller]}/" %>' + node.id,
 				async: false,
 				cache: false,
 				dataType: "text",
 				success: function(data) {
 					zTree.removeNode(node);
+					var url = '<%= "/#{params[:controller]}/new" %>'
+					getForm(url);
 					$.jGrowl(data);
 				},
 				error: function (data, textStatus){

@@ -10,3 +10,4 @@ ul.box-select > li{cursor:pointer;}
 .tree_select_search,.pointer{cursor:pointer;}
 #accurate-search{cursor:pointer;}
 #search_panel{margin-top:6px;display:none;}
+.li_operate{top:5px;right: 0;position: absolute;}

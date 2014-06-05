@@ -5,4 +5,4 @@
 //= require plugins/jquery_ui_touch_punch/jquery.ui.touch-punch.min
 //= require bootstrap/bootstrap
 //= require base
-//= require turbolinks
+// require turbolinks

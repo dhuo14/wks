@@ -1,0 +1,169 @@
+<%= set_params(@category.params) %>
+
+<div class="row" id="save_param_btn">
+	<div class="col-sm-9 col-sm-offset-3">
+		<input class="btn btn-primary btn-lg" type="button" value="增加参数" name="add_param"/>&nbsp;&nbsp;
+		<input class="btn btn-primary btn-lg" type="submit" value=" 保 存 " name="commit"/>
+	</div>
+</div>
+
+<div class='box-content' style='display:none;' id='edit_attr'>
+	<form action="save_attr" class="form form-horizontal validate-form" id="edit_attr_form" method="post">
+		<input type="hidden" name="id" value="<%=@category.id%>"/>
+		<div class="form-group string required attr_name">
+			<div class="control-label col-sm-3">
+				<label class="string required">
+					<span class='text-red'>*</span> 名称
+				</label>
+			</div>
+			<div class="col-sm-5 controls">
+				<input class="string required form-control" id="attr_name" name="attr[name]" placeholder="名称" type="text" value="" />
+			</div>
+		</div>
+		
+		<div class="form-group string required attr_data_type">
+			<div class="control-label col-sm-3">
+				<label class="string required">
+					<span class='text-red'>*</span> 类型
+				</label>
+			</div>
+			<div class="col-sm-5 controls">
+				<select class='required form-control' id="attr_data_type" name="attr[data_type]">
+          <option value='字符'>字符</option>
+          <option value='数字'>数字</option>
+          <option value='日期'>日期</option>
+          <option value='布尔'>布尔</option>
+          <option value='大文本'>大文本</option>
+          <option value='富文本'>富文本</option>
+        </select>
+			</div>
+		</div>
+		
+		<div class="form-group string attr_column">
+			<div class="control-label col-sm-3">
+				<label class="string">别名</label>
+			</div>
+			<div class="col-sm-5 controls">
+				<input class="string form-control" id="attr_column" name="attr[column]" placeholder="别名" type="text" value="" />
+			</div>
+		</div>
+
+		<div class="form-group my_radio_buttons optional attr_required">
+			<div class="control-label col-sm-3">
+				<label class="my_radio_buttons optional required">
+					<span class='text-red'>*</span> 是否必填
+				</label>
+			</div>
+			<div class="col-sm-5 controls">
+				<label class="radio radio-inline">
+					<input data-rule-required="true" id="attr_required_1" name="attr[required]" type="radio" value="true" />是
+				</label>
+				<label class="radio radio-inline">
+					<input id="attr_required_0" data-rule-required="true" name="attr[required]" type="radio" value="false" />否
+				</label>
+			</div>
+		</div>
+
+		<div class="form-group string attr_hint">
+			<div class="control-label col-sm-3">
+				<label class="string">提示信息</label>
+			</div>
+			<div class="col-sm-5 controls">
+				<input class="string form-control" id="attr_hint" name="attr[hint]" placeholder="提示信息" type="text" value="" />
+			</div>
+		</div>
+
+		<div class="form-group string attr_placeholder">
+			<div class="control-label col-sm-3">
+				<label class="string">占位符</label>
+			</div>
+			<div class="col-sm-5 controls">
+				<input class="string form-control" id="attr_placeholder" name="attr[placeholder]" placeholder="占位符" type="text" value="" />
+			</div>
+		</div>
+
+		<div class="form-actions form-actions-padding-sm" style="background-color: #FFFFFF;">
+			<div class="row">
+				<div class="col-sm-9 col-sm-offset-3">
+					<input class="btn btn-primary btn-lg" name="commit" type="submit" value=" 保 存 " /> &nbsp;&nbsp; 
+					<button class="btn btn-lg" name="button" type="reset"> 重 置 </button>
+				</div>
+			</div>
+		</div>
+
+
+	</form>
+</div>
+
+
+<script type='text/javascript'>
+	$(document).ready(function(){
+		// 保存，ajax提交
+		$("#save_param_btn input[name='commit'][type='submit']").on("click", function(){
+			var html = $("div.dd-nestable").html();
+			$.ajax({
+				type: "post",
+				url: '<%= save_params_kobe_categories_path %>',
+				async: false,
+				cache: false,
+				dataType: "html",
+				data: { 'id': <%= @category.id %>, 'html': html },
+				success: function(data) {
+					$.jGrowl(data);
+				},
+				error: function (data, textStatus){
+					bootbox.alert("操作失败，请重试！错误代码：" + textStatus + "\n" + data, init_ztree());
+				}
+			});
+		});
+
+		// 修改参数
+		$("span.li_operate a.edit").on("click", function(){
+			bootbox.alert($("#edit_attr").html());
+			var node = $(this).parent().prev("div")[0];
+			$(".bootbox-body input[name='attr[name]']").val(node.textContent);
+			$(".bootbox-body input[name='attr[name]']").attr('readonly','readonly');
+			var param = node.attributes;
+			for(var i = 0; i<param.length; i++){
+				if(param[i].name != "class" && param[i].name != "required"){
+					$(".bootbox-body input[name='attr["+param[i].name+"]']").val(param[i].value);
+				}
+				if(param[i].name == "data_type"){
+					$(".bootbox-body select[name='attr[data_type]'] option[value='"+param[i].value+"']").attr("selected",true);
+				}
+				if(param[i].name == "required"){
+					$(".bootbox-body input[name='attr[required]'][value='"+param[i].value+"']").attr("checked",true);
+				}
+			}
+		});
+
+		//增加参数
+		$("#save_param_btn input[name='add_param'][type='button']").on("click", function(){
+			bootbox.alert($("#edit_attr").html());
+			
+		});
+
+		//删除参数
+		$("span.li_operate a.remove").on("click", function(){
+			var html = $(this).parent().prev("div")[0].outerHTML;
+			var li = $(this).parents('li')[0];
+			$.ajax({
+				type: "post",
+				url: '<%= remove_params_kobe_categories_path %>',
+				async: false,
+				cache: false,
+				dataType: "html",
+				data: { 'id': <%= @category.id %>, 'html': html },
+				success: function(data) {
+					li.remove();
+					$(".tooltip").css('display','none');
+					$.jGrowl(data);
+				},
+				error: function (data, textStatus){
+					bootbox.alert("操作失败，请重试！错误代码：" + textStatus + "\n" + data, init_ztree());
+				}
+			});
+		});
+
+	});
+</script>

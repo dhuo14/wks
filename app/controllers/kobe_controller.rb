@@ -38,7 +38,10 @@ class KobeController < ApplicationController
   # 以下是公用方法
   protected
 
-  
+  # 树节点移动
+  def ztree_move(obj_class)
+    render :text => obj_class.ztree_move_node(params[:sourceId],params[:targetId],params[:moveType],params[:isCopy])
+  end
 
   # 以下是私有方法
   private 

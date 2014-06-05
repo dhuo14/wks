@@ -21,7 +21,7 @@ module ApplicationHelper
     return str.html_safe
   end
 
-  # 表单提交按钮
+  # simple_form表单提交按钮
   def form_btn(f)
     str = %Q|
     <div class="form-actions form-actions-padding-sm" style="background-color: #FFFFFF;">

@@ -140,7 +140,9 @@
 				if(param[i].name == "required"){
 					$("#edit_attr_form input[name='attr[required]'][value='"+param[i].value+"']").attr("checked",true);
 				}
+
 			}
+			 $( "#edit_attr_form" ).validate();
 		});
 
 		//增加参数

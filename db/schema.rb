@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20140506074929) do
     t.string   "icon",                                              comment: "图标"
     t.integer  "status",         limit: 2, default: 0, null: false, comment: "状态"
     t.integer  "sort",                                              comment: "排序"
+    t.text     "params",                                            comment: "参数"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -173,14 +174,15 @@ ActiveRecord::Schema.define(version: 20140506074929) do
     t.string   "name",                       null: false, comment: "名称"
     t.string   "action",                     null: false, comment: "权限"
     t.string   "subject",                    null: false, comment: "对象"
-    t.boolean  "is_model",    default: true, null: false
-    t.string   "conditions"
-    t.string   "description",                null: false, comment: "描述"
+    t.boolean  "is_model",    default: true, null: false, comment: "是否类"
+    t.string   "conditions",                              comment: "条件"
+    t.string   "description",                             comment: "描述"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "permissions", ["action", "subject"], name: "index_permissions_on_action_and_subject", using: :btree
+  add_index "permissions", ["name"], name: "index_permissions_on_name", using: :btree
 
   create_table "permissions_roles", force: true do |t|
     t.integer "role_id",       null: false

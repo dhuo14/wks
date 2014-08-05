@@ -4,7 +4,9 @@ class UserMailer < ActionMailer::Base
   # self.async = true
 
   def registration_confirmation(user)
-		mail :to => "dhuo14@163.com", :subject => "测试的激活邮件"
-	end
+  	@user = user
+  	email_with_name = "#{@user.name} <#{@user.email}>"
+	mail(to: email_with_name, subject: "测试的激活邮件")
+  end
 
 end

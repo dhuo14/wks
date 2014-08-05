@@ -93,5 +93,5 @@ Wks::Application.configure do
   #是否使用ttl/lls加密，当为'true'时，必须使用官网提供的ttl端口号，gmail为587
   # :enable_starttls_auto => false 
   }
- config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = true
 end
